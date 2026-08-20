@@ -860,6 +860,7 @@ body {
   width: 0.3em;
 }
 
+/* cột chứa 2 bản: gsap_split_letter (gốc) + clone, xếp chồng dọc */
 .letter-col {
   display: flex;
   flex-direction: column;
