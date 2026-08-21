@@ -91,7 +91,9 @@ function init() {
 document.addEventListener("DOMContentLoaded", () => {
   init();
   initSwiper();
-  staggerText();
+  document.fonts.ready.then(() => {
+    staggerText();
+  });
 });
 
 let isLinkClicked = false;

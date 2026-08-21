@@ -1,5 +1,7 @@
 #header {
   --color-default: var(--color-secondary);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   .header {
     &-container {
       grid-template-columns: 1fr auto 1fr;
