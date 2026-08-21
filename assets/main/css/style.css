@@ -992,8 +992,20 @@ body {
   overflow: hidden;
 }
 
+#header {
+  --color-default: var(--color-secondary);
+}
 #header .header-container {
-  display: grid;
   grid-template-columns: 1fr auto 1fr;
   gap: var(--space-40);
+  padding: 10px 60px;
+  border-bottom: 1px solid var(--color-secondary);
+}
+#header .header-menu ul {
+  display: flex;
+  align-items: center;
+  gap: var(--space-24);
+}
+#header .header-menu ul li a {
+  color: var(--color-default);
 }
