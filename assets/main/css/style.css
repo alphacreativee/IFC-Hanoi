@@ -1,11 +1,12 @@
 @charset "UTF-8";
 :root {
-  --font-heading: "", sans-serif;
-  --font-body: "", sans-serif;
+  --font-heading: "King Sans", sans-serif;
+  --font-body: "Be Vietnam Pro", sans-serif;
   --color-black: #000000;
   --color-white: #ffffff;
-  --color-primary: #1c3752;
-  --color-secondary: #f4e7d1;
+  --color-primary: #123754;
+  --color-secondary: #f6e7ce;
+  --color-third: #934117;
   --space-8: 8px;
   --space-16: 16px;
   --space-24: 24px;
@@ -16,7 +17,7 @@
   --space-64: 64px;
   --space-72: 72px;
   --space-80: 80px;
-  --spacing-padding: 120px 40px;
+  --spacing-padding: 72px 60px 38px;
 }
 
 @media (max-width: 991px) {
@@ -31,7 +32,6 @@
     --space-64: 56px;
     --space-72: 64px;
     --space-80: 72px;
-    --spacing-padding: 64px 16px;
   }
 }
 .color-black {
@@ -40,6 +40,30 @@
 
 .color-white {
   color: var(--color-white);
+}
+
+.color-primary {
+  color: var(--color-primary);
+}
+
+.color-secondary {
+  color: var(--color-secondary);
+}
+
+.color-third {
+  color: var(--color-third);
+}
+
+.bgc-primary {
+  background-color: var(--color-primary);
+}
+
+.bgc-secondary {
+  background-color: var(--color-secondary);
+}
+
+.bgc-third {
+  background-color: var(--color-third);
 }
 
 .limit-width {

@@ -1,0 +1,26 @@
+@font-face {
+    font-family: 'King Sans';
+    src: url('KingSansRegular.eot');
+    src: url('KingSansRegular.eot?#iefix') format('embedded-opentype'),
+        url('KingSansRegular.woff2') format('woff2'),
+        url('KingSansRegular.woff') format('woff'),
+        url('KingSansRegular.ttf') format('truetype'),
+        url('KingSansRegular.svg#KingSansRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'King Sans';
+    src: url('KingSansVN-Regular.eot');
+    src: url('KingSansVN-Regular.eot?#iefix') format('embedded-opentype'),
+        url('KingSansVN-Regular.woff2') format('woff2'),
+        url('KingSansVN-Regular.woff') format('woff'),
+        url('KingSansVN-Regular.ttf') format('truetype'),
+        url('KingSansVN-Regular.svg#KingSansVN-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
