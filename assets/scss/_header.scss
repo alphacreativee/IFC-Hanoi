@@ -1,0 +1,9 @@
+#header {
+  .header {
+    &-container {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: var(--space-40);
+    }
+  }
+}

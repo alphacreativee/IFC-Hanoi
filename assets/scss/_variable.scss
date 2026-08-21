@@ -38,6 +38,30 @@
   }
 }
 // font variable
+.font-heading {
+  font-family: var(--font-heading);
+}
+.font-body {
+  font-family: var(--font-body);
+}
+.heading-1 {
+  font-size: 60px;
+  line-height: 54px;
+}
+.heading-2 {
+  font-size: 49px;
+  line-height: 45px;
+}
+.heading-3 {
+  font-size: 24px;
+  line-height: 1;
+}
+.b1-font {
+  font-size: 15px;
+}
+.b2-font {
+  font-size: 13px;
+}
 // color variable
 .color-black {
   color: var(--color-black);
