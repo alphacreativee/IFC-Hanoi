@@ -229,3 +229,24 @@ export function staggerText() {
     });
   });
 }
+export function loadingAnimation() {
+  if (!document.querySelector("#loading")) return;
+  const tl = gsap.timeline();
+  tl.to(".loading-col-overlay", {
+    clipPath: "inset(0 0 0 100%)",
+    opacity: 0,
+    duration: 0.75,
+    ease: "none",
+  });
+  tl.to(
+    "#loading",
+
+    {
+      clipPath: "inset(0% 0% 100% 0%)",
+      duration: 1,
+      ease: "power2.inOut",
+    },
+  );
+
+  return tl;
+}

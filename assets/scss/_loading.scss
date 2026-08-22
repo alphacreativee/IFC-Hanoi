@@ -1,0 +1,33 @@
+#loading {
+  z-index: 1100;
+  will-change: clip-path;
+  pointer-events: none;
+  .loading {
+    &-logo {
+      img {
+        height: 65px;
+        width: auto;
+      }
+    }
+    &-col {
+      width: 100%;
+      &-overlay {
+        position: absolute;
+        inset: 0;
+        background-color: var(--color-primary);
+        will-change: clip-path;
+        clip-path: inset(0 0 0 0%);
+        opacity: 1;
+      }
+
+      &::before {
+        content: "";
+      }
+      img {
+        width: 100vw;
+        max-width: 100%;
+        height: auto;
+      }
+    }
+  }
+}

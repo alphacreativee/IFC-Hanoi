@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
     <!-- import favicon -->
-    <link rel="icon" href="./assets/images/favicon.ico" type="image/x-icon" />
+    <link
+      rel="icon"
+      href="./assets/images/icons/logo-full.svg"
+      type="image/x-icon"
+    />
     <!-- meta -->
     <meta property="og:url" content="" />
     <meta property="og:type" content="website" />
@@ -32,6 +36,20 @@
   </head>
 
   <body>
+    <!-- loading -->
+    <!-- <script>
+      fetch("./components/loading.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("loading").innerHTML = data;
+        });
+    </script>
+
+    <div
+      id="loading"
+      class="loading position-fixed top-0 start-0 end-0 w-100 h-100 bgc-primary d-flex align-items-center justify-content-center"
+    ></div> -->
+    <!-- end loading -->
     <!-- layout -->
     <!-- header -->
     <script>
@@ -92,10 +110,9 @@
     ></header>
     <!-- end header -->
     <main>
-      <section
-        class="banner"
-        style="height: 100vh; background-color: #123754"
-      ></section>
+      <section class="banner" style="height: 100vh">
+        <img src="./assets/images/del/img-2.jpg" alt="" />
+      </section>
       <section
         class="intro"
         style="height: 100vh; background-color: #934117"

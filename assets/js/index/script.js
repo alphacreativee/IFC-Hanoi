@@ -4,6 +4,7 @@ import {
   createFilterTab,
   getDateLightPick,
   staggerText,
+  loadingAnimation,
 } from "../../main/js/global.min.js";
 
 const $ = jQuery;
@@ -89,8 +90,17 @@ function init() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  init();
   initSwiper();
+  init();
+  const loadingEl = document.getElementById("loading");
+  if (loadingEl) {
+    loadingAnimation()
+      .then(() => {
+        // init();
+      })
+      .catch((err) => console.error("Loading error:", err));
+  } else {
+  }
   document.fonts.ready.then(() => {
     staggerText();
   });
