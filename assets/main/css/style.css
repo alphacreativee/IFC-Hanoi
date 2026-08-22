@@ -54,15 +54,17 @@
 
 .heading-3 {
   font-size: 24px;
-  line-height: 1;
+  line-height: 1.1;
 }
 
 .b1-font {
   font-size: 15px;
+  line-height: 1.1;
 }
 
 .b2-font {
   font-size: 13px;
+  line-height: 1.2;
 }
 
 .color-black {
@@ -930,6 +932,53 @@ body {
   line-height: 1.2em;
 }
 
+.global-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: max-content;
+  padding: 12px 24px;
+  border: 1px solid rgb(var(--color-border-opacity)/0.5);
+  border-radius: 24px;
+  height: 48px;
+  transition: all 0.3s ease;
+}
+.global-button:hover {
+  border: 1px solid rgb(var(--color-border-opacity)/1);
+}
+.global-button:hover .icon {
+  transform: translateX(-5px);
+}
+.global-button .icon {
+  width: 18px;
+  aspect-ratio: 1;
+  transition: transform 0.3s ease;
+}
+.global-button .icon svg {
+  color: var(--color-default);
+  transition: color 0.3s ease;
+}
+
+.swc {
+  width: 40px;
+  height: 40px;
+}
+.swc::after {
+  content: unset;
+  font-size: 0;
+}
+.swc svg {
+  width: 40px;
+  height: 40px;
+}
+.swc.swiper-button-next {
+  transform: rotate(180deg);
+  right: 20px;
+}
+.swc.swiper-button-prev {
+  left: 20px;
+}
+
 .lightpick {
   --color-stroke: #ccc;
   --color-bg: #fff;
@@ -994,18 +1043,37 @@ body {
 
 #header {
   --color-default: var(--color-secondary);
+  --color-border-opacity: 246 231 206;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
+  z-index: 999;
+}
+#header.scrolled {
+  --color-default: var(--color-primary);
+  --color-border-opacity: 18 55 84;
+}
+#header.scrolled .header-logo img.logo-active {
+  opacity: 1;
+  visibility: visible;
 }
 #header .header-logo img {
   height: 40px;
   width: auto;
 }
+#header .header-logo img.logo-active {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
 #header .header-container {
   grid-template-columns: 1fr auto 1fr;
   gap: var(--space-40);
   padding: 10px 60px;
-  border-bottom: 1px solid var(--color-secondary);
+  border-bottom: 1px solid var(--color-default);
+  transition: border 0.3s ease;
 }
 #header .header-menu ul {
   display: flex;
@@ -1014,6 +1082,7 @@ body {
 }
 #header .header-menu ul li a {
   color: var(--color-default);
+  transition: color 0.3s ease;
 }
 #header .header-group {
   gap: var(--space-16);
@@ -1043,13 +1112,22 @@ body {
   gap: 12px;
 }
 #header .header-lang .dropdown-custom-btn .icon svg {
-  color: var(--color-secondary);
+  color: var(--color-default);
+  transition: color 0.3s ease;
 }
 #header .header-lang .value-select,
 #header .header-lang .dropdown-custom-item {
   font-size: 15px;
   color: var(--color-secondary);
   text-transform: uppercase;
+}
+#header .header-lang .value-select {
+  color: var(--color-default);
+  transition: color 0.3s ease;
+}
+#header .header-cta .label {
+  color: var(--color-default);
+  transition: color 0.3s ease;
 }
 
 #loading {
@@ -1079,4 +1157,69 @@ body {
   width: 100vw;
   max-width: 100%;
   height: auto;
+}
+
+.banner {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+.banner-box {
+  height: 100%;
+}
+.banner-box .img {
+  width: 100%;
+  height: 100%;
+}
+.banner-box .img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+.banner-box .video {
+  overflow: hidden;
+  height: 100%;
+  background-position: center;
+  background-size: 120% 120%;
+}
+.banner-box .video iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%) scale(1.2);
+}
+.banner-content {
+  position: absolute;
+  bottom: 60px;
+  left: 60px;
+  z-index: 2;
+  max-width: 400px;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 16px;
+}
+.banner-content .title {
+  margin-bottom: 10px;
+}
+.banner-content a.global-button {
+  background-color: var(--color-secondary);
+  text-transform: uppercase;
+  font-size: 13px;
+  line-height: 1.2;
+  color: var(--color-primary);
+  margin-top: 18px;
+}
+.banner .swiper-pagination {
+  background-color: rgba(0, 0, 0, 0.2);
+  width: max-content;
+  left: 50%;
+  bottom: 10px;
+  height: 26px;
+  padding: 0 12px;
+  border-radius: 13px;
+}
+.banner .swiper-pagination-bullet {
+  background-color: var(--color-white);
 }

@@ -78,7 +78,7 @@ export function headerScroll() {
   const header = document.getElementById("header");
   if (!header) return null;
 
-  let lastScroll = 0;
+  const threshold = window.innerHeight;
 
   const trigger = ScrollTrigger.create({
     start: "top top",
@@ -86,17 +86,11 @@ export function headerScroll() {
     onUpdate: (self) => {
       const currentScroll = self.scroll();
 
-      if (currentScroll <= 0) {
-        header.classList.remove("scrolled");
-      } else if (currentScroll > lastScroll) {
-        // Scroll down
+      if (currentScroll > threshold) {
         header.classList.add("scrolled");
       } else {
-        // Scroll up
         header.classList.remove("scrolled");
       }
-
-      lastScroll = currentScroll;
     },
   });
 
@@ -249,4 +243,26 @@ export function loadingAnimation() {
   );
 
   return tl;
+}
+export function imageSlider() {
+  const sliders = document.querySelectorAll(".image-slider");
+  if (!sliders.length) return;
+
+  sliders.forEach((sliderEl) => {
+    new Swiper(sliderEl, {
+      loop: true,
+      speed: 2000,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: sliderEl.querySelector(".swiper-pagination"),
+      },
+      navigation: {
+        nextEl: sliderEl.querySelector(".swiper-button-next"),
+        prevEl: sliderEl.querySelector(".swiper-button-prev"),
+      },
+    });
+  });
 }

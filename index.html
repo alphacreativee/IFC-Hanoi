@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="./assets/libs/lenis.css" />
     <link rel="stylesheet" href="./assets/libs/swiper-bundle.min.css" />
     <link rel="stylesheet" href="./assets/libs/lightpick.min.css" />
+
     <!-- end meta -->
     <!-- link custom css page -->
     <link rel="stylesheet" href="./assets/fonts/KingSans/font.css" />
@@ -110,9 +111,116 @@
     ></header>
     <!-- end header -->
     <main>
-      <section class="banner" style="height: 100vh">
-        <img src="./assets/images/del/img-2.jpg" alt="" />
+      <section class="banner position-relative">
+        <div class="banner-inner h-100">
+          <div class="swiper image-slider h-100">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="banner-box position-relative">
+                  <div
+                    class="video position-relative"
+                    style="
+                      background-image: url(&quot;./assets/images/del/img-3.jpg&quot;);
+                    "
+                  >
+                    <iframe
+                      src="https://player.vimeo.com/video/1220392950?background=1&autoplay=1&loop=1&muted=1"
+                      frameborder="0"
+                      allow="autoplay; fullscreen; picture-in-picture"
+                      allowfullscreen
+                    ></iframe>
+                  </div>
+                  <div class="banner-content">
+                    <h3
+                      class="title heading-3 font-heading color-secondary text-uppercase"
+                    >
+                      Welcome to IFC Hanoi
+                    </h3>
+                    <div class="desc b2-font color-secondary">
+                      Anchoring the capital’s emerging business center, IFC
+                      Hanoi brings together Grade A office spaces, curated
+                      retail, and world-class hospitality in one seamlessly
+                      connected address.
+                    </div>
+                    <a href="" class="global-button">
+                      <div class="icon">
+                        <img
+                          src="./assets/images/icons/icon-arrow-primary.svg"
+                          alt=""
+                        />
+                      </div>
+                      <div class="label">Discover</div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="swiper-slide">
+                <div class="banner-box position-relative">
+                  <div class="img">
+                    <img src="./assets/images/del/img-2.jpg" alt="" />
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="banner-box position-relative">
+                  <div class="img">
+                    <img src="./assets/images/del/img-1.jpg" alt="" />
+                  </div>
+                </div>
+              </div> -->
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-arrow">
+              <div class="swiper-button-prev swc">
+                <svg
+                  width="40"
+                  height="40"
+                  viewBox="0 0 40 40"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g clip-path="url(#clip0_642_2495)">
+                    <path
+                      d="M8.9 13L4 20L8.9 27H11.172L6.972 21H35L36 19H6.973L11.172 13H8.9Z"
+                      fill="#F4E7D1"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_642_2495">
+                      <rect width="40" height="40" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </div>
+              <div class="swiper-button-next swc">
+                <svg
+                  width="40"
+                  height="40"
+                  viewBox="0 0 40 40"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g clip-path="url(#clip0_642_2495)">
+                    <path
+                      d="M8.9 13L4 20L8.9 27H11.172L6.972 21H35L36 19H6.973L11.172 13H8.9Z"
+                      fill="#F4E7D1"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_642_2495">
+                      <rect width="40" height="40" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
+      <section
+        class="intro"
+        style="height: 100vh; background-color: #934117"
+      ></section>
       <section
         class="intro"
         style="height: 100vh; background-color: #934117"
@@ -141,6 +249,7 @@
     <script src="./assets/libs/swiper-bundle.min.js"></script>
     <script src="./assets/libs/moment.min.js"></script>
     <script src="./assets/libs/lightpick.min.js"></script>
+    <script src="https://player.vimeo.com/api/player.js"></script>
     <!-- import custom js -->
     <script type="module" src="./assets/main/js/script.min.js"></script>
     <!-- <script type="module" src="./assets/main/js/home.min.js"></script> -->

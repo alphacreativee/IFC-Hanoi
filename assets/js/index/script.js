@@ -5,6 +5,8 @@ import {
   getDateLightPick,
   staggerText,
   loadingAnimation,
+  headerScroll,
+  imageSlider,
 } from "../../main/js/global.min.js";
 
 const $ = jQuery;
@@ -86,6 +88,8 @@ function init() {
   gsap.registerPlugin(ScrollTrigger);
   customDropdown();
   createFilterTab();
+  headerScroll();
+  imageSlider();
   // getDateLightPick();
 }
 
