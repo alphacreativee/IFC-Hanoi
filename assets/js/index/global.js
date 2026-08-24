@@ -433,18 +433,35 @@ export function animationBox() {
       if (container.dataset.scriptInitialized) return;
       container.dataset.scriptInitialized = "true";
 
+      const logoEl = container.querySelector("[box-logo]");
       const titleEl = container.querySelector("[box-title]");
       const descEl = container.querySelector("[box-desc]");
       const btnEl = container.querySelector("[box-btn]");
       const startPoint = container.dataset.start || "top 80%";
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: container,
           start: startPoint,
           toggleActions: "play none none none",
-          //   markers: true,
+          // markers: true,
         },
       });
+
+      // ----- 0. Logo (fade) - chạy đầu tiên nếu có -----
+      if (logoEl) {
+        tl.fromTo(
+          logoEl,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.45,
+            ease: "power2.out",
+          },
+          0, // bắt đầu từ đầu timeline
+        );
+      }
 
       // ----- 1. Title (chars) -----
       if (titleEl) {
@@ -467,7 +484,7 @@ export function animationBox() {
                 duration: 0.5,
                 stagger: 0.04,
               },
-              0,
+              logoEl ? "<+0.15" : 0, // nếu có logo thì delay nhẹ sau logo
             );
           },
         });
