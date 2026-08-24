@@ -1346,3 +1346,26 @@ body {
   bottom: auto;
   top: 0;
 }
+
+.retail-inner {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+}
+.retail .slider-pagination {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  background-color: red;
+}
+.retail .slider-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+.retail-col {
+  min-width: 0;
+}

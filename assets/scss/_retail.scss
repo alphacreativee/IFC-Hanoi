@@ -1,0 +1,24 @@
+.retail {
+  &-inner {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+  }
+  .slider-pagination {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    background-color: red;
+  }
+  .slider-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+  }
+  &-col {
+    min-width: 0;
+  }
+}

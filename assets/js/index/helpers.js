@@ -86,3 +86,126 @@ export function animationIntro() {
     });
   });
 }
+export function animationRetail() {
+  gsap.registerPlugin(SplitText, ScrollTrigger);
+
+  document.querySelectorAll(".slider-retail").forEach((sliderEl) => {
+    if (sliderEl.dataset.scriptInitialized) return;
+    sliderEl.dataset.scriptInitialized = "true";
+
+    const container = sliderEl.closest(".retail-col");
+    const paginationRows = container.querySelectorAll(".slider-pagination-row");
+    const contentBox = container.querySelector(".slider-content");
+
+    // ----- Init Swiper -----
+    const swiper = new Swiper(sliderEl, {
+      slidesPerView: 1,
+      speed: 800,
+      effect: "fade",
+      fadeEffect: { crossFade: true },
+      allowTouchMove: true,
+      on: {
+        slideChange: function () {
+          updatePagination(this.activeIndex);
+          updateContent(this.activeIndex);
+        },
+      },
+    });
+
+    // ----- Click pagination -----
+    paginationRows.forEach((row, index) => {
+      row.addEventListener("click", () => {
+        swiper.slideTo(index);
+      });
+    });
+
+    // ----- Active class cho pagination -----
+    function updatePagination(activeIndex) {
+      paginationRows.forEach((row, i) => {
+        row.classList.toggle("active", i === activeIndex);
+      });
+    }
+
+    // ----- Update + animate content -----
+    function updateContent(activeIndex) {
+      const activeSlide = swiper.slides[activeIndex];
+      const sourceContent = activeSlide.querySelector(".retail-content");
+
+      if (!sourceContent || !contentBox) return;
+
+      // Clear old content
+      contentBox.innerHTML = "";
+
+      // Clone title + description
+      const title = sourceContent.querySelector("h3")?.cloneNode(true);
+      const desc = sourceContent.querySelector(".description")?.cloneNode(true);
+
+      if (title) contentBox.appendChild(title);
+      if (desc) contentBox.appendChild(desc);
+
+      // Animate
+      animateContent(contentBox);
+    }
+
+    // ----- Animation giống intro / workplace -----
+    function animateContent(box) {
+      const titleEl = box.querySelector("h3");
+      const descEl = box.querySelector(".description");
+
+      const tl = gsap.timeline();
+
+      // Title (chars)
+      if (titleEl) {
+        SplitText.create(titleEl, {
+          type: "chars",
+          charsClass: "char",
+          autoSplit: true,
+          onSplit: (self) => {
+            tl.fromTo(
+              self.chars,
+              {
+                transformOrigin: "50% 100%",
+                scaleY: 0,
+                opacity: 0,
+              },
+              {
+                ease: "power3.out",
+                opacity: 1,
+                scaleY: 1,
+                duration: 0.45,
+                stagger: 0.035,
+              },
+              0,
+            );
+          },
+        });
+      }
+
+      // Description (lines + mask)
+      if (descEl) {
+        SplitText.create(descEl, {
+          type: "lines",
+          mask: "lines",
+          linesClass: "line",
+          autoSplit: true,
+          onSplit: (self) => {
+            tl.fromTo(
+              self.lines,
+              { y: "110%" },
+              {
+                y: "0%",
+                duration: 0.65,
+                ease: "power3.inOut",
+                stagger: 0.05,
+              },
+              "<+0.25",
+            );
+          },
+        });
+      }
+    }
+
+    updatePagination(0);
+    updateContent(0);
+  });
+}

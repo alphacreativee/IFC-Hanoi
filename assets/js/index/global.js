@@ -373,6 +373,8 @@ export function animationFade() {
   });
 }
 export function imageParallax() {
+  gsap.registerPlugin(ScrollTrigger);
+
   document.querySelectorAll("[parallax-image]").forEach((el) => {
     if (el.dataset.scriptInitialized) return;
     el.dataset.scriptInitialized = "true";
@@ -381,25 +383,46 @@ export function imageParallax() {
     if (!img) return;
 
     const percentParallax = 15;
+    const row =
+      el.closest("[parallax-row]") || el.closest(".parallax-row") || el;
 
-    const row = el.closest(".parallax-row") || el;
+    // Hàm tạo animation
+    const createParallax = () => {
+      // Kill cái cũ nếu có (tránh bị double)
+      if (el._parallaxTween) {
+        el._parallaxTween.scrollTrigger?.kill();
+        el._parallaxTween.kill();
+      }
 
-    const tween = gsap.fromTo(
-      img,
-      { yPercent: `-${percentParallax}` },
-      {
-        yPercent: percentParallax,
-        ease: "none",
-        scrollTrigger: {
-          trigger: row,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
+      el._parallaxTween = gsap.fromTo(
+        img,
+        { yPercent: -percentParallax },
+        {
+          yPercent: percentParallax,
+          ease: "none",
+          scrollTrigger: {
+            trigger: row,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+            // markers: true, // bật lên để debug
+          },
         },
-      },
-    );
+      );
+    };
 
-    el._parallaxST = tween.scrollTrigger;
+    // Nếu ảnh đã load rồi thì chạy luôn
+    if (img.complete) {
+      createParallax();
+    } else {
+      // Chờ ảnh load xong mới tạo ScrollTrigger
+      img.addEventListener("load", createParallax, { once: true });
+    }
+  });
+
+  // Quan trọng: refresh lại tất cả ScrollTrigger sau khi trang load xong
+  window.addEventListener("load", () => {
+    ScrollTrigger.refresh();
   });
 }
 export function animationBox() {
