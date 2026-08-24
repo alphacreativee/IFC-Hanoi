@@ -10,7 +10,6 @@ import {
   animationTextLine,
   animationTitle,
   animationFade,
-  animationIntro,
   imageParallax,
 } from "../../main/js/global.min.js";
 
@@ -95,7 +94,6 @@ function init() {
   createFilterTab();
   headerScroll();
   imageSlider();
-  animationIntro();
   imageParallax();
   // getDateLightPick();
 }

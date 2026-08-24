@@ -36,12 +36,14 @@
   &-col {
     &:first-child {
       .workplace-content {
-        background-color: rgba(18, 55, 84, 0.5);
+        background-color: rgba(18, 55, 84, 0.8);
       }
     }
     &:last-child {
       .workplace-content {
-        background-color: rgba(147, 65, 23, 0.5);
+        background-color: rgba(147, 65, 23, 0.8);
+        bottom: auto;
+        top: 0;
       }
     }
   }
