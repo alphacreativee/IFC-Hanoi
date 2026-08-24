@@ -1421,7 +1421,7 @@ body {
 .retail-col {
   min-width: 0;
   width: 100%;
-  aspect-ratio: 1152/1000;
+  aspect-ratio: 1025/750;
 }
 .retail-col::before {
   content: "";
@@ -1456,4 +1456,10 @@ body {
 }
 .retail-box {
   max-width: 70%;
+}
+.retail-bg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
