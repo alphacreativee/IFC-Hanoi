@@ -1,0 +1,48 @@
+.workplace {
+  &-inner {
+    padding: var(--spacing-padding);
+  }
+  &-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  &-image {
+    width: 100%;
+    aspect-ratio: 900 / 816;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  &-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .title {
+      margin-bottom: 12px;
+    }
+    .description {
+      margin-bottom: var(--space-32);
+      max-width: 50%;
+      text-align: center;
+    }
+  }
+  &-col {
+    &:first-child {
+      .workplace-content {
+        background-color: rgba(18, 55, 84, 0.5);
+      }
+    }
+    &:last-child {
+      .workplace-content {
+        background-color: rgba(147, 65, 23, 0.5);
+      }
+    }
+  }
+}

@@ -460,3 +460,33 @@ export function animationIntro() {
     });
   });
 }
+export function imageParallax() {
+  document.querySelectorAll("[parallax-image]").forEach((el) => {
+    if (el.dataset.scriptInitialized) return;
+    el.dataset.scriptInitialized = "true";
+
+    const img = el.querySelector("img");
+    if (!img) return;
+
+    const percentParallax = 15;
+
+    const row = el.closest(".parallax-row") || el;
+
+    const tween = gsap.fromTo(
+      img,
+      { yPercent: `-${percentParallax}` },
+      {
+        yPercent: percentParallax,
+        ease: "none",
+        scrollTrigger: {
+          trigger: row,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+      },
+    );
+
+    el._parallaxST = tween.scrollTrigger;
+  });
+}
