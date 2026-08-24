@@ -38,7 +38,7 @@
 
   <body>
     <!-- loading -->
-    <script>
+    <!-- <script>
       fetch("./components/loading.html")
         .then((response) => response.text())
         .then((data) => {
@@ -49,7 +49,7 @@
     <div
       id="loading"
       class="loading position-fixed top-0 start-0 end-0 w-100 h-100 bgc-primary d-flex align-items-center justify-content-center"
-    ></div>
+    ></div> -->
     <!-- end loading -->
     <!-- layout -->
     <!-- header -->
@@ -130,7 +130,7 @@
                       allowfullscreen
                     ></iframe>
                   </div>
-                  <div class="banner-content">
+                  <div class="banner-content d-none">
                     <h3
                       class="title heading-3 font-heading color-secondary text-uppercase"
                     >
@@ -217,12 +217,45 @@
           </div>
         </div>
       </section>
+      <sectiond class="intro position-relative">
+        <div class="intro-inner limit-8-col" el-intro>
+          <div class="intro-title">
+            <h3
+              class="font-heading heading-2 color-primary text-uppercase"
+              el-title-intro
+            >
+              First premier Mixed-Use Destination in Tay Ho Tay
+            </h3>
+          </div>
+          <div class="intro-line">
+            <div class="line-line"></div>
+          </div>
+          <div class="intro-box">
+            <div class="description b1-font color-primary" el-txt-line-intro>
+              Anchoring the capital’s emerging business center, IFC Hanoi brings
+              together Grade A office spaces, curated retail, and world-class
+              hospitality in one seamlessly connected address.
+            </div>
+            <div class="intro-button" el-fade-intro>
+              <a href="" class="global-button button-primary">
+                <div class="icon">
+                  <img
+                    src="./assets/images/icons/icon-arrow-primary.svg"
+                    alt=""
+                  />
+                </div>
+                <div
+                  class="label font-body b2-font text-uppercase color-primary"
+                >
+                  about us
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </sectiond>
       <section
-        class="intro"
-        style="height: 100vh; background-color: #934117"
-      ></section>
-      <section
-        class="intro"
+        class="work"
         style="height: 100vh; background-color: #934117"
       ></section>
     </main>
@@ -249,7 +282,7 @@
     <script src="./assets/libs/swiper-bundle.min.js"></script>
     <script src="./assets/libs/moment.min.js"></script>
     <script src="./assets/libs/lightpick.min.js"></script>
-    <script src="https://player.vimeo.com/api/player.js"></script>
+
     <!-- import custom js -->
     <script type="module" src="./assets/main/js/script.min.js"></script>
     <!-- <script type="module" src="./assets/main/js/home.min.js"></script> -->

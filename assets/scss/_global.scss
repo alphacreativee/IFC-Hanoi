@@ -37,6 +37,10 @@
   height: 1.2em;
   line-height: 1.2em;
 }
+
+[el-text-line] .line {
+  white-space: nowrap;
+}
 // btn
 .global-button {
   display: flex;
@@ -63,6 +67,12 @@
     svg {
       color: var(--color-default);
       transition: color 0.3s ease;
+    }
+  }
+  &.button-primary {
+    border: 1px solid rgba(18, 55, 84, 0.5);
+    &:hover {
+      border: 1px solid var(--color-primary);
     }
   }
 }

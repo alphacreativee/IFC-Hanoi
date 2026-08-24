@@ -18,6 +18,7 @@
   --space-72: 72px;
   --space-80: 80px;
   --spacing-padding: 72px 60px 38px;
+  --spacing-padding-y: 72px 0px 38px;
 }
 
 @media (max-width: 991px) {
@@ -59,7 +60,7 @@
 
 .b1-font {
   font-size: 15px;
-  line-height: 1.1;
+  line-height: 1.5;
 }
 
 .b2-font {
@@ -932,6 +933,10 @@ body {
   line-height: 1.2em;
 }
 
+[el-text-line] .line {
+  white-space: nowrap;
+}
+
 .global-button {
   display: flex;
   align-items: center;
@@ -957,6 +962,12 @@ body {
 .global-button .icon svg {
   color: var(--color-default);
   transition: color 0.3s ease;
+}
+.global-button.button-primary {
+  border: 1px solid rgba(18, 55, 84, 0.5);
+}
+.global-button.button-primary:hover {
+  border: 1px solid var(--color-primary);
 }
 
 .swc {
@@ -1222,4 +1233,38 @@ body {
 }
 .banner .swiper-pagination-bullet {
   background-color: var(--color-white);
+}
+
+.intro-inner {
+  display: flex;
+  gap: 10px;
+  padding: var(--spacing-padding-y);
+}
+.intro-line {
+  width: 48px;
+  min-width: 48px;
+  height: 140px;
+  position: relative;
+}
+.intro-line .line-line {
+  width: 1px;
+  height: 148px;
+  background-color: var(--color-third);
+  transform: rotate(18.9deg);
+  transform-origin: bottom left;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transition: height 0.3s ease;
+}
+.intro-box {
+  padding-top: var(--space-48);
+}
+.intro-box .description {
+  margin-bottom: var(--space-48);
+  line-height: 1.5;
+}
+.intro-title {
+  max-width: 520px;
+  width: 100%;
 }

@@ -7,6 +7,10 @@ import {
   loadingAnimation,
   headerScroll,
   imageSlider,
+  animationTextLine,
+  animationTitle,
+  animationFade,
+  animationIntro,
 } from "../../main/js/global.min.js";
 
 const $ = jQuery;
@@ -90,17 +94,21 @@ function init() {
   createFilterTab();
   headerScroll();
   imageSlider();
+  animationIntro();
   // getDateLightPick();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  animationTextLine();
+  animationTitle();
+  animationFade();
   initSwiper();
-  // init();
+  init();
   const loadingEl = document.getElementById("loading");
   if (loadingEl) {
     loadingAnimation()
       .then(() => {
-        init();
+        // init();
       })
       .catch((err) => console.error("Loading error:", err));
   } else {

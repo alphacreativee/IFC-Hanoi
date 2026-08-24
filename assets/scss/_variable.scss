@@ -21,6 +21,7 @@
   --space-72: 72px;
   --space-80: 80px;
   --spacing-padding: 72px 60px 38px;
+  --spacing-padding-y: 72px 0px 38px;
 }
 @media (max-width: 991px) {
   :root {
@@ -59,7 +60,7 @@
 }
 .b1-font {
   font-size: 15px;
-  line-height: 1.1;
+  line-height: 1.5;
 }
 .b2-font {
   font-size: 13px;

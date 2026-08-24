@@ -266,3 +266,197 @@ export function imageSlider() {
     });
   });
 }
+export function animationTextLine() {
+  gsap.registerPlugin(SplitText, ScrollTrigger);
+
+  document.fonts.ready.then(() => {
+    document.querySelectorAll("[el-txt-line]").forEach((el) => {
+      if (el.dataset.scriptInitialized) return;
+      el.dataset.scriptInitialized = "true";
+
+      let splitTitle;
+
+      SplitText.create(el, {
+        type: "lines",
+        mask: "lines",
+        linesClass: "line",
+        autoSplit: true,
+        onSplit: (self) => {
+          splitTitle = self;
+
+          return gsap.fromTo(
+            self.lines,
+            { y: "100%" },
+            {
+              y: "0%",
+              duration: 0.8,
+              ease: "power3.inOut",
+              stagger: 0.05,
+              scrollTrigger: {
+                trigger: el,
+                start: "top 85%",
+                end: "bottom 85%",
+                toggleActions: "play none none none",
+                // markers: true,
+              },
+            },
+          );
+        },
+      });
+    });
+  });
+}
+export function animationTitle() {
+  gsap.registerPlugin(SplitText, ScrollTrigger);
+
+  document.fonts.ready.then(() => {
+    document.querySelectorAll("[el-title]").forEach((title) => {
+      if (title.dataset.scriptInitialized) return;
+      title.dataset.scriptInitialized = "true";
+
+      SplitText.create(title, {
+        type: "chars",
+        charsClass: "char",
+        autoSplit: true,
+        onSplit: (self) => {
+          return gsap.fromTo(
+            self.chars,
+            {
+              transformOrigin: "50% 100%",
+              scaleY: 0,
+              opacity: 0,
+            },
+            {
+              ease: "power3.out",
+              opacity: 1,
+              scaleY: 1,
+              duration: 0.5,
+              stagger: 0.05,
+              scrollTrigger: {
+                trigger: title,
+                start: "top 85%",
+                toggleActions: "play none none none",
+                // markers: true,
+              },
+            },
+          );
+        },
+      });
+    });
+  });
+}
+export function animationFade() {
+  gsap.registerPlugin(ScrollTrigger);
+
+  // ----- Fade đơn lẻ -----
+  document.querySelectorAll("[el-fade]").forEach((el) => {
+    if (el.dataset.scriptInitialized) return;
+    el.dataset.scriptInitialized = "true";
+
+    gsap.fromTo(
+      el,
+      { opacity: 0, y: 40 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: el,
+          start: "top 85%",
+          end: "bottom 85%",
+          toggleActions: "play none none none",
+          // markers: true,
+        },
+      },
+    );
+  });
+}
+export function animationIntro() {
+  gsap.registerPlugin(SplitText, ScrollTrigger);
+
+  document.fonts.ready.then(() => {
+    document.querySelectorAll("[el-intro]").forEach((container) => {
+      if (container.dataset.scriptInitialized) return;
+      container.dataset.scriptInitialized = "true";
+
+      const titleEl = container.querySelector("[el-title-intro]");
+      const lineEl = container.querySelector("[el-txt-line-intro]");
+      const fadeEls = container.querySelectorAll("[el-fade-intro]");
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container,
+          start: "top 85%",
+          toggleActions: "play none none none",
+          // markers: true,
+        },
+      });
+
+      // ----- 1. Title (chars) -----
+      if (titleEl) {
+        SplitText.create(titleEl, {
+          type: "chars",
+          charsClass: "char",
+          autoSplit: true,
+          onSplit: (self) => {
+            tl.fromTo(
+              self.chars,
+              {
+                transformOrigin: "50% 100%",
+                scaleY: 0,
+                opacity: 0,
+              },
+              {
+                ease: "power3.out",
+                opacity: 1,
+                scaleY: 1,
+                duration: 0.5,
+                stagger: 0.05,
+              },
+              0, // bắt đầu từ đầu timeline
+            );
+          },
+        });
+      }
+
+      // ----- 2. Txt line (lines, mask) -----
+      if (lineEl) {
+        SplitText.create(lineEl, {
+          type: "lines",
+          mask: "lines",
+          linesClass: "line",
+          autoSplit: true,
+          onSplit: (self) => {
+            tl.fromTo(
+              self.lines,
+              { y: "100%" },
+              {
+                y: "0%",
+                duration: 0.8,
+                ease: "power3.inOut",
+                stagger: 0.05,
+              },
+              "<+0.6",
+            );
+          },
+        });
+      }
+
+      // ----- 3. Fade -----
+      if (fadeEls.length) {
+        tl.fromTo(
+          fadeEls,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.4,
+            ease: "none",
+          },
+          ">-0.2", // nối sau txt-line
+        );
+      }
+    });
+  });
+}

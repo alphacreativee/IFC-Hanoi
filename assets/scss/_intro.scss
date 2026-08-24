@@ -1,0 +1,40 @@
+.intro {
+  //   padding: var(--spacing-padding);
+
+  &-inner {
+    display: flex;
+    gap: 10px;
+    padding: var(--spacing-padding-y);
+  }
+  &-line {
+    width: 48px;
+    min-width: 48px;
+    height: 140px;
+    position: relative;
+    // overflow: hidden;
+
+    .line-line {
+      width: 1px;
+      height: 148px;
+      background-color: var(--color-third);
+      transform: rotate(18.9deg);
+      transform-origin: bottom left;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      transition: height 0.3s ease;
+    }
+  }
+  &-box {
+    padding-top: var(--space-48);
+
+    .description {
+      margin-bottom: var(--space-48);
+      line-height: 1.5;
+    }
+  }
+  &-title {
+    max-width: 520px;
+    width: 100%;
+  }
+}
