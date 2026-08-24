@@ -42,10 +42,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    img {
-      width: calc(100vw - 120px);
-      max-width: 100%;
-      height: 80px;
-    }
+    width: calc(100vw - 120px);
+    height: 80px;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: url("../../images/icons/bg-col-secondary.svg");
+    background-position: center;
   }
 }

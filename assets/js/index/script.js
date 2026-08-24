@@ -105,12 +105,12 @@ document.addEventListener("DOMContentLoaded", () => {
   animationTitle();
   animationFade();
   initSwiper();
-  init();
+  // init();
   const loadingEl = document.getElementById("loading");
   if (loadingEl) {
     loadingAnimation()
       .then(() => {
-        // init();
+        init();
       })
       .catch((err) => console.error("Loading error:", err));
   } else {
