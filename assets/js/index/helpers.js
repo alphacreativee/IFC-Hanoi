@@ -97,6 +97,8 @@ export function animationRetail() {
     const paginationRows = container.querySelectorAll(".slider-pagination-row");
     const contentBox = container.querySelector(".slider-content");
 
+    let hasPlayedIntro = false; // chỉ chạy hiệu ứng scroll 1 lần
+
     // ----- Init Swiper -----
     const swiper = new Swiper(sliderEl, {
       slidesPerView: 1,
@@ -107,7 +109,7 @@ export function animationRetail() {
       on: {
         slideChange: function () {
           updatePagination(this.activeIndex);
-          updateContent(this.activeIndex);
+          updateContent(this.activeIndex, true); // true = animate ngay
         },
       },
     });
@@ -126,8 +128,8 @@ export function animationRetail() {
       });
     }
 
-    // ----- Update + animate content -----
-    function updateContent(activeIndex) {
+    // ----- Update content -----
+    function updateContent(activeIndex, shouldAnimate = false) {
       const activeSlide = swiper.slides[activeIndex];
       const sourceContent = activeSlide.querySelector(".retail-content");
 
@@ -143,11 +145,13 @@ export function animationRetail() {
       if (title) contentBox.appendChild(title);
       if (desc) contentBox.appendChild(desc);
 
-      // Animate
-      animateContent(contentBox);
+      // Chỉ animate khi được yêu cầu
+      if (shouldAnimate) {
+        animateContent(contentBox);
+      }
     }
 
-    // ----- Animation giống intro / workplace -----
+    // ----- Animation title + description -----
     function animateContent(box) {
       const titleEl = box.querySelector("h3");
       const descEl = box.querySelector(".description");
@@ -205,7 +209,21 @@ export function animationRetail() {
       }
     }
 
+    // ----- ScrollTrigger: hiệu ứng xuất hiện khi cuộn tới -----
+    ScrollTrigger.create({
+      trigger: container,
+      start: "top 50%",
+      once: true,
+      onEnter: () => {
+        if (!hasPlayedIntro) {
+          hasPlayedIntro = true;
+          updateContent(swiper.activeIndex, true); // animate lần đầu
+        }
+      },
+    });
+
+    // Init trạng thái ban đầu (chưa animate)
     updatePagination(0);
-    updateContent(0);
+    updateContent(0, false); // chỉ đổ content, chưa chạy hiệu ứng
   });
 }

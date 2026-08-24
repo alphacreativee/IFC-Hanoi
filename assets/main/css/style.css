@@ -1356,8 +1356,44 @@ body {
   left: 20px;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 2;
-  background-color: red;
+  z-index: 3;
+}
+.retail .slider-pagination-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.retail .slider-pagination-row:last-child {
+  margin-bottom: 0;
+}
+.retail .slider-pagination-row {
+  cursor: pointer;
+}
+.retail .slider-pagination-row.active span::before {
+  width: 100%;
+}
+.retail .slider-pagination-row span {
+  display: block;
+  position: relative;
+  width: 32px;
+}
+.retail .slider-pagination-row span::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+  width: 50%;
+  height: 1px;
+  background-color: var(--color-white);
+  transition: width 0.3s ease;
+}
+.retail .slider-pagination-row .label {
+  font-size: 28px;
+  line-height: 1.2;
+  font-family: var(--font-heading);
+  color: var(--color-white);
+  text-transform: uppercase;
 }
 .retail .slider-content {
   position: absolute;
@@ -1365,7 +1401,59 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 3;
+  width: 350px;
+  text-align: center;
+}
+.retail .slider-content h3 {
+  font-family: var(--font-heading);
+  font-size: 49px;
+  line-height: 45px;
+  color: var(--color-secondary);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.retail .slider-content .description {
+  font-size: 13px;
+  line-height: 1.2;
+  color: var(--color-secondary);
+  text-align: center;
 }
 .retail-col {
   min-width: 0;
+  width: 100%;
+  aspect-ratio: 1152/1000;
+}
+.retail-col::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+.retail .slider-retail {
+  height: 100%;
+}
+.retail .slider-retail .swiper-slide {
+  height: auto;
+}
+.retail-img {
+  width: 100%;
+  height: 100%;
+}
+.retail-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.retail-content {
+  padding: 32px 32px 32px 60px;
+}
+.retail-content h3 {
+  margin-bottom: 12px;
+}
+.retail-content .description {
+  margin-bottom: 32px;
+}
+.retail-box {
+  max-width: 70%;
 }

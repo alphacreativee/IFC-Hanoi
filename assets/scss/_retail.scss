@@ -8,8 +8,48 @@
     left: 20px;
     top: 50%;
     transform: translateY(-50%);
-    z-index: 2;
-    background-color: red;
+    z-index: 3;
+
+    &-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+      cursor: pointer;
+      &.active {
+        span {
+          &::before {
+            width: 100%;
+          }
+        }
+      }
+      //   justify-content: flex-end;
+      span {
+        display: block;
+        position: relative;
+        width: 32px;
+        &::before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          right: 0;
+          width: 50%;
+          height: 1px;
+          background-color: var(--color-white);
+          transition: width 0.3s ease;
+        }
+      }
+      .label {
+        font-size: 28px;
+        line-height: 1.2;
+        font-family: var(--font-heading);
+        color: var(--color-white);
+        text-transform: uppercase;
+      }
+    }
   }
   .slider-content {
     position: absolute;
@@ -17,8 +57,60 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 3;
+    width: 350px;
+    text-align: center;
+    h3 {
+      font-family: var(--font-heading);
+      font-size: 49px;
+      line-height: 45px;
+      color: var(--color-secondary);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .description {
+      font-size: 13px;
+      line-height: 1.2;
+      color: var(--color-secondary);
+      text-align: center;
+    }
   }
   &-col {
     min-width: 0;
+    width: 100%;
+    aspect-ratio: 1152 / 1000;
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 2;
+    }
+  }
+  .slider-retail {
+    height: 100%;
+    .swiper-slide {
+      height: auto;
+    }
+  }
+  &-img {
+    width: 100%;
+    height: 100%;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  &-content {
+    padding: 32px 32px 32px 60px;
+    h3 {
+      margin-bottom: 12px;
+    }
+    .description {
+      margin-bottom: 32px;
+    }
+  }
+  &-box {
+    max-width: 70%;
   }
 }
