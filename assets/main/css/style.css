@@ -1006,8 +1006,8 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  width: 110%;
-  height: 110%;
+  width: 115%;
+  height: 115%;
   object-fit: cover;
 }
 
@@ -1334,6 +1334,9 @@ body {
   margin-bottom: var(--space-32);
   max-width: 50%;
   text-align: center;
+}
+.workplace-col {
+  overflow: hidden;
 }
 .workplace-col:first-child .workplace-content {
   background-color: rgba(18, 55, 84, 0.8);

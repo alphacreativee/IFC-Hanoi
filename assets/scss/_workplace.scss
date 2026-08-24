@@ -34,6 +34,7 @@
     }
   }
   &-col {
+    overflow: hidden;
     &:first-child {
       .workplace-content {
         background-color: rgba(18, 55, 84, 0.8);

@@ -11,6 +11,7 @@ import {
   animationTitle,
   animationFade,
   imageParallax,
+  animationBox,
 } from "../../main/js/global.min.js";
 
 const $ = jQuery;
@@ -95,6 +96,7 @@ function init() {
   headerScroll();
   imageSlider();
   imageParallax();
+  animationBox();
   // getDateLightPick();
 }
 
