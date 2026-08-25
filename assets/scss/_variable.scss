@@ -53,6 +53,10 @@
 .heading-2 {
   font-size: 49px;
   line-height: 45px;
+  @media (max-width: 991px) {
+    font-size: 32px;
+    line-height: 30px;
+  }
 }
 .heading-3 {
   font-size: 24px;

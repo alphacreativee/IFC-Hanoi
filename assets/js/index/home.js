@@ -1,10 +1,6 @@
 // export các function dùng cho home
 
-import {
-  animationIntro,
-  animationRetail,
-  sliderNews,
-} from "../../main/js/helpers.min.js";
+import { animationRetail, sliderNews } from "../../main/js/helpers.min.js";
 ("use strict");
 $ = jQuery;
 
@@ -18,7 +14,7 @@ gsap.ticker.lagSmoothing(0);
 
 const init = () => {
   gsap.registerPlugin(ScrollTrigger);
-  animationIntro();
+
   animationRetail();
   sliderNews();
 };

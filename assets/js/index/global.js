@@ -78,7 +78,8 @@ export function headerScroll() {
   const header = document.getElementById("header");
   if (!header) return null;
 
-  const threshold = window.innerHeight;
+  const isMobile = window.innerWidth <= 991;
+  const threshold = isMobile ? window.innerHeight * 0.45 : window.innerHeight;
 
   const trigger = ScrollTrigger.create({
     start: "top top",
@@ -552,6 +553,135 @@ export function animationBox() {
             ease: "power2.out",
           },
           ">-0.15",
+        );
+      }
+    });
+  });
+}
+export function headerMobile() {
+  if (window.innerWidth > 992) return;
+
+  const hamBtn = document.getElementById("ham-btn");
+  const headerMenu = document.querySelector(".header-menu");
+  const headerMain = document.getElementById("header");
+  if (!hamBtn || !headerMenu) return;
+
+  hamBtn.addEventListener("click", () => {
+    hamBtn.classList.toggle("active");
+    headerMenu.classList.toggle("show");
+    headerMain.classList.toggle("change-color");
+  });
+}
+export function animationIntro() {
+  gsap.registerPlugin(SplitText, ScrollTrigger);
+
+  document.fonts.ready.then(() => {
+    document.querySelectorAll("[el-intro]").forEach((container) => {
+      if (container.dataset.scriptInitialized) return;
+      container.dataset.scriptInitialized = "true";
+
+      const titleEl = container.querySelector("[el-title-intro]");
+      const lineEl = container.querySelector("[el-txt-line-intro]");
+      const fadeEls = container.querySelectorAll("[el-fade-intro]");
+      const heightLine = container.querySelectorAll("[el-line-intro]");
+
+      const isMobile = window.innerWidth <= 768; // chỉnh breakpoint nếu cần
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container,
+          start: "top 85%",
+          toggleActions: "play none none none",
+          // markers: true,
+        },
+      });
+
+      // ----- Label thời gian: đổi thứ tự tuỳ mobile/desktop -----
+      if (isMobile) {
+        // Mobile: title chạy trước, line chạy sau
+        tl.addLabel("titleStart", 0);
+        tl.addLabel("lineStart", 0.5);
+        tl.addLabel("descStart", 1.3);
+        tl.addLabel("fadeStart", 2.0);
+        console.log("123");
+      } else {
+        // Desktop: line chạy trước, title chạy sau (giữ như cũ)
+        tl.addLabel("lineStart", 0);
+        tl.addLabel("titleStart", 0.5);
+        tl.addLabel("descStart", 1.3);
+        tl.addLabel("fadeStart", 2.0);
+      }
+
+      // ----- Line -----
+      if (heightLine.length) {
+        tl.fromTo(
+          heightLine,
+          { scaleY: 0, rotate: 0, transformOrigin: "0% 0%" },
+          { scaleY: 1, duration: 0.5, ease: "power2.out" },
+          "lineStart",
+        );
+        tl.to(
+          heightLine,
+          {
+            rotate: 18.9,
+            transformOrigin: "50% 50%",
+            duration: 0.4,
+            ease: "power3.out",
+          },
+          "lineStart+=0.4",
+        );
+      } else {
+        console.warn("⚠️ el-line-intro không tìm thấy trong container này");
+      }
+
+      // ----- Title -----
+      if (titleEl) {
+        SplitText.create(titleEl, {
+          type: "chars",
+          charsClass: "char",
+          autoSplit: true,
+          onSplit: (self) => {
+            tl.fromTo(
+              self.chars,
+              { transformOrigin: "50% 100%", scaleY: 0, opacity: 0 },
+              {
+                ease: "power3.out",
+                opacity: 1,
+                scaleY: 1,
+                duration: 0.5,
+                stagger: 0.05,
+              },
+              "titleStart",
+            );
+          },
+        });
+      }
+
+      // ----- Txt line (description) -----
+      if (lineEl) {
+        SplitText.create(lineEl, {
+          type: "lines",
+          mask: "lines",
+          linesClass: "line",
+          autoSplit: true,
+          onSplit: (self) => {
+            tl.fromTo(
+              self.lines,
+              { y: "100%" },
+              { y: "0%", duration: 0.8, ease: "power3.inOut", stagger: 0.05 },
+              "descStart",
+            );
+          },
+        });
+      }
+
+      // ----- Fade -----
+      if (fadeEls.length) {
+        tl.fromTo(
+          fadeEls,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.4, ease: "none" },
+          "fadeStart",
         );
       }
     });

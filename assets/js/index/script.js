@@ -12,6 +12,8 @@ import {
   animationFade,
   imageParallax,
   animationBox,
+  headerMobile,
+  animationIntro,
 } from "../../main/js/global.min.js";
 
 const $ = jQuery;
@@ -97,6 +99,8 @@ function init() {
   imageSlider();
   imageParallax();
   animationBox();
+  headerMobile();
+  animationIntro();
   // getDateLightPick();
 }
 
@@ -105,6 +109,12 @@ document.addEventListener("DOMContentLoaded", () => {
   animationTitle();
   animationFade();
   initSwiper();
+  const isMobile = window.innerWidth <= 991;
+  if (isMobile) {
+    setTimeout(() => {
+      animationIntro();
+    }, 1000);
+  }
   // init();
   const loadingEl = document.getElementById("loading");
   if (loadingEl) {
