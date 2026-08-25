@@ -9,7 +9,7 @@ export function animationIntro() {
       const titleEl = container.querySelector("[el-title-intro]");
       const lineEl = container.querySelector("[el-txt-line-intro]");
       const fadeEls = container.querySelectorAll("[el-fade-intro]");
-
+      const heightLine = container.querySelectorAll("[el-line-intro]");
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: container,
@@ -45,7 +45,15 @@ export function animationIntro() {
           },
         });
       }
-
+      if (heightLine) {
+        tl.to(
+          heightLine,
+          {
+            height: "148px",
+          },
+          "<+0.6",
+        );
+      }
       // ----- 2. Txt line (lines, mask) -----
       if (lineEl) {
         SplitText.create(lineEl, {

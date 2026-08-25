@@ -1270,7 +1270,7 @@ body {
 }
 .intro-line .line-line {
   width: 1px;
-  height: 148px;
+  height: 0px;
   background-color: var(--color-third);
   transform: rotate(18.9deg);
   transform-origin: bottom left;
