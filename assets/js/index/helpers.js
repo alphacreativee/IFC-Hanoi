@@ -19,7 +19,36 @@ export function animationIntro() {
         },
       });
 
-      // ----- 1. Title (chars) -----
+      // ----- 0. Line: chạy TRƯỚC TIÊN -----
+      if (heightLine.length) {
+        tl.fromTo(
+          heightLine,
+          {
+            scaleY: 0,
+            rotate: 0,
+            transformOrigin: "0% 0%",
+          },
+          {
+            scaleY: 1,
+            duration: 0.5,
+            ease: "power2.out",
+          },
+          0, // bắt đầu ngay từ đầu timeline
+        );
+
+        tl.to(
+          heightLine,
+          {
+            rotate: 18.9,
+            transformOrigin: "50% 50%",
+            duration: 0.4,
+            ease: "power3.out",
+          },
+          ">-0.1",
+        );
+      }
+
+      // ----- 1. Title (chars) - chạy SAU khi line xong -----
       if (titleEl) {
         SplitText.create(titleEl, {
           type: "chars",
@@ -40,20 +69,12 @@ export function animationIntro() {
                 duration: 0.5,
                 stagger: 0.05,
               },
-              0, // bắt đầu từ đầu timeline
+              "<+0.3", // nối ngay sau khi line xoay xong
             );
           },
         });
       }
-      if (heightLine) {
-        tl.to(
-          heightLine,
-          {
-            height: "148px",
-          },
-          "<+0.6",
-        );
-      }
+
       // ----- 2. Txt line (lines, mask) -----
       if (lineEl) {
         SplitText.create(lineEl, {
@@ -88,7 +109,7 @@ export function animationIntro() {
             duration: 0.4,
             ease: "none",
           },
-          ">-0.2", // nối sau txt-line
+          ">-0.2",
         );
       }
     });

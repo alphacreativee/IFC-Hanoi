@@ -1270,14 +1270,13 @@ body {
 }
 .intro-line .line-line {
   width: 1px;
-  height: 0px;
+  height: 148px;
   background-color: var(--color-third);
-  transform: rotate(18.9deg);
-  transform-origin: bottom left;
   position: absolute;
   bottom: 0;
-  left: 0;
-  transition: height 0.3s ease;
+  left: 50%;
+  transform: scaleY(0) rotate(0deg);
+  transform-origin: 0% 0%;
 }
 .intro-box {
   padding-top: var(--space-48);
