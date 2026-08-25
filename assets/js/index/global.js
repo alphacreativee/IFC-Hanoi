@@ -409,8 +409,9 @@ export function imageParallax() {
 
     const img = el.querySelector("img");
     if (!img) return;
+    const isMobile = window.innerWidth < 991;
 
-    const percentParallax = 15;
+    const percentParallax = isMobile ? 10 : 15;
     const row =
       el.closest("[parallax-row]") || el.closest(".parallax-row") || el;
 

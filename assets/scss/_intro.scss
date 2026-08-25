@@ -7,10 +7,11 @@
     padding: var(--spacing-padding-y);
     margin-bottom: 72px;
     @media (max-width: 767px) {
-      padding: 72px 16px;
+      padding: 72px 16px 0;
       display: grid;
       grid-template-columns: 48px 1fr;
       gap: 48px 16px;
+      margin-bottom: 40px;
     }
   }
   &-line {
