@@ -59,6 +59,14 @@
     z-index: 3;
     width: 350px;
     text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    &.is-ready {
+      opacity: 1;
+      visibility: visible;
+    }
+
     h3 {
       font-family: var(--font-heading);
       font-size: 49px;

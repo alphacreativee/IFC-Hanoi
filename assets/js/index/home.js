@@ -1,6 +1,10 @@
 // export các function dùng cho home
 
-import { animationIntro, animationRetail } from "../../main/js/helpers.min.js";
+import {
+  animationIntro,
+  animationRetail,
+  sliderNews,
+} from "../../main/js/helpers.min.js";
 ("use strict");
 $ = jQuery;
 
@@ -16,6 +20,7 @@ const init = () => {
   gsap.registerPlugin(ScrollTrigger);
   animationIntro();
   animationRetail();
+  sliderNews();
 };
 document.addEventListener("DOMContentLoaded", () => {
   init();

@@ -117,7 +117,8 @@ export function animationRetail() {
       on: {
         slideChange: function () {
           updatePagination(this.activeIndex);
-          updateContent(this.activeIndex, true); // true = animate ngay
+          // Chỉ animate nếu intro đã chạy rồi (tránh animate khi chưa scroll tới)
+          updateContent(this.activeIndex, hasPlayedIntro);
         },
       },
     });
@@ -143,6 +144,9 @@ export function animationRetail() {
 
       if (!sourceContent || !contentBox) return;
 
+      // Ẩn lại trước khi đổ content mới (tránh flash khi đổi slide)
+      contentBox.classList.remove("is-ready");
+
       // Clear old content
       contentBox.innerHTML = "";
 
@@ -153,10 +157,12 @@ export function animationRetail() {
       if (title) contentBox.appendChild(title);
       if (desc) contentBox.appendChild(desc);
 
-      // Chỉ animate khi được yêu cầu
       if (shouldAnimate) {
         animateContent(contentBox);
       }
+      // Nếu shouldAnimate = false: KHÔNG add is-ready ở đây.
+      // Giữ nguyên trạng thái ẩn (CSS mặc định), chờ ScrollTrigger
+      // hoặc lần đổi slide kế tiếp mới thực sự hiện + animate.
     }
 
     // ----- Animation title + description -----
@@ -164,7 +170,19 @@ export function animationRetail() {
       const titleEl = box.querySelector("h3");
       const descEl = box.querySelector(".description");
 
-      const tl = gsap.timeline();
+      const tl = gsap.timeline({ paused: true });
+
+      let pending = (titleEl ? 1 : 0) + (descEl ? 1 : 0);
+      let started = false;
+
+      function tryStart() {
+        pending--;
+        if (pending === 0 && !started) {
+          started = true;
+          box.classList.add("is-ready");
+          tl.play(0);
+        }
+      }
 
       // Title (chars)
       if (titleEl) {
@@ -189,6 +207,7 @@ export function animationRetail() {
               },
               0,
             );
+            tryStart();
           },
         });
       }
@@ -212,9 +231,22 @@ export function animationRetail() {
               },
               "<+0.25",
             );
+            tryStart();
           },
         });
       }
+
+      if (pending === 0) {
+        box.classList.add("is-ready");
+      }
+
+      // Fallback an toàn nếu SplitText load quá lâu / lỗi
+      setTimeout(() => {
+        if (!box.classList.contains("is-ready")) {
+          box.classList.add("is-ready");
+          tl.play(0);
+        }
+      }, 3000);
     }
 
     // ----- ScrollTrigger: hiệu ứng xuất hiện khi cuộn tới -----
@@ -230,8 +262,22 @@ export function animationRetail() {
       },
     });
 
-    // Init trạng thái ban đầu (chưa animate)
+    // Init trạng thái ban đầu: chỉ đổ pagination + content, KHÔNG hiện, KHÔNG animate
     updatePagination(0);
-    updateContent(0, false); // chỉ đổ content, chưa chạy hiệu ứng
+    updateContent(0, false); // content nằm sẵn trong DOM nhưng vẫn ẩn (CSS)
+  });
+}
+export function sliderNews() {
+  const sliderNews = document.querySelectorAll(".news-slider");
+  if (!sliderNews.length) return;
+  sliderNews.forEach((sliderEl) => {
+    new Swiper(sliderEl, {
+      slidesPerView: 3,
+      spaceBetween: 12,
+      // navigation: {
+      //   nextEl: sliderEl.querySelector(".swiper-button-next"),
+      //   prevEl: sliderEl.querySelector(".swiper-button-prev"),
+      // },
+    });
   });
 }
