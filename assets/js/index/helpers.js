@@ -10,6 +10,7 @@ export function animationIntro() {
       const lineEl = container.querySelector("[el-txt-line-intro]");
       const fadeEls = container.querySelectorAll("[el-fade-intro]");
       const heightLine = container.querySelectorAll("[el-line-intro]");
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: container,
@@ -19,23 +20,21 @@ export function animationIntro() {
         },
       });
 
-      // ----- 0. Line: chạy TRƯỚC TIÊN -----
+      // ----- Đặt các label cố định, không phụ thuộc thứ tự add -----
+      tl.addLabel("lineStart", 0);
+      tl.addLabel("titleStart", 0.5); // fix cứng thời điểm title bắt đầu
+      tl.addLabel("descStart", 1.3);
+      tl.addLabel("fadeStart", 2.0);
+
+      // ----- 0. Line -----
       if (heightLine.length) {
+        console.log("heightLine found:", heightLine.length); // debug
         tl.fromTo(
           heightLine,
-          {
-            scaleY: 0,
-            rotate: 0,
-            transformOrigin: "0% 0%",
-          },
-          {
-            scaleY: 1,
-            duration: 0.5,
-            ease: "power2.out",
-          },
-          0, // bắt đầu ngay từ đầu timeline
+          { scaleY: 0, rotate: 0, transformOrigin: "0% 0%" },
+          { scaleY: 1, duration: 0.5, ease: "power2.out" },
+          "lineStart",
         );
-
         tl.to(
           heightLine,
           {
@@ -44,11 +43,13 @@ export function animationIntro() {
             duration: 0.4,
             ease: "power3.out",
           },
-          ">-0.1",
+          "lineStart+=0.4",
         );
+      } else {
+        console.warn("⚠️ el-line-intro không tìm thấy trong container này");
       }
 
-      // ----- 1. Title (chars) - chạy SAU khi line xong -----
+      // ----- 1. Title -----
       if (titleEl) {
         SplitText.create(titleEl, {
           type: "chars",
@@ -57,11 +58,7 @@ export function animationIntro() {
           onSplit: (self) => {
             tl.fromTo(
               self.chars,
-              {
-                transformOrigin: "50% 100%",
-                scaleY: 0,
-                opacity: 0,
-              },
+              { transformOrigin: "50% 100%", scaleY: 0, opacity: 0 },
               {
                 ease: "power3.out",
                 opacity: 1,
@@ -69,13 +66,13 @@ export function animationIntro() {
                 duration: 0.5,
                 stagger: 0.05,
               },
-              "<+0.3", // nối ngay sau khi line xoay xong
+              "titleStart", // luôn cố định, không phụ thuộc line có chạy hay không
             );
           },
         });
       }
 
-      // ----- 2. Txt line (lines, mask) -----
+      // ----- 2. Txt line -----
       if (lineEl) {
         SplitText.create(lineEl, {
           type: "lines",
@@ -86,13 +83,8 @@ export function animationIntro() {
             tl.fromTo(
               self.lines,
               { y: "100%" },
-              {
-                y: "0%",
-                duration: 0.8,
-                ease: "power3.inOut",
-                stagger: 0.05,
-              },
-              "<+0.6",
+              { y: "0%", duration: 0.8, ease: "power3.inOut", stagger: 0.05 },
+              "descStart",
             );
           },
         });
@@ -103,13 +95,8 @@ export function animationIntro() {
         tl.fromTo(
           fadeEls,
           { opacity: 0, y: 20 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.4,
-            ease: "none",
-          },
-          ">-0.2",
+          { opacity: 1, y: 0, duration: 0.4, ease: "none" },
+          "fadeStart",
         );
       }
     });
