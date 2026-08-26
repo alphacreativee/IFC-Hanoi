@@ -1,10 +1,25 @@
 #cta {
-  right: 20px;
+  right: 10px;
   bottom: 20px;
   z-index: 99;
-  background-color: red;
+  padding: 4px;
+  background-color: rgba(18, 55, 84, 0.5);
+  backdrop-filter: blur(5px);
+  border-radius: 999px;
   .cta {
     &-item {
+      margin-bottom: 4px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+      &:hover {
+        a {
+          background-color: var(--color-secondary);
+          svg {
+            color: var(--color-primary);
+          }
+        }
+      }
       a {
         width: 36px;
         height: 36px;
@@ -13,8 +28,12 @@
         align-items: center;
         border: 1px solid var(--color-secondary);
         border-radius: 50%;
+        transition: all 0.3s ease;
         svg {
           color: var(--color-secondary);
+          path {
+            transition: color 0.3s ease;
+          }
         }
       }
     }

@@ -1,6 +1,6 @@
 export function customDropdown() {
   const dropdowns = document.querySelectorAll(
-    ".dropdown-custom, .dropdown-custom-select",
+    ".dropdown-custom, .dropdown-custom-select"
   );
   if (!dropdowns.length) return;
   dropdowns.forEach((dropdown) => {
@@ -92,7 +92,7 @@ export function headerScroll() {
       } else {
         header.classList.remove("scrolled");
       }
-    },
+    }
   });
 
   return trigger;
@@ -167,7 +167,7 @@ export function getDateLightPick() {
     field: document.getElementById("datepicker"),
     minDate: new Date(),
     singleDate: false,
-    numberOfMonths: 2,
+    numberOfMonths: 2
     // lang: "en-US",
   });
 }
@@ -178,7 +178,7 @@ export function staggerText() {
     const split = new SplitText(el, {
       type: "words, chars",
       wordsClass: "gsap_split_word",
-      charsClass: "gsap_split_letter",
+      charsClass: "gsap_split_letter"
     });
 
     split.chars.forEach((letterEl) => {
@@ -212,8 +212,8 @@ export function staggerText() {
       ease: "power3.out",
       stagger: {
         each: 0.03,
-        from: "start",
-      },
+        from: "start"
+      }
     });
 
     el.addEventListener("mouseenter", () => {
@@ -231,7 +231,7 @@ export function loadingAnimation() {
     clipPath: "inset(0 0 0 100%)",
     opacity: 0,
     duration: 0.75,
-    ease: "none",
+    ease: "none"
   });
   tl.to(
     "#loading",
@@ -239,8 +239,8 @@ export function loadingAnimation() {
     {
       clipPath: "inset(0% 0% 100% 0%)",
       duration: 1,
-      ease: "power2.inOut",
-    },
+      ease: "power2.inOut"
+    }
   );
 
   return tl;
@@ -255,15 +255,15 @@ export function imageSlider() {
       speed: 2000,
       autoplay: {
         delay: 3000,
-        disableOnInteraction: false,
+        disableOnInteraction: false
       },
       pagination: {
-        el: sliderEl.querySelector(".swiper-pagination"),
+        el: sliderEl.querySelector(".swiper-pagination")
       },
       navigation: {
         nextEl: sliderEl.querySelector(".swiper-button-next"),
-        prevEl: sliderEl.querySelector(".swiper-button-prev"),
-      },
+        prevEl: sliderEl.querySelector(".swiper-button-prev")
+      }
     });
   });
 }
@@ -290,15 +290,15 @@ export function bannerSlider() {
       speed: 1000,
       autoplay: {
         delay: imageDelay,
-        disableOnInteraction: false,
+        disableOnInteraction: false
       },
       pagination: {
-        el: sliderEl.querySelector(".swiper-pagination"),
+        el: sliderEl.querySelector(".swiper-pagination")
       },
       navigation: {
         nextEl: sliderEl.querySelector(".swiper-button-next"),
-        prevEl: sliderEl.querySelector(".swiper-button-prev"),
-      },
+        prevEl: sliderEl.querySelector(".swiper-button-prev")
+      }
     });
   });
 }
@@ -332,12 +332,12 @@ export function animationTextLine() {
                 trigger: el,
                 start: "top 85%",
                 end: "bottom 85%",
-                toggleActions: "play none none none",
+                toggleActions: "play none none none"
                 // markers: true,
-              },
-            },
+              }
+            }
           );
-        },
+        }
       });
     });
   });
@@ -360,7 +360,7 @@ export function animationTitle() {
             {
               transformOrigin: "50% 100%",
               scaleY: 0,
-              opacity: 0,
+              opacity: 0
             },
             {
               ease: "power3.out",
@@ -371,12 +371,12 @@ export function animationTitle() {
               scrollTrigger: {
                 trigger: title,
                 start: "top 85%",
-                toggleActions: "play none none none",
+                toggleActions: "play none none none"
                 // markers: true,
-              },
-            },
+              }
+            }
           );
-        },
+        }
       });
     });
   });
@@ -401,10 +401,10 @@ export function animationFade() {
           trigger: el,
           start: "top 85%",
           end: "bottom 85%",
-          toggleActions: "play none none none",
+          toggleActions: "play none none none"
           // markers: true,
-        },
-      },
+        }
+      }
     );
   });
   // ----- Fade theo danh sách (stagger) -----
@@ -428,10 +428,10 @@ export function animationFade() {
           trigger: listEl,
           start: "top 85%",
           end: "bottom 85%",
-          toggleActions: "play none none none",
+          toggleActions: "play none none none"
           // markers: true,
-        },
-      },
+        }
+      }
     );
   });
 }
@@ -468,10 +468,10 @@ export function imageParallax() {
             trigger: row,
             start: "top bottom",
             end: "bottom top",
-            scrub: true,
+            scrub: true
             // markers: true, // bật lên để debug
-          },
-        },
+          }
+        }
       );
     };
 
@@ -507,9 +507,9 @@ export function animationBox() {
         scrollTrigger: {
           trigger: container,
           start: startPoint,
-          toggleActions: "play none none none",
+          toggleActions: "play none none none"
           // markers: true,
-        },
+        }
       });
 
       // ----- 0. Logo (fade) - chạy đầu tiên nếu có -----
@@ -521,9 +521,9 @@ export function animationBox() {
             opacity: 1,
             y: 0,
             duration: 0.45,
-            ease: "power2.out",
+            ease: "power2.out"
           },
-          0, // bắt đầu từ đầu timeline
+          0 // bắt đầu từ đầu timeline
         );
       }
 
@@ -539,18 +539,18 @@ export function animationBox() {
               {
                 transformOrigin: "50% 100%",
                 scaleY: 0,
-                opacity: 0,
+                opacity: 0
               },
               {
                 ease: "power3.out",
                 opacity: 1,
                 scaleY: 1,
                 duration: 0.5,
-                stagger: 0.04,
+                stagger: 0.04
               },
-              logoEl ? "<+0.15" : 0, // nếu có logo thì delay nhẹ sau logo
+              logoEl ? "<+0.15" : 0 // nếu có logo thì delay nhẹ sau logo
             );
-          },
+          }
         });
       }
 
@@ -569,11 +569,11 @@ export function animationBox() {
                 y: "0%",
                 duration: 0.7,
                 ease: "power3.inOut",
-                stagger: 0.06,
+                stagger: 0.06
               },
-              "<+0.4",
+              "<+0.4"
             );
-          },
+          }
         });
       }
 
@@ -586,9 +586,9 @@ export function animationBox() {
             opacity: 1,
             y: 0,
             duration: 0.45,
-            ease: "power2.out",
+            ease: "power2.out"
           },
-          ">-0.15",
+          ">-0.15"
         );
       }
     });
@@ -627,9 +627,9 @@ export function animationIntro() {
         scrollTrigger: {
           trigger: container,
           start: "top 85%",
-          toggleActions: "play none none none",
+          toggleActions: "play none none none"
           // markers: true,
-        },
+        }
       });
 
       // ----- Label thời gian: đổi thứ tự tuỳ mobile/desktop -----
@@ -654,7 +654,7 @@ export function animationIntro() {
           heightLine,
           { scaleY: 0, rotate: 0, transformOrigin: "0% 0%" },
           { scaleY: 1, duration: 0.5, ease: "power2.out" },
-          "lineStart",
+          "lineStart"
         );
         tl.to(
           heightLine,
@@ -662,9 +662,9 @@ export function animationIntro() {
             rotate: 18.9,
             transformOrigin: "50% 50%",
             duration: 0.4,
-            ease: "power3.out",
+            ease: "power3.out"
           },
-          "lineStart+=0.4",
+          "lineStart+=0.4"
         );
       } else {
         console.warn("⚠️ el-line-intro không tìm thấy trong container này");
@@ -685,11 +685,11 @@ export function animationIntro() {
                 opacity: 1,
                 scaleY: 1,
                 duration: 0.5,
-                stagger: 0.05,
+                stagger: 0.05
               },
-              "titleStart",
+              "titleStart"
             );
-          },
+          }
         });
       }
 
@@ -705,9 +705,9 @@ export function animationIntro() {
               self.lines,
               { y: "100%" },
               { y: "0%", duration: 0.8, ease: "power3.inOut", stagger: 0.05 },
-              "descStart",
+              "descStart"
             );
-          },
+          }
         });
       }
 
@@ -717,7 +717,7 @@ export function animationIntro() {
           fadeEls,
           { opacity: 0, y: 20 },
           { opacity: 1, y: 0, duration: 0.4, ease: "none" },
-          "fadeStart",
+          "fadeStart"
         );
       }
     });
