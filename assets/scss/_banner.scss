@@ -65,6 +65,8 @@
     height: 26px;
     padding: 0 12px;
     border-radius: 13px;
+    transform: translateX(-50%);
+
     &-bullet {
       background-color: var(--color-white);
     }

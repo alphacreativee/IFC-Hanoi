@@ -267,6 +267,41 @@ export function imageSlider() {
     });
   });
 }
+export function bannerSlider() {
+  const sliders = document.querySelectorAll(".banner .image-slider");
+  if (!sliders.length) return;
+
+  const imageDelay = 3000;
+
+  sliders.forEach((sliderEl) => {
+    sliderEl.querySelectorAll(".swiper-slide").forEach((slide) => {
+      const videoTime =
+        slide.dataset.videoTime ||
+        slide.dataset.slideVideo ||
+        slide.getAttribute("slide-video");
+      const delay = videoTime ? Number(videoTime) * 1000 : imageDelay;
+
+      slide.dataset.swiperAutoplay =
+        Number.isFinite(delay) && delay > 0 ? delay : imageDelay;
+    });
+
+    new Swiper(sliderEl, {
+      loop: true,
+      speed: 1000,
+      autoplay: {
+        delay: imageDelay,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: sliderEl.querySelector(".swiper-pagination"),
+      },
+      navigation: {
+        nextEl: sliderEl.querySelector(".swiper-button-next"),
+        prevEl: sliderEl.querySelector(".swiper-button-prev"),
+      },
+    });
+  });
+}
 export function animationTextLine() {
   gsap.registerPlugin(SplitText, ScrollTrigger);
 

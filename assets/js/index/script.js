@@ -6,7 +6,6 @@ import {
   staggerText,
   loadingAnimation,
   headerScroll,
-  imageSlider,
   animationTextLine,
   animationTitle,
   animationFade,
@@ -14,6 +13,7 @@ import {
   animationBox,
   headerMobile,
   animationIntro,
+  bannerSlider,
 } from "../../main/js/global.min.js";
 
 const $ = jQuery;
@@ -96,7 +96,7 @@ function init() {
   customDropdown();
   createFilterTab();
   headerScroll();
-  imageSlider();
+  bannerSlider();
   imageParallax();
   animationBox();
   headerMobile();

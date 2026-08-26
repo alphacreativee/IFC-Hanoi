@@ -1373,6 +1373,7 @@ body {
   height: 26px;
   padding: 0 12px;
   border-radius: 13px;
+  transform: translateX(-50%);
 }
 .banner .swiper-pagination-bullet {
   background-color: var(--color-white);
