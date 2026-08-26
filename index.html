@@ -37,6 +37,18 @@
   </head>
 
   <body>
+    <!-- cta -->
+
+    <script>
+      fetch("./components/cta.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("cta").innerHTML = data;
+        });
+    </script>
+
+    <div id="cta" class="cta position-fixed"></div>
+    <!-- end cta -->
     <!-- loading -->
     <script>
       fetch("./components/loading.html")
