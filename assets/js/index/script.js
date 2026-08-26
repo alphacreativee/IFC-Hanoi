@@ -32,7 +32,60 @@ gsap.ticker.add((time) => {
 });
 
 gsap.ticker.lagSmoothing(0);
+function handlePageVisibilityAndFavicon() {
+  const originalTitle = document.title;
+  let faviconInterval;
+  let isBlinking = false;
+  // const dynamicTitleElement =
+  //   document.getElementById("dynamic-title").textContent;
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) {
+      // document.title = dynamicTitleElement;
+      startFaviconBlinking();
+    } else {
+      // document.title = originalTitle;
+      stopFaviconBlinking();
+    }
+  });
 
+  function changeFavicon(src) {
+    let link = document.querySelector("link[rel~='icon']");
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = "icon";
+      link.type = "image/svg+xml"; // Thêm MIME type cho SVG
+      document.head.appendChild(link);
+    }
+    link.href = `${src}?v=${new Date().getTime()}`;
+  }
+
+  function startFaviconBlinking() {
+    if (isBlinking) return; // Tránh chạy nhiều interval
+
+    isBlinking = true;
+    const hostname = window.location.origin;
+
+    const favicons = [
+      `${hostname}/assets/images/icons/logo-full-primary.svg`,
+      `${hostname}/assets/images/icons/logo-full.svg`,
+    ];
+    let faviconIndex = 0;
+
+    faviconInterval = setInterval(() => {
+      changeFavicon(favicons[faviconIndex]);
+      faviconIndex = (faviconIndex + 1) % favicons.length;
+    }, 500);
+  }
+
+  function stopFaviconBlinking(assestUrl) {
+    clearInterval(faviconInterval);
+    isBlinking = false;
+    const hostname = window.location.origin;
+    changeFavicon(
+      `${hostname}/wp-content/themes/alpha/assets/images/use/favicon-black.svg`,
+    );
+  }
+}
 function initParallaxSwiper(swiperEl, options = {}) {
   const interleaveOffset = 0.85;
 
@@ -109,6 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
   animationTitle();
   animationFade();
   initSwiper();
+  handlePageVisibilityAndFavicon();
   const isMobile = window.innerWidth <= 991;
   if (isMobile) {
     setTimeout(() => {
