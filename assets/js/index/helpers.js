@@ -172,6 +172,7 @@ export function animationRetail() {
   });
 }
 export function sliderNews() {
+  if (window.innerWidth < 991) return;
   const sliderNews = document.querySelectorAll(".news-slider");
   if (!sliderNews.length) return;
   sliderNews.forEach((sliderEl) => {

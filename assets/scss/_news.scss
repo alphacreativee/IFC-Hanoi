@@ -55,4 +55,11 @@
       }
     }
   }
+  @media (max-width: 991px) {
+    .swiper {
+      &-wrapper {
+        flex-wrap: wrap;
+      }
+    }
+  }
 }
