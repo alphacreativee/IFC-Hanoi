@@ -2216,7 +2216,7 @@ body.no-scroll {
 }
 @media (max-width: 767px) {
   .section-contact__inner {
-    padding: 48px 24px;
+    padding: 64px 16px;
   }
   .section-contact__heading {
     margin-bottom: var(--space-32);
