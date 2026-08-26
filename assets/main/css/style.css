@@ -1139,7 +1139,7 @@ body.no-scroll {
     top: 63px;
     left: 0;
     right: 0;
-    height: calc(100vh - 63px);
+    height: calc(100dvh - 63px);
     background-color: var(--color-white);
     padding: 24px;
     transition: clip-path 0.3s ease;
