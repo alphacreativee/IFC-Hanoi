@@ -58,9 +58,13 @@
     }
   }
   &-title {
-    max-width: 520px;
-    width: 100%;
+    min-width: 520px;
+    // width: 100%;
     position: relative;
+    @media (max-width: 991px) {
+      min-width: auto;
+      width: 100%;
+    }
     &.active {
       &::before {
         clip-path: inset(0 100% 0 0);

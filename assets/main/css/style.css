@@ -1448,9 +1448,14 @@ body.no-scroll {
   line-height: 1.5;
 }
 .intro-title {
-  max-width: 520px;
-  width: 100%;
+  min-width: 520px;
   position: relative;
+}
+@media (max-width: 991px) {
+  .intro-title {
+    min-width: auto;
+    width: 100%;
+  }
 }
 .intro-title.active::before {
   clip-path: inset(0 100% 0 0);
