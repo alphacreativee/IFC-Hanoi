@@ -79,7 +79,7 @@ export function headerScroll() {
   if (!header) return null;
 
   const isMobile = window.innerWidth <= 991;
-  const threshold = isMobile ? window.innerHeight * 0.45 : window.innerHeight;
+  const threshold = isMobile ? window.innerHeight * 0.3 : window.innerHeight;
 
   const trigger = ScrollTrigger.create({
     start: "top top",
@@ -647,8 +647,9 @@ export function animationIntro() {
       const lineEl = container.querySelector("[el-txt-line-intro]");
       const fadeEls = container.querySelectorAll("[el-fade-intro]");
       const heightLine = container.querySelectorAll("[el-line-intro]");
+      const introBg = container.querySelector(".intro-bg");
 
-      const isMobile = window.innerWidth <= 768; // chỉnh breakpoint nếu cần
+      const isMobile = window.innerWidth <= 768;
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -657,18 +658,17 @@ export function animationIntro() {
           toggleActions: "play none none none",
           // markers: true,
         },
+        onComplete: () => {
+          if (introBg) introBg.classList.add("active");
+        },
       });
 
-      // ----- Label thời gian: đổi thứ tự tuỳ mobile/desktop -----
       if (isMobile) {
-        // Mobile: title chạy trước, line chạy sau
         tl.addLabel("titleStart", 0);
         tl.addLabel("lineStart", 0.5);
         tl.addLabel("descStart", 1.3);
         tl.addLabel("fadeStart", 2.0);
-        console.log("123");
       } else {
-        // Desktop: line chạy trước, title chạy sau (giữ như cũ)
         tl.addLabel("lineStart", 0);
         tl.addLabel("titleStart", 0.5);
         tl.addLabel("descStart", 1.3);
@@ -700,9 +700,9 @@ export function animationIntro() {
       // ----- Title -----
       if (titleEl) {
         SplitText.create(titleEl, {
-          type: "chars",
+          type: "words, chars",
           charsClass: "char",
-          autoSplit: true,
+          wordsClass: "word",
           onSplit: (self) => {
             tl.fromTo(
               self.chars,

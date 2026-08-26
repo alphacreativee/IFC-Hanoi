@@ -72,6 +72,9 @@
     gap: 18px;
     max-width: 315px;
     margin: 0;
+    @media (max-width: 767px) {
+      max-width: 100%;
+    }
   }
 
   .footer-contact-title {
@@ -90,7 +93,12 @@
       color: var(--color-white);
     }
   }
-
+  .footer-contact-address {
+    max-width: 240px;
+    @media (max-width: 991px) {
+      max-width: 100%;
+    }
+  }
   .footer-contact-link a:not(:first-child) {
     margin-top: 4px;
   }
@@ -210,8 +218,8 @@
 
 @media (max-width: 479px) {
   #footer {
-    .footer-nav {
-      grid-template-columns: 1fr;
-    }
+    // .footer-nav {
+    //   grid-template-columns: 1fr;
+    // }
   }
 }
