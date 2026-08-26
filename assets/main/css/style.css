@@ -1018,6 +1018,10 @@ body {
   object-fit: cover;
 }
 
+.line-mask .line {
+  white-space: nowrap;
+}
+
 .lightpick {
   --color-stroke: #ccc;
   --color-bg: #fff;
@@ -1895,7 +1899,6 @@ body {
   width: 120%;
   height: 120%;
   object-fit: cover;
-  transition: transform 0.3s ease;
 }
 
 .news-inner {
@@ -2132,4 +2135,16 @@ body {
   bottom: 20px;
   z-index: 99;
   background-color: red;
+}
+#cta .cta-item a {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--color-secondary);
+  border-radius: 50%;
+}
+#cta .cta-item a svg {
+  color: var(--color-secondary);
 }
