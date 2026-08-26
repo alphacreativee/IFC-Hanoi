@@ -79,7 +79,7 @@ export function headerScroll() {
   if (!header) return null;
 
   const isMobile = window.innerWidth <= 991;
-  const threshold = isMobile ? window.innerHeight * 0.3 : window.innerHeight;
+  const threshold = isMobile ? 100 : window.innerHeight;
 
   const trigger = ScrollTrigger.create({
     start: "top top",
