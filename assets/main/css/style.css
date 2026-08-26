@@ -900,6 +900,15 @@ body {
   -moz-osx-font-smoothing: grayscale !important;
   font-family: var(--font-body);
 }
+body.no-scroll {
+  overflow: hidden;
+}
+
+html.no-scroll,
+body.no-scroll {
+  overflow: hidden;
+  height: 100%;
+}
 
 [staggertext] {
   font-size: 15px;

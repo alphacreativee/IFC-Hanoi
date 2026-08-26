@@ -632,6 +632,7 @@ export function headerMobile() {
     hamBtn.classList.toggle("active");
     headerMenu.classList.toggle("show");
     headerMain.classList.toggle("change-color");
+    document.body.classList.toggle("no-scroll");
   });
 }
 export function animationIntro() {
