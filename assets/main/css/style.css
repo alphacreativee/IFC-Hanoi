@@ -1074,6 +1074,11 @@ a.aloading::after {
   }
 }
 
+@media (min-width: 992px) {
+  [box-title] {
+    white-space: nowrap;
+  }
+}
 .lightpick {
   --color-stroke: #ccc;
   --color-bg: #fff;
@@ -1496,6 +1501,11 @@ a.aloading::after {
 .intro-title {
   min-width: 520px;
   position: relative;
+}
+@media (min-width: 992px) and (max-width: 1300px) {
+  .intro-title {
+    min-width: 400px;
+  }
 }
 @media (max-width: 991px) {
   .intro-title {

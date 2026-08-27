@@ -65,6 +65,9 @@
     min-width: 520px;
     // width: 100%;
     position: relative;
+    @media (min-width: 992px) and (max-width: 1300px) {
+      min-width: 400px;
+    }
     @media (max-width: 991px) {
       min-width: auto;
       width: 100%;
