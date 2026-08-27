@@ -1519,7 +1519,7 @@ a.aloading::after {
 .intro-title::before {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: -20px 0;
   background-color: var(--color-white);
   z-index: 2;
   will-change: clip-path;
@@ -1549,7 +1549,7 @@ a.aloading::after {
 .intro-bg::before {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: -10px 0;
   background-color: var(--color-white);
   will-change: clip-path;
   clip-path: inset(0 0 0 0%);
