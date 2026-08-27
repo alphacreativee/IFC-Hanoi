@@ -1403,9 +1403,8 @@ body.no-scroll {
 @media (max-width: 767px) {
   .intro-inner {
     padding: 72px 16px 0;
-    display: grid;
-    grid-template-columns: 48px 1fr;
-    gap: 48px 16px;
+    flex-direction: column;
+    gap: 20px 16px;
     margin-bottom: 40px;
   }
 }
@@ -1414,6 +1413,11 @@ body.no-scroll {
   min-width: 48px;
   height: 140px;
   position: relative;
+}
+@media (max-width: 991px) {
+  .intro-line {
+    display: none;
+  }
 }
 .intro-line .line-line {
   width: 1px;
@@ -1428,6 +1432,11 @@ body.no-scroll {
 .intro-box {
   padding-top: var(--space-48);
   position: relative;
+}
+@media (max-width: 991px) {
+  .intro-box {
+    padding-top: 0;
+  }
 }
 .intro-box.active::before {
   clip-path: inset(0 0 0 100%);
@@ -1949,7 +1958,7 @@ body.no-scroll {
   }
 }
 .hospitality-logo img {
-  transform: scale(1.2);
+  transform: scale(1);
 }
 .hospitality-col {
   display: flex;

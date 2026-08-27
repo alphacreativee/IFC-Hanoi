@@ -8,9 +8,8 @@
     margin-bottom: 72px;
     @media (max-width: 767px) {
       padding: 72px 16px 0;
-      display: grid;
-      grid-template-columns: 48px 1fr;
-      gap: 48px 16px;
+      flex-direction: column;
+      gap: 20px 16px;
       margin-bottom: 40px;
     }
   }
@@ -20,7 +19,9 @@
     height: 140px;
     position: relative;
     // overflow: hidden;
-
+    @media (max-width: 991px) {
+      display: none;
+    }
     .line-line {
       width: 1px;
       height: 148px; // fixed chiều dài cuối cùng, không animate height nữa
@@ -36,6 +37,9 @@
   &-box {
     padding-top: var(--space-48);
     position: relative;
+    @media (max-width: 991px) {
+      padding-top: 0;
+    }
     &.active {
       &::before {
         clip-path: inset(0 0 0 100%);
