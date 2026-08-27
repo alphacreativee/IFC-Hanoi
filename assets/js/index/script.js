@@ -14,7 +14,7 @@ import {
   headerMobile,
   animationIntro,
   bannerSlider,
-  leasingContactForm,
+  leasingContactForm
 } from "../../main/js/global.min.js";
 
 const $ = jQuery;
@@ -22,7 +22,7 @@ const $ = jQuery;
 const lenis = new Lenis({
   duration: 1.2,
   easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  smooth: true,
+  smooth: true
 });
 
 // Connect Lenis to GSAP ScrollTrigger
@@ -64,11 +64,10 @@ function handlePageVisibilityAndFavicon() {
     if (isBlinking) return; // Tránh chạy nhiều interval
 
     isBlinking = true;
-    const hostname = window.location.origin;
 
     const favicons = [
-      `${hostname}/assets/images/icons/logo-full-primary.svg`,
-      `${hostname}/assets/images/icons/logo-full.svg`,
+      `${assetUrl}/assets/images/icons/logo-full-primary.svg`,
+      `${assetUrl}/assets/images/icons/logo-full.svg`
     ];
     let faviconIndex = 0;
 
@@ -81,9 +80,9 @@ function handlePageVisibilityAndFavicon() {
   function stopFaviconBlinking(assestUrl) {
     clearInterval(faviconInterval);
     isBlinking = false;
-    const hostname = window.location.origin;
+    const assetUrl = window.location.origin;
     changeFavicon(
-      `${hostname}/wp-content/themes/alpha/assets/images/use/favicon-black.svg`,
+      `${assetUrl}/wp-content/themes/alpha/assets/images/use/favicon-black.svg`
     );
   }
 }
@@ -125,8 +124,8 @@ function initParallaxSwiper(swiperEl, options = {}) {
           if (image) image.style.transition = `${speed}ms ${easing}`;
         });
       },
-      ...(options.on || {}),
-    },
+      ...(options.on || {})
+    }
   });
 }
 
@@ -140,8 +139,8 @@ function initSwiper() {
   const swiperParallax = initParallaxSwiper(swiperEl, {
     navigation: {
       nextEl: containerSwiperEl.querySelector(".swiper-button-next"),
-      prevEl: containerSwiperEl.querySelector(".swiper-button-prev"),
-    },
+      prevEl: containerSwiperEl.querySelector(".swiper-button-prev")
+    }
   });
 }
 

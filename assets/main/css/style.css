@@ -1043,9 +1043,9 @@ a.aloading {
   position: relative;
   color: transparent !important;
 }
-button.aloading.bg-blue,
-a.aloading.bg-blue {
-  background-color: var(--color-gold);
+button.aloading.section-contact__button,
+a.aloading.section-contact__button {
+  background-color: #f4e7d1;
 }
 button.aloading::after,
 a.aloading::after {
@@ -1057,8 +1057,8 @@ a.aloading::after {
   transform: translate(-50%, -50%);
   border: 2px solid transparent;
   border-radius: 50%;
-  border-top: 2px solid var(--color-white);
-  border-right: 2px solid var(--color-white);
+  border-top: 2px solid var(--color-primary);
+  border-right: 2px solid var(--color-primary);
   width: 20px;
   height: 20px;
   animation: spin-animation 1s linear infinite;

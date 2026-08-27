@@ -127,8 +127,8 @@ a {
     position: relative;
     color: transparent !important;
 
-    &.bg-blue {
-      background-color: var(--color-gold);
+    &.section-contact__button {
+      background-color: #f4e7d1;
     }
 
     &::after {
@@ -140,8 +140,8 @@ a {
       transform: translate(-50%, -50%);
       border: 2px solid transparent;
       border-radius: 50%;
-      border-top: 2px solid var(--color-white);
-      border-right: 2px solid var(--color-white);
+      border-top: 2px solid var(--color-primary);
+      border-right: 2px solid var(--color-primary);
       width: 20px;
       height: 20px;
       animation: spin-animation 1s linear infinite;
