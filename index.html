@@ -685,18 +685,18 @@
             </div>
 
             <form class="section-contact__form" action="#">
-              <div class="form-item">
+              <div class="form-item required">
                 <input type="text" name="name" placeholder="Name" />
               </div>
               <div class="form-row">
-                <div class="form-item">
+                <div class="form-item required">
                   <input type="tel" name="phone" placeholder="Phone" />
                 </div>
-                <div class="form-item">
+                <div class="form-item required">
                   <input type="email" name="email" placeholder="Email" />
                 </div>
               </div>
-              <div class="form-item">
+              <div class="form-item required">
                 <input type="text" name="company" placeholder="Company name" />
               </div>
               <div class="form-item">
@@ -706,10 +706,18 @@
                   placeholder="Message (optional)"
                 ></textarea>
               </div>
-              <button class="section-contact__button" type="submit">
+              <button
+                class="section-contact__button"
+                type="submit"
+                email_recepient="contact@ifchanoi.com"
+              >
                 <span class="section-contact__button-icon">→</span>
                 <span class="section-contact__button-label">Send</span>
               </button>
+
+              <div class="form-message" style="display: none">
+                Submit form successfully !!!
+              </div>
             </form>
           </div>
 

@@ -1037,6 +1037,43 @@ body.no-scroll {
   white-space: nowrap;
 }
 
+button.aloading,
+a.aloading {
+  pointer-events: none;
+  position: relative;
+  color: transparent !important;
+}
+button.aloading.bg-blue,
+a.aloading.bg-blue {
+  background-color: var(--color-gold);
+}
+button.aloading::after,
+a.aloading::after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid transparent;
+  border-radius: 50%;
+  border-top: 2px solid var(--color-white);
+  border-right: 2px solid var(--color-white);
+  width: 20px;
+  height: 20px;
+  animation: spin-animation 1s linear infinite;
+  z-index: 2;
+  background: 0 0;
+}
+@keyframes spin-animation {
+  0% {
+    transform: translate(-50%, -50%) rotate(0);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
 .lightpick {
   --color-stroke: #ccc;
   --color-bg: #fff;
@@ -2140,6 +2177,10 @@ body.no-scroll {
   -webkit-text-fill-color: var(--color-primary);
   caret-color: var(--color-primary);
 }
+.section-contact .form-item.error input,
+.section-contact .form-item.error textarea {
+  border-bottom-color: red;
+}
 .section-contact__button {
   display: flex;
   align-items: center;
@@ -2162,6 +2203,12 @@ body.no-scroll {
 }
 .section-contact__button:hover .section-contact__button-icon {
   transform: translateX(-5px);
+}
+.section-contact .form-message {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--color-primary);
 }
 .section-contact__button-icon {
   font-weight: 400;

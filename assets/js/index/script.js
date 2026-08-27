@@ -14,6 +14,7 @@ import {
   headerMobile,
   animationIntro,
   bannerSlider,
+  leasingContactForm,
 } from "../../main/js/global.min.js";
 
 const $ = jQuery;
@@ -154,6 +155,7 @@ function init() {
   animationBox();
   headerMobile();
   animationIntro();
+  leasingContactForm();
   // getDateLightPick();
 }
 
