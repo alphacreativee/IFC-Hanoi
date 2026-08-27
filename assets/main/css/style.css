@@ -1026,7 +1026,7 @@ body.no-scroll {
 
 [parallax-image] img {
   position: absolute;
-  top: -10%;
+  top: -5%;
   left: 0;
   width: 115%;
   height: 115%;
@@ -2035,6 +2035,8 @@ a.aloading::after {
   width: 100%;
   aspect-ratio: 780/425;
   overflow: hidden;
+  flex: 1;
+  min-height: 0;
 }
 .hospitality-image img {
   width: 120%;

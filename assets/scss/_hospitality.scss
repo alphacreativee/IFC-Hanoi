@@ -51,6 +51,8 @@
     width: 100%;
     aspect-ratio: 780 / 425;
     overflow: hidden;
+    flex: 1;
+    min-height: 0;
     img {
       width: 120%;
       height: 120%;
