@@ -87,11 +87,11 @@
       .dropdown-custom-menu {
         position: absolute;
         top: 100%;
-        left: -8px;
+        left: 0;
         background-color: var(--color-primary);
-        width: calc(100% + 8px);
+        width: calc(100%);
         margin-top: 21.5px;
-        padding: 8px;
+        // padding: 8px;
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
@@ -103,6 +103,7 @@
       .dropdown-custom-btn {
         display: flex;
         align-items: center;
+        cursor: pointer;
         gap: 12px;
         .icon {
           svg {
@@ -114,8 +115,15 @@
       .value-select,
       .dropdown-custom-item {
         font-size: 15px;
+        padding: 8px;
         color: var(--color-secondary);
         text-transform: uppercase;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          color: var(--color-white);
+        }
       }
       .value-select {
         color: var(--color-default);

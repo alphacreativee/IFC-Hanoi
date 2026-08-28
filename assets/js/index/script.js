@@ -35,10 +35,22 @@ gsap.ticker.add((time) => {
 gsap.ticker.lagSmoothing(0);
 function handlePageVisibilityAndFavicon() {
   const originalTitle = document.title;
-  let faviconInterval;
+  const hostname =
+    typeof assetUrl !== "undefined" && assetUrl
+      ? assetUrl.replace(/\/$/, "")
+      : window.location.origin;
+  const favicons = [
+    `${hostname}/assets/images/icons/logo-full-primary.svg`,
+    `${hostname}/assets/images/icons/logo-full.svg`
+  ];
+  const defaultFavicon = favicons[0];
+  let faviconInterval = null;
   let isBlinking = false;
   // const dynamicTitleElement =
   //   document.getElementById("dynamic-title").textContent;
+
+  changeFavicon(defaultFavicon);
+
   document.addEventListener("visibilitychange", function () {
     if (document.hidden) {
       // document.title = dynamicTitleElement;
@@ -54,22 +66,20 @@ function handlePageVisibilityAndFavicon() {
     if (!link) {
       link = document.createElement("link");
       link.rel = "icon";
-      link.type = "image/svg+xml"; // Thêm MIME type cho SVG
+      link.type = "image/svg+xml";
       document.head.appendChild(link);
     }
     link.href = `${src}?v=${new Date().getTime()}`;
   }
 
   function startFaviconBlinking() {
-    if (isBlinking) return; // Tránh chạy nhiều interval
+    if (isBlinking) return;
 
     isBlinking = true;
-
-    const favicons = [
-      `${assetUrl}/assets/images/icons/logo-full-primary.svg`,
-      `${assetUrl}/assets/images/icons/logo-full.svg`
-    ];
     let faviconIndex = 0;
+
+    changeFavicon(favicons[faviconIndex]);
+    faviconIndex = (faviconIndex + 1) % favicons.length;
 
     faviconInterval = setInterval(() => {
       changeFavicon(favicons[faviconIndex]);
@@ -77,13 +87,15 @@ function handlePageVisibilityAndFavicon() {
     }, 500);
   }
 
-  function stopFaviconBlinking(assestUrl) {
-    clearInterval(faviconInterval);
+  function stopFaviconBlinking() {
+    if (faviconInterval) {
+      clearInterval(faviconInterval);
+      faviconInterval = null;
+    }
+
     isBlinking = false;
-    const assetUrl = window.location.origin;
-    changeFavicon(
-      `${assetUrl}/wp-content/themes/alpha/assets/images/use/favicon-black.svg`
-    );
+    document.title = originalTitle;
+    changeFavicon(defaultFavicon);
   }
 }
 function initParallaxSwiper(swiperEl, options = {}) {

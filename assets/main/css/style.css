@@ -916,6 +916,11 @@ body.no-scroll {
   height: 100%;
 }
 
+::selection {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+}
+
 [staggertext] {
   font-size: 15px;
   color: #000;
@@ -1224,11 +1229,10 @@ a.aloading::after {
 #header .header-lang .dropdown-custom-menu {
   position: absolute;
   top: 100%;
-  left: -8px;
+  left: 0;
   background-color: var(--color-primary);
-  width: calc(100% + 8px);
+  width: 100%;
   margin-top: 21.5px;
-  padding: 8px;
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease;
@@ -1240,6 +1244,7 @@ a.aloading::after {
 #header .header-lang .dropdown-custom-btn {
   display: flex;
   align-items: center;
+  cursor: pointer;
   gap: 12px;
 }
 #header .header-lang .dropdown-custom-btn .icon svg {
@@ -1249,8 +1254,15 @@ a.aloading::after {
 #header .header-lang .value-select,
 #header .header-lang .dropdown-custom-item {
   font-size: 15px;
+  padding: 8px;
   color: var(--color-secondary);
   text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+#header .header-lang .value-select:hover,
+#header .header-lang .dropdown-custom-item:hover {
+  color: var(--color-white);
 }
 #header .header-lang .value-select {
   color: var(--color-default);
@@ -1486,7 +1498,7 @@ a.aloading::after {
 .intro-box::before {
   content: "";
   position: absolute;
-  inset: 0;
+  inset: -10px 0;
   background-color: var(--color-white);
   z-index: 2;
   will-change: clip-path;
@@ -1704,15 +1716,12 @@ a.aloading::after {
 #footer .footer-contact-title {
   font-weight: 700;
 }
-#footer .footer-contact-address,
 #footer .footer-contact a,
 #footer .footer-contact-link a,
 #footer .footer-nav a {
   color: inherit;
   transition: color 0.3s ease;
-  font-size: var(--footer-text-size);
 }
-#footer .footer-contact-address:hover,
 #footer .footer-contact a:hover,
 #footer .footer-contact-link a:hover,
 #footer .footer-nav a:hover {
@@ -1720,6 +1729,7 @@ a.aloading::after {
 }
 #footer .footer-contact-address {
   max-width: 240px;
+  font-size: var(--footer-text-size);
 }
 @media (max-width: 991px) {
   #footer .footer-contact-address {
@@ -2088,7 +2098,7 @@ a.aloading::after {
   }
 }
 .news-content .name {
-  width: 70%;
+  width: 80%;
 }
 .news-arrow {
   opacity: 0;

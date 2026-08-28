@@ -48,7 +48,7 @@
     &::before {
       content: "";
       position: absolute;
-      inset: 0;
+      inset: -10px 0;
       background-color: var(--color-white);
       z-index: 2;
       will-change: clip-path;

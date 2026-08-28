@@ -81,13 +81,12 @@
     font-weight: 700;
   }
 
-  .footer-contact-address,
   .footer-contact a,
   .footer-contact-link a,
   .footer-nav a {
     color: inherit;
     transition: color 0.3s ease;
-    font-size: var(--footer-text-size);
+    
 
     &:hover {
       color: var(--color-white);
@@ -95,6 +94,7 @@
   }
   .footer-contact-address {
     max-width: 240px;
+    font-size: var(--footer-text-size);
     @media (max-width: 991px) {
       max-width: 100%;
     }
