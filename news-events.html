@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News & Events</title>
+    <!-- import favicon -->
+    <link
+      rel="icon"
+      href="./assets/images/icons/logo-full-primary.svg"
+      type="image/x-icon"
+    />
+    <!-- meta -->
+    <meta property="og:url" content="" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="" />
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="" />
+    <!-- meta -->
+    <link rel="stylesheet" href="./assets/libs/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/libs/lenis.css" />
+    <link rel="stylesheet" href="./assets/libs/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="./assets/libs/lightpick.min.css" />
+
+    <!-- end meta -->
+    <!-- link custom css page -->
+    <link rel="stylesheet" href="./assets/fonts/KingSans/font.css" />
+    <link rel="stylesheet" href="./assets/fonts/BeVNPro/font.css" />
+    <link rel="stylesheet" href="./assets/main/css/style.min.css" />
+    <!-- end link custom css page -->
+    <!-- scrollRestoration -->
+    <script>
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+
+      var assetUrl = window.location.origin;
+    </script>
+  </head>
+
+  <body>
+    <!-- cta -->
+    <script>
+      fetch("./components/cta.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("cta").innerHTML = data;
+        });
+    </script>
+
+    <div id="cta" class="cta position-fixed"></div>
+    <!-- end cta -->
+    <!-- loading -->
+    <script>
+      fetch("./components/loading.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("loading").innerHTML = data;
+        });
+    </script>
+
+    <div
+      id="loading"
+      class="loading position-fixed top-0 start-0 end-0 w-100 h-100 bgc-primary d-flex align-items-center justify-content-center"
+    ></div>
+    <!-- end loading -->
+    <!-- layout -->
+    <!-- header -->
+    <script>
+      fetch("./components/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+          const currentPath = window.location.pathname || "/";
+
+          const navLinks = document.querySelectorAll(".header-menu ul>li>a");
+          navLinks.forEach((link) => {
+            const linkPath = link.getAttribute("href");
+
+            let normalizedCurrentPath = currentPath;
+            let normalizedLinkPath = linkPath;
+
+            if (normalizedLinkPath.startsWith("./")) {
+              normalizedLinkPath = normalizedLinkPath.substring(1);
+            }
+
+            const currentSegment = normalizedCurrentPath.split("/").pop() || "";
+            const linkSegment = normalizedLinkPath.split("/").pop() || "";
+
+            const isRootPath =
+              currentPath === "/" ||
+              currentPath.endsWith("/") ||
+              currentSegment === "";
+
+            const isHomeLink =
+              linkPath === "/" ||
+              linkPath === "./" ||
+              linkPath === "./index.html" ||
+              linkPath === "index.html" ||
+              linkSegment === "index.html";
+
+            const isMatch =
+              normalizedLinkPath === normalizedCurrentPath ||
+              currentSegment === linkSegment ||
+              (isRootPath && isHomeLink) ||
+              (currentPath.endsWith(normalizedLinkPath) &&
+                normalizedLinkPath !== "/");
+
+            if (isMatch) {
+              link.classList.add("active");
+            }
+          });
+        });
+    </script>
+    <header
+      id="header"
+      class="header position-fixed top-0 start-0 end-0 w-100"
+    ></header>
+    <!-- end header -->
+
+    <main>
+      <section class="banner short-banner position-relative">
+        <div class="banner-inner h-100">
+          <div class="swiper image-slider h-100">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="banner-box position-relative">
+                  <div class="img">
+                    <img src="./assets/images/del/banner-news.webp" alt="" />
+                  </div>
+                  <h1 class="short-banner-title font-heading" el-title>
+                    News & Events
+                  </h1>
+                  <nav class="breadcrumb font-body" aria-label="Breadcrumb">
+                    <a class="breadcrumb-home" href="./index.html">
+                      <img
+                        src="./assets/images/icons/icon-home.svg"
+                        alt=""
+                        width="16"
+                        height="16"
+                      />
+                      <span>IFC</span>
+                    </a>
+                    <span>/</span>
+                    <span>News & Events</span>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="newsPage">
+        <div class="newsPage-inner">
+          <div class="newsPage-grid" el-fade-list>
+            <div class="newsPage-item">
+              <a href="javascript:void(0)" class="news-box d-block">
+                <div class="news-image">
+                  <img src="./assets/images/del/news-1.jpg" alt="" />
+                </div>
+                <div class="news-content">
+                  <div class="date b2-font color-primary">12 Aug</div>
+                  <div class="name b2-font color-primary">
+                    IFC Hanoi: An Iconic Financial Landmark in Tay Ho Tay's
+                    Emerging Economic Hub
+                  </div>
+                </div>
+                <div class="news-arrow">
+                  <img
+                    src="./assets/images/icons/icon-arrow-primary.svg"
+                    alt=""
+                  />
+                </div>
+              </a>
+            </div>
+            <div class="newsPage-item">
+              <a href="javascript:void(0)" class="news-box d-block">
+                <div class="news-image">
+                  <img src="./assets/images/del/news-3.jpg" alt="" />
+                </div>
+                <div class="news-content">
+                  <div class="date b2-font color-primary">12 Aug</div>
+                  <div class="name b2-font color-primary">
+                    Redefining Hanoi's Horizon: Introducing IFC Hanoi in
+                    Starlake Tay Ho Tay
+                  </div>
+                </div>
+                <div class="news-arrow">
+                  <img
+                    src="./assets/images/icons/icon-arrow-primary.svg"
+                    alt=""
+                  />
+                </div>
+              </a>
+            </div>
+            <div class="newsPage-item">
+              <a href="javascript:void(0)" class="news-box d-block">
+                <div class="news-image">
+                  <img src="./assets/images/del/news-2.jpg" alt="" />
+                </div>
+                <div class="news-content">
+                  <div class="date b2-font color-primary">12 Aug</div>
+                  <div class="name b2-font color-primary">
+                    Built for Sustainability: Inside IFC Hanoi's LEED Gold
+                    Design Features
+                  </div>
+                </div>
+                <div class="news-arrow">
+                  <img
+                    src="./assets/images/icons/icon-arrow-primary.svg"
+                    alt=""
+                  />
+                </div>
+              </a>
+            </div>
+            <div class="newsPage-item">
+              <a href="javascript:void(0)" class="news-box d-block">
+                <div class="news-image">
+                  <img src="./assets/images/del/img-5.jpg" alt="" />
+                </div>
+                <div class="news-content">
+                  <div class="date b2-font color-primary">12 Aug</div>
+                  <div class="name b2-font color-primary">
+                    IFC Hanoi: An Iconic Financial Landmark in Tay Ho Tay's
+                    Emerging Economic Hub
+                  </div>
+                </div>
+                <div class="news-arrow">
+                  <img
+                    src="./assets/images/icons/icon-arrow-primary.svg"
+                    alt=""
+                  />
+                </div>
+              </a>
+            </div>
+            <div class="newsPage-item">
+              <a href="javascript:void(0)" class="news-box d-block">
+                <div class="news-image">
+                  <img src="./assets/images/del/img-7.jpg" alt="" />
+                </div>
+                <div class="news-content">
+                  <div class="date b2-font color-primary">12 Aug</div>
+                  <div class="name b2-font color-primary">
+                    Redefining Hanoi's Horizon: Introducing IFC Hanoi in
+                    Starlake Tay Ho Tay
+                  </div>
+                </div>
+                <div class="news-arrow">
+                  <img
+                    src="./assets/images/icons/icon-arrow-primary.svg"
+                    alt=""
+                  />
+                </div>
+              </a>
+            </div>
+            <div class="newsPage-item">
+              <a href="javascript:void(0)" class="news-box d-block">
+                <div class="news-image">
+                  <img src="./assets/images/del/img-6.jpg" alt="" />
+                </div>
+                <div class="news-content">
+                  <div class="date b2-font color-primary">12 Aug</div>
+                  <div class="name b2-font color-primary">
+                    Built for Sustainability: Inside IFC Hanoi's LEED Gold
+                    Design Features
+                  </div>
+                </div>
+                <div class="news-arrow">
+                  <img
+                    src="./assets/images/icons/icon-arrow-primary.svg"
+                    alt=""
+                  />
+                </div>
+              </a>
+            </div>
+            <div class="newsPage-item">
+              <a href="javascript:void(0)" class="news-box d-block">
+                <div class="news-image">
+                  <img src="./assets/images/del/img-4.jpg" alt="" />
+                </div>
+                <div class="news-content">
+                  <div class="date b2-font color-primary">12 Aug</div>
+                  <div class="name b2-font color-primary">
+                    IFC Hanoi: An Iconic Financial Landmark in Tay Ho Tay's
+                    Emerging Economic Hub
+                  </div>
+                </div>
+                <div class="news-arrow">
+                  <img
+                    src="./assets/images/icons/icon-arrow-primary.svg"
+                    alt=""
+                  />
+                </div>
+              </a>
+            </div>
+            <div class="newsPage-item">
+              <a href="javascript:void(0)" class="news-box d-block">
+                <div class="news-image">
+                  <img src="./assets/images/del/img-3.jpg" alt="" />
+                </div>
+                <div class="news-content">
+                  <div class="date b2-font color-primary">12 Aug</div>
+                  <div class="name b2-font color-primary">
+                    Redefining Hanoi's Horizon: Introducing IFC Hanoi in
+                    Starlake Tay Ho Tay
+                  </div>
+                </div>
+                <div class="news-arrow">
+                  <img
+                    src="./assets/images/icons/icon-arrow-primary.svg"
+                    alt=""
+                  />
+                </div>
+              </a>
+            </div>
+            <div class="newsPage-item">
+              <a href="javascript:void(0)" class="news-box d-block">
+                <div class="news-image">
+                  <img src="./assets/images/del/office-building.webp" alt="" />
+                </div>
+                <div class="news-content">
+                  <div class="date b2-font color-primary">12 Aug</div>
+                  <div class="name b2-font color-primary">
+                    Built for Sustainability: Inside IFC Hanoi's LEED Gold
+                    Design Features
+                  </div>
+                </div>
+                <div class="news-arrow">
+                  <img
+                    src="./assets/images/icons/icon-arrow-primary.svg"
+                    alt=""
+                  />
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- layout -->
+    <!-- footer -->
+    <script>
+      fetch("./components/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    </script>
+
+    <footer id="footer"></footer>
+    <!-- end footer -->
+    <!-- end layout -->
+
+    <script src="./assets/libs/jquery-3.7.1.js"></script>
+    <script src="./assets/libs/lenis.min.js"></script>
+    <script src="./assets/libs/gsap.min.js"></script>
+    <script src="./assets/libs/ScrollTrigger.min.js"></script>
+    <script src="./assets/libs/SplitText.min.js"></script>
+    <script src="./assets/libs/bootstrap.bundle.min.js"></script>
+    <script src="./assets/libs/swiper-bundle.min.js"></script>
+    <script src="./assets/libs/moment.min.js"></script>
+    <script src="./assets/libs/lightpick.min.js"></script>
+
+    <!-- import custom js -->
+    <script type="module" src="./assets/main/js/script.min.js"></script>
+    <!-- end import custom js -->
+  </body>
+</html>
