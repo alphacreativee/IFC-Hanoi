@@ -33,71 +33,71 @@ gsap.ticker.add((time) => {
 });
 
 gsap.ticker.lagSmoothing(0);
-function handlePageVisibilityAndFavicon() {
-  const originalTitle = document.title;
-  const hostname =
-    typeof assetUrl !== "undefined" && assetUrl
-      ? assetUrl.replace(/\/$/, "")
-      : window.location.origin;
-  const favicons = [
-    `${hostname}/assets/images/icons/logo-full-primary.svg`,
-    `${hostname}/assets/images/icons/logo-full.svg`
-  ];
-  const defaultFavicon = favicons[0];
-  let faviconInterval = null;
-  let isBlinking = false;
-  // const dynamicTitleElement =
-  //   document.getElementById("dynamic-title").textContent;
+// function handlePageVisibilityAndFavicon() {
+//   const originalTitle = document.title;
+//   const hostname =
+//     typeof assetUrl !== "undefined" && assetUrl
+//       ? assetUrl.replace(/\/$/, "")
+//       : window.location.origin;
+//   const favicons = [
+//     `${hostname}/assets/images/icons/logo-full-primary.svg`,
+//     `${hostname}/assets/images/icons/logo-full.svg`
+//   ];
+//   const defaultFavicon = favicons[0];
+//   let faviconInterval = null;
+//   let isBlinking = false;
+//   // const dynamicTitleElement =
+//   //   document.getElementById("dynamic-title").textContent;
 
-  changeFavicon(defaultFavicon);
+//   changeFavicon(defaultFavicon);
 
-  document.addEventListener("visibilitychange", function () {
-    if (document.hidden) {
-      // document.title = dynamicTitleElement;
-      startFaviconBlinking();
-    } else {
-      // document.title = originalTitle;
-      stopFaviconBlinking();
-    }
-  });
+//   document.addEventListener("visibilitychange", function () {
+//     if (document.hidden) {
+//       // document.title = dynamicTitleElement;
+//       startFaviconBlinking();
+//     } else {
+//       // document.title = originalTitle;
+//       stopFaviconBlinking();
+//     }
+//   });
 
-  function changeFavicon(src) {
-    let link = document.querySelector("link[rel~='icon']");
-    if (!link) {
-      link = document.createElement("link");
-      link.rel = "icon";
-      link.type = "image/svg+xml";
-      document.head.appendChild(link);
-    }
-    link.href = `${src}?v=${new Date().getTime()}`;
-  }
+//   function changeFavicon(src) {
+//     let link = document.querySelector("link[rel~='icon']");
+//     if (!link) {
+//       link = document.createElement("link");
+//       link.rel = "icon";
+//       link.type = "image/svg+xml";
+//       document.head.appendChild(link);
+//     }
+//     link.href = `${src}?v=${new Date().getTime()}`;
+//   }
 
-  function startFaviconBlinking() {
-    if (isBlinking) return;
+//   function startFaviconBlinking() {
+//     if (isBlinking) return;
 
-    isBlinking = true;
-    let faviconIndex = 0;
+//     isBlinking = true;
+//     let faviconIndex = 0;
 
-    changeFavicon(favicons[faviconIndex]);
-    faviconIndex = (faviconIndex + 1) % favicons.length;
+//     changeFavicon(favicons[faviconIndex]);
+//     faviconIndex = (faviconIndex + 1) % favicons.length;
 
-    faviconInterval = setInterval(() => {
-      changeFavicon(favicons[faviconIndex]);
-      faviconIndex = (faviconIndex + 1) % favicons.length;
-    }, 500);
-  }
+//     faviconInterval = setInterval(() => {
+//       changeFavicon(favicons[faviconIndex]);
+//       faviconIndex = (faviconIndex + 1) % favicons.length;
+//     }, 500);
+//   }
 
-  function stopFaviconBlinking() {
-    if (faviconInterval) {
-      clearInterval(faviconInterval);
-      faviconInterval = null;
-    }
+//   function stopFaviconBlinking() {
+//     if (faviconInterval) {
+//       clearInterval(faviconInterval);
+//       faviconInterval = null;
+//     }
 
-    isBlinking = false;
-    document.title = originalTitle;
-    changeFavicon(defaultFavicon);
-  }
-}
+//     isBlinking = false;
+//     document.title = originalTitle;
+//     changeFavicon(defaultFavicon);
+//   }
+// }
 function initParallaxSwiper(swiperEl, options = {}) {
   const interleaveOffset = 0.85;
 
@@ -175,7 +175,8 @@ document.addEventListener("DOMContentLoaded", () => {
   animationTitle();
   animationFade();
   initSwiper();
-  handlePageVisibilityAndFavicon();
+  // handlePageVisibilityAndFavicon();
+
   const isMobile = window.innerWidth <= 991;
   if (isMobile) {
     setTimeout(() => {
