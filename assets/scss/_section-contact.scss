@@ -5,7 +5,7 @@
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 0.98fr);
     gap: 16px;
-    padding: var(--spacing-padding);
+    padding: 60px;
   }
 
   &__content {

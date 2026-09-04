@@ -274,7 +274,10 @@ export function bannerSlider() {
   const imageDelay = 3000;
 
   sliders.forEach((sliderEl) => {
-    sliderEl.querySelectorAll(".swiper-slide").forEach((slide) => {
+    const slides = sliderEl.querySelectorAll(".swiper-slide");
+    const hasMultipleSlides = slides.length > 1;
+
+    slides.forEach((slide) => {
       const videoTime =
         slide.dataset.videoTime ||
         slide.dataset.slideVideo ||
@@ -286,12 +289,14 @@ export function bannerSlider() {
     });
 
     new Swiper(sliderEl, {
-      loop: true,
+      loop: hasMultipleSlides,
       speed: 1000,
-      autoplay: {
-        delay: imageDelay,
-        disableOnInteraction: false,
-      },
+      autoplay: hasMultipleSlides
+        ? {
+            delay: imageDelay,
+            disableOnInteraction: false,
+          }
+        : false,
       pagination: {
         el: sliderEl.querySelector(".swiper-pagination"),
       },
