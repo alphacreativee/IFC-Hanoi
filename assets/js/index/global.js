@@ -639,6 +639,47 @@ export function headerMobile() {
     headerMain.classList.toggle("change-color");
     document.body.classList.toggle("no-scroll");
   });
+  const menuSub = document.querySelectorAll("li.menu-item-has-children > a");
+  menuSub.forEach((item) => {
+    item.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      console.log(this);
+
+      const subMenu = this.parentElement.querySelector(".sub-menu");
+      const allSubMenus = Array.from(
+        document.querySelectorAll("#header .sub-menu"),
+      ).filter((el) => el !== subMenu);
+
+      allSubMenus.forEach((el) => {
+        el.style.maxHeight = el.scrollHeight + "px";
+        el.offsetHeight; // force reflow
+        el.style.maxHeight = 0;
+        el.classList.remove("open");
+      });
+
+      if (subMenu.classList.contains("open")) {
+        subMenu.style.maxHeight = subMenu.scrollHeight + "px";
+        subMenu.offsetHeight; // force reflow
+        subMenu.style.maxHeight = 0;
+        subMenu.classList.remove("open");
+      } else {
+        subMenu.classList.add("open");
+        subMenu.style.maxHeight = subMenu.scrollHeight + "px";
+
+        subMenu.addEventListener(
+          "transitionend",
+          function handler() {
+            if (subMenu.classList.contains("open")) {
+              subMenu.style.maxHeight = "none";
+            }
+            subMenu.removeEventListener("transitionend", handler);
+          },
+          { once: true },
+        );
+      }
+    });
+  });
 }
 // export function animationIntro() {
 //   gsap.registerPlugin(SplitText, ScrollTrigger);

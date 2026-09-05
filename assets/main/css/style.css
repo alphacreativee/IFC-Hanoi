@@ -1255,6 +1255,12 @@ a.aloading::after {
   align-items: center;
   gap: 12px;
 }
+@media (max-width: 991px) {
+  #header .header-menu ul li.menu-item-has-children > a {
+    justify-content: center;
+    transform: translateX(8px);
+  }
+}
 #header .header-menu ul li.menu-item-has-children > .sub-menu {
   position: absolute;
   top: 100%;
@@ -1267,11 +1273,35 @@ a.aloading::after {
   transition: all 0.3s ease;
   padding: 12px;
 }
+@media (max-width: 991px) {
+  #header .header-menu ul li.menu-item-has-children > .sub-menu {
+    position: static;
+    opacity: 1;
+    visibility: visible;
+    background-color: transparent !important;
+    margin-top: 0px;
+    overflow: hidden;
+    padding: 0;
+    transition: max-height 0.3s ease;
+    max-height: 0;
+  }
+  #header .header-menu ul li.menu-item-has-children > .sub-menu.open {
+    margin-top: 16px;
+  }
+  #header .header-menu ul li.menu-item-has-children > .sub-menu ul li a {
+    color: var(--color-primary) !important;
+  }
+}
 #header .header-menu ul li.menu-item-has-children > .sub-menu ul {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 12px;
+}
+@media (max-width: 991px) {
+  #header .header-menu ul li.menu-item-has-children > .sub-menu ul {
+    align-items: center;
+  }
 }
 #header .header-menu ul li.menu-item-has-children > .sub-menu ul li a {
   white-space: nowrap;
