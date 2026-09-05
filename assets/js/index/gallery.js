@@ -30,6 +30,17 @@ function gallery() {
     return items.filter((item) => item.classList.contains(activeFilter));
   };
 
+  const initVideoPlayBorders = () => {
+    gallerySection.querySelectorAll(".media-item__play").forEach((play) => {
+      if (play.querySelector(".media-item__play-border")) return;
+
+      play.insertAdjacentHTML(
+        "afterbegin",
+        '<svg class="media-item__play-border" viewBox="0 0 38 38" aria-hidden="true" focusable="false"><circle cx="19" cy="19" r="18.5"></circle></svg>',
+      );
+    });
+  };
+
   const updatePattern = () => {
     const pattern = [
       { column: "1 / span 8", row: 1, span: 6 },
@@ -117,6 +128,67 @@ function gallery() {
   const updateMobilePagination = (index, total) => {
     if (!mobilePagination) return;
     mobilePagination.textContent = `${index + 1}/${total}`;
+  };
+
+  const initGalleryCaptionStagger = () => {
+    if (typeof gsap === "undefined" || typeof SplitText === "undefined") {
+      return;
+    }
+
+    gsap.registerPlugin(SplitText);
+
+    gallerySection.querySelectorAll(".media-item").forEach((item) => {
+      const caption = item.querySelector(".media-item__caption");
+      if (!caption || caption.dataset.galleryStaggerInitialized) return;
+      caption.dataset.galleryStaggerInitialized = "true";
+
+      const split = new SplitText(caption, {
+        type: "words, chars",
+        wordsClass: "gsap_split_word",
+        charsClass: "gsap_split_letter"
+      });
+
+      split.chars.forEach((letterEl) => {
+        const isSpace = letterEl.textContent.trim() === "";
+        const mask = document.createElement("span");
+        mask.className = "letter-mask" + (isSpace ? " space" : "");
+
+        const col = document.createElement("span");
+        col.className = "letter-col";
+
+        letterEl.parentNode.insertBefore(mask, letterEl);
+        col.appendChild(letterEl);
+
+        const clone = document.createElement("span");
+        clone.className = "gsap_split_letter";
+        clone.textContent = letterEl.textContent;
+        col.appendChild(clone);
+
+        mask.appendChild(col);
+      });
+
+      const cols = caption.querySelectorAll(".letter-col");
+      gsap.set(cols, { yPercent: 0 });
+
+      const tl = gsap.timeline({ paused: true });
+      tl.to(cols, {
+        yPercent: -50,
+        duration: 0.5,
+        ease: "power3.out",
+        stagger: {
+          each: 0.03,
+          from: "start"
+        }
+      });
+
+      item.addEventListener("mouseenter", () => {
+        tl.timeScale(1).play();
+      });
+
+      item.addEventListener("mouseleave", () => {
+        tl.timeScale(1.5).reverse();
+      });
+    });
   };
 
   const stopPopupMedia = () => {
@@ -209,7 +281,13 @@ function gallery() {
     }
   });
 
+  initVideoPlayBorders();
   updatePattern();
+  if (document.fonts?.ready) {
+    document.fonts.ready.then(initGalleryCaptionStagger);
+  } else {
+    initGalleryCaptionStagger();
+  }
 }
 
 document.addEventListener("DOMContentLoaded", gallery);

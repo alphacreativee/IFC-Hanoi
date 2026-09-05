@@ -1,6 +1,6 @@
 export function customDropdown() {
   const dropdowns = document.querySelectorAll(
-    ".dropdown-custom, .dropdown-custom-select",
+    ".dropdown-custom, .dropdown-custom-select"
   );
   if (!dropdowns.length) return;
   dropdowns.forEach((dropdown) => {
@@ -79,7 +79,13 @@ export function headerScroll() {
   if (!header) return null;
 
   const isMobile = window.innerWidth <= 991;
-  const threshold = isMobile ? 100 : window.innerHeight;
+  // const threshold = isMobile ? 100 : window.innerHeight;
+
+  const banner = document.querySelector(".banner");
+
+  const threshold = isMobile
+    ? 100
+    : banner?.getBoundingClientRect().height || window.innerHeight || 100;
 
   const trigger = ScrollTrigger.create({
     start: "top top",
@@ -92,7 +98,7 @@ export function headerScroll() {
       } else {
         header.classList.remove("scrolled");
       }
-    },
+    }
   });
 
   return trigger;
@@ -167,7 +173,7 @@ export function getDateLightPick() {
     field: document.getElementById("datepicker"),
     minDate: new Date(),
     singleDate: false,
-    numberOfMonths: 2,
+    numberOfMonths: 2
     // lang: "en-US",
   });
 }
@@ -178,7 +184,7 @@ export function staggerText() {
     const split = new SplitText(el, {
       type: "words, chars",
       wordsClass: "gsap_split_word",
-      charsClass: "gsap_split_letter",
+      charsClass: "gsap_split_letter"
     });
 
     split.chars.forEach((letterEl) => {
@@ -212,8 +218,8 @@ export function staggerText() {
       ease: "power3.out",
       stagger: {
         each: 0.03,
-        from: "start",
-      },
+        from: "start"
+      }
     });
 
     el.addEventListener("mouseenter", () => {
@@ -231,7 +237,7 @@ export function loadingAnimation() {
     clipPath: "inset(0 0 0 100%)",
     opacity: 0,
     duration: 0.75,
-    ease: "none",
+    ease: "none"
   });
   tl.to(
     "#loading",
@@ -239,8 +245,8 @@ export function loadingAnimation() {
     {
       clipPath: "inset(0% 0% 100% 0%)",
       duration: 1,
-      ease: "power2.inOut",
-    },
+      ease: "power2.inOut"
+    }
   );
 
   return tl;
@@ -255,15 +261,15 @@ export function imageSlider() {
       speed: 2000,
       autoplay: {
         delay: 3000,
-        disableOnInteraction: false,
+        disableOnInteraction: false
       },
       pagination: {
-        el: sliderEl.querySelector(".swiper-pagination"),
+        el: sliderEl.querySelector(".swiper-pagination")
       },
       navigation: {
         nextEl: sliderEl.querySelector(".swiper-button-next"),
-        prevEl: sliderEl.querySelector(".swiper-button-prev"),
-      },
+        prevEl: sliderEl.querySelector(".swiper-button-prev")
+      }
     });
   });
 }
@@ -294,16 +300,16 @@ export function bannerSlider() {
       autoplay: hasMultipleSlides
         ? {
             delay: imageDelay,
-            disableOnInteraction: false,
+            disableOnInteraction: false
           }
         : false,
       pagination: {
-        el: sliderEl.querySelector(".swiper-pagination"),
+        el: sliderEl.querySelector(".swiper-pagination")
       },
       navigation: {
         nextEl: sliderEl.querySelector(".swiper-button-next"),
-        prevEl: sliderEl.querySelector(".swiper-button-prev"),
-      },
+        prevEl: sliderEl.querySelector(".swiper-button-prev")
+      }
     });
   });
 }
@@ -337,12 +343,12 @@ export function animationTextLine() {
                 trigger: el,
                 start: "top 85%",
                 end: "bottom 85%",
-                toggleActions: "play none none none",
+                toggleActions: "play none none none"
                 // markers: true,
-              },
-            },
+              }
+            }
           );
-        },
+        }
       });
     });
   });
@@ -365,7 +371,7 @@ export function animationTitle() {
             {
               transformOrigin: "50% 100%",
               scaleY: 0,
-              opacity: 0,
+              opacity: 0
             },
             {
               ease: "power3.out",
@@ -376,12 +382,12 @@ export function animationTitle() {
               scrollTrigger: {
                 trigger: title,
                 start: "top 85%",
-                toggleActions: "play none none none",
+                toggleActions: "play none none none"
                 // markers: true,
-              },
-            },
+              }
+            }
           );
-        },
+        }
       });
     });
   });
@@ -406,10 +412,10 @@ export function animationFade() {
           trigger: el,
           start: "top 85%",
           end: "bottom 85%",
-          toggleActions: "play none none none",
+          toggleActions: "play none none none"
           // markers: true,
-        },
-      },
+        }
+      }
     );
   });
   // ----- Fade theo danh sách (stagger) -----
@@ -437,10 +443,10 @@ export function animationFade() {
               trigger: item,
               start: "top 90%",
               end: "bottom 90%",
-              toggleActions: "play none none none",
+              toggleActions: "play none none none"
               // markers: true,
-            },
-          },
+            }
+          }
         );
       });
     } else {
@@ -458,10 +464,10 @@ export function animationFade() {
             trigger: listEl,
             start: "top 85%",
             end: "bottom 85%",
-            toggleActions: "play none none none",
+            toggleActions: "play none none none"
             // markers: true,
-          },
-        },
+          }
+        }
       );
     }
   });
@@ -499,10 +505,10 @@ export function imageParallax() {
             trigger: row,
             start: "top bottom",
             end: "bottom top",
-            scrub: true,
+            scrub: true
             // markers: true, // bật lên để debug
-          },
-        },
+          }
+        }
       );
     };
 
@@ -538,9 +544,9 @@ export function animationBox() {
         scrollTrigger: {
           trigger: container,
           start: startPoint,
-          toggleActions: "play none none none",
+          toggleActions: "play none none none"
           // markers: true,
-        },
+        }
       });
 
       // ----- 0. Logo (fade) - chạy đầu tiên nếu có -----
@@ -552,9 +558,9 @@ export function animationBox() {
             opacity: 1,
             y: 0,
             duration: 0.45,
-            ease: "power2.out",
+            ease: "power2.out"
           },
-          0, // bắt đầu từ đầu timeline
+          0 // bắt đầu từ đầu timeline
         );
       }
 
@@ -570,18 +576,18 @@ export function animationBox() {
               {
                 transformOrigin: "50% 100%",
                 scaleY: 0,
-                opacity: 0,
+                opacity: 0
               },
               {
                 ease: "power3.out",
                 opacity: 1,
                 scaleY: 1,
                 duration: 0.5,
-                stagger: 0.04,
+                stagger: 0.04
               },
-              logoEl ? "<+0.15" : 0, // nếu có logo thì delay nhẹ sau logo
+              logoEl ? "<+0.15" : 0 // nếu có logo thì delay nhẹ sau logo
             );
-          },
+          }
         });
       }
 
@@ -600,11 +606,11 @@ export function animationBox() {
                 y: "0%",
                 duration: 0.7,
                 ease: "power3.inOut",
-                stagger: 0.06,
+                stagger: 0.06
               },
-              "<+0.4",
+              "<+0.4"
             );
-          },
+          }
         });
       }
 
@@ -617,9 +623,9 @@ export function animationBox() {
             opacity: 1,
             y: 0,
             duration: 0.45,
-            ease: "power2.out",
+            ease: "power2.out"
           },
-          ">-0.15",
+          ">-0.15"
         );
       }
     });
@@ -638,6 +644,47 @@ export function headerMobile() {
     headerMenu.classList.toggle("show");
     headerMain.classList.toggle("change-color");
     document.body.classList.toggle("no-scroll");
+  });
+  const menuSub = document.querySelectorAll("li.menu-item-has-children > a");
+  menuSub.forEach((item) => {
+    item.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      console.log(this);
+
+      const subMenu = this.parentElement.querySelector(".sub-menu");
+      const allSubMenus = Array.from(
+        document.querySelectorAll("#header .sub-menu")
+      ).filter((el) => el !== subMenu);
+
+      allSubMenus.forEach((el) => {
+        el.style.maxHeight = el.scrollHeight + "px";
+        el.offsetHeight; // force reflow
+        el.style.maxHeight = 0;
+        el.classList.remove("open");
+      });
+
+      if (subMenu.classList.contains("open")) {
+        subMenu.style.maxHeight = subMenu.scrollHeight + "px";
+        subMenu.offsetHeight; // force reflow
+        subMenu.style.maxHeight = 0;
+        subMenu.classList.remove("open");
+      } else {
+        subMenu.classList.add("open");
+        subMenu.style.maxHeight = subMenu.scrollHeight + "px";
+
+        subMenu.addEventListener(
+          "transitionend",
+          function handler() {
+            if (subMenu.classList.contains("open")) {
+              subMenu.style.maxHeight = "none";
+            }
+            subMenu.removeEventListener("transitionend", handler);
+          },
+          { once: true }
+        );
+      }
+    });
   });
 }
 // export function animationIntro() {
@@ -772,9 +819,9 @@ export function animationIntro() {
         scrollTrigger: {
           trigger: container,
           start: "top 85%",
-          toggleActions: "play none none none",
+          toggleActions: "play none none none"
           // markers: true,
-        },
+        }
       });
 
       if (isMobile) {
@@ -795,7 +842,7 @@ export function animationIntro() {
           heightLine,
           { scaleY: 0, rotate: 0, transformOrigin: "0% 0%" },
           { scaleY: 1, duration: 0.5, ease: "power2.out" },
-          "lineStart",
+          "lineStart"
         );
         tl.to(
           heightLine,
@@ -803,9 +850,9 @@ export function animationIntro() {
             rotate: 18.9,
             transformOrigin: "50% 50%",
             duration: 0.4,
-            ease: "power3.out",
+            ease: "power3.out"
           },
-          "lineStart+=0.4",
+          "lineStart+=0.4"
         );
       } else {
         console.warn("⚠️ el-line-intro không tìm thấy trong container này");
@@ -836,7 +883,7 @@ export function leasingContactForm() {
 
     const submitBtn = currentForm.find('[type="submit"]');
     const note = currentForm.find(
-      ".form-message, .form-note, .note, .section-contact__note",
+      ".form-message, .form-note, .note, .section-contact__note"
     );
 
     const getFieldValue = ($formItem) => {
@@ -864,7 +911,7 @@ export function leasingContactForm() {
       function () {
         const $formItem = $(this).closest(".form-item");
         $formItem.toggleClass("error", !$.trim($(this).val() || ""));
-      },
+      }
     );
 
     currentForm.on("submit", function (e) {
@@ -909,7 +956,7 @@ export function leasingContactForm() {
         },
         complete() {
           submitBtn.removeClass("aloading");
-        },
+        }
       });
     });
   });
