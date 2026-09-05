@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IFC Hanoi: An Iconic Financial Landmark</title>
+    <!-- import favicon -->
+    <link
+      rel="icon"
+      href="./assets/images/icons/logo-full-primary.svg"
+      type="image/x-icon"
+    />
+    <!-- meta -->
+    <meta property="og:url" content="" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="" />
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="" />
+    <!-- meta -->
+    <link rel="stylesheet" href="./assets/libs/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/libs/lenis.css" />
+    <link rel="stylesheet" href="./assets/libs/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="./assets/libs/lightpick.min.css" />
+
+    <!-- end meta -->
+    <!-- link custom css page -->
+    <link rel="stylesheet" href="./assets/fonts/KingSans/font.css" />
+    <link rel="stylesheet" href="./assets/fonts/BeVNPro/font.css" />
+    <link rel="stylesheet" href="./assets/main/css/style.min.css" />
+    <!-- end link custom css page -->
+    <!-- scrollRestoration -->
+    <script>
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+
+      var assetUrl = window.location.origin;
+    </script>
+  </head>
+
+  <body>
+    <!-- cta -->
+    <script>
+      fetch("./components/cta.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("cta").innerHTML = data;
+        });
+    </script>
+
+    <div id="cta" class="cta position-fixed"></div>
+    <!-- end cta -->
+    <!-- loading -->
+    <script>
+      fetch("./components/loading.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("loading").innerHTML = data;
+        });
+    </script>
+
+    <div
+      id="loading"
+      class="loading position-fixed top-0 start-0 end-0 w-100 h-100 bgc-primary d-flex align-items-center justify-content-center"
+    ></div>
+    <!-- end loading -->
+    <!-- layout -->
+    <!-- header -->
+    <script>
+      fetch("./components/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+          const currentPath = window.location.pathname || "/";
+
+          const navLinks = document.querySelectorAll(".header-menu ul>li>a");
+          navLinks.forEach((link) => {
+            const linkPath = link.getAttribute("href");
+
+            let normalizedCurrentPath = currentPath;
+            let normalizedLinkPath = linkPath;
+
+            if (normalizedLinkPath.startsWith("./")) {
+              normalizedLinkPath = normalizedLinkPath.substring(1);
+            }
+
+            const currentSegment = normalizedCurrentPath.split("/").pop() || "";
+            const linkSegment = normalizedLinkPath.split("/").pop() || "";
+
+            const isRootPath =
+              currentPath === "/" ||
+              currentPath.endsWith("/") ||
+              currentSegment === "";
+
+            const isHomeLink =
+              linkPath === "/" ||
+              linkPath === "./" ||
+              linkPath === "./index.html" ||
+              linkPath === "index.html" ||
+              linkSegment === "index.html";
+
+            const isMatch =
+              normalizedLinkPath === normalizedCurrentPath ||
+              currentSegment === linkSegment ||
+              (isRootPath && isHomeLink) ||
+              (currentPath.endsWith(normalizedLinkPath) &&
+                normalizedLinkPath !== "/");
+
+            if (isMatch) {
+              link.classList.add("active");
+            }
+          });
+        });
+    </script>
+    <header
+      id="header"
+      class="header position-fixed top-0 start-0 end-0 w-100"
+    ></header>
+    <!-- end header -->
+
+    <main>
+      <section class="banner short-banner position-relative">
+        <div class="banner-inner h-100">
+          <div class="swiper image-slider h-100">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="banner-box position-relative">
+                  <div class="img">
+                    <img src="./assets/images/del/banner-contact.webp" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="newsDetail">
+        <div class="newsDetail__inner">
+          <div class="newsDetail__article">
+            <div class="newsDetail__meta b2-font color-primary">
+              15 August, 2026
+            </div>
+            <h1 class="newsDetail__title font-heading color-primary">
+              An Iconic Financial Landmark in Tay Ho Tay's Emerging Economic Hub
+            </h1>
+
+            <div class="newsDetail__content b2-font">
+              <p>
+                Rising at the heart of Starlake Tay Ho Tay, IFC Hanoi is set to
+                redefine the city's skyline and establish a new benchmark for
+                integrated commercial developments in Vietnam's capital. More
+                than a building, it represents a bold vision for what Hanoi can
+                become - a city that stands shoulder to shoulder with the great
+                commercial capitals of Asia.
+              </p>
+
+              <p>
+                Distinguished by its contemporary architecture and premium-grade
+                specifications, the development brings together Grade A offices,
+                luxury retail, and world-class hospitality within a single
+                landmark destination. Every detail has been considered - from
+                the sweeping lobby atriums to the precision-engineered curtain
+                walls that frame panoramic views of West Lake and the emerging
+                Tay Ho Tay skyline. It is designed not only to meet
+                international standards but to set them, anchoring Hanoi's
+                fastest-growing financial and business district with a presence
+                that commands attention.
+              </p>
+
+              <p>
+                The office towers offer expansive, column-free floor plates
+                built for the demands of multinational corporations, financial
+                institutions, and forward-thinking enterprises seeking a
+                prestigious Hanoi address. Flexible layouts, advanced building
+                management systems, and sustainability credentials make IFC
+                Hanoi a workspace designed for the next generation of business.
+              </p>
+
+              <figure>
+                <img src="./assets/images/del/img-3.jpg" alt="" />
+                <figcaption>
+                  A panoramic view of Tay Ho Tay, where IFC Hanoi anchors a new
+                  business destination.
+                </figcaption>
+              </figure>
+
+              <p>
+                At its core, the Shilla Monogram hotel delivers an elevated
+                hospitality experience unlike anything currently available in
+                the city. Operated by South Korea's premier hospitality group,
+                Hotel Shilla, it combines refined Korean service traditions with
+                effortless modern sophistication. From meticulously curated
+                interiors to signature dining and wellness offerings, every
+                touchpoint is designed to leave a lasting impression on
+                discerning travelers and executive guests alike.
+              </p>
+
+              <p>
+                The retail podium completes the vision - a curated destination
+                for luxury and lifestyle brands, dining, and cultural
+                experiences that will draw visitors from across the city and
+                beyond. Together, these elements create a self-contained
+                ecosystem where business, leisure, and living converge
+                seamlessly.
+              </p>
+
+              <p>
+                IFC Hanoi isn't just a landmark. It's a statement - one that
+                signals Hanoi's arrival on the global stage and invites the
+                world to take notice.
+              </p>
+            </div>
+
+            <div class="newsDetail__share b2-font color-primary">
+              <span>Share on:</span>
+              <a href="javascript:void(0)">Facebook</a>
+              <a href="javascript:void(0)">LinkedIn</a>
+            </div>
+          </div>
+
+          <div class="newsDetail__sidebar">
+            <h2 class="newsDetail__sidebar-title font-heading color-primary">
+              NEXT POSTS
+            </h2>
+            <a href="./news-detail.html" class="newsDetail__next d-block">
+              <div class="newsDetail__next-image">
+                <img src="./assets/images/del/img-4.jpg" alt="" />
+              </div>
+              <div class="newsDetail__next-date b2-font color-primary">
+                12 Aug
+              </div>
+              <div class="newsDetail__next-title b2-font color-primary">
+                IFC Hanoi: An Iconic Financial Landmark in Tay Ho Tay's Emerging
+                Economic Hub
+              </div>
+              <div class="news-arrow">
+                <img
+                  src="./assets/images/icons/icon-arrow-primary.svg"
+                  alt=""
+                />
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- layout -->
+    <!-- footer -->
+    <script>
+      fetch("./components/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    </script>
+
+    <footer id="footer"></footer>
+    <!-- end footer -->
+    <!-- end layout -->
+
+    <script src="./assets/libs/jquery-3.7.1.js"></script>
+    <script src="./assets/libs/lenis.min.js"></script>
+    <script src="./assets/libs/gsap.min.js"></script>
+    <script src="./assets/libs/ScrollTrigger.min.js"></script>
+    <script src="./assets/libs/SplitText.min.js"></script>
+    <script src="./assets/libs/bootstrap.bundle.min.js"></script>
+    <script src="./assets/libs/swiper-bundle.min.js"></script>
+    <script src="./assets/libs/moment.min.js"></script>
+    <script src="./assets/libs/lightpick.min.js"></script>
+
+    <!-- import custom js -->
+    <script type="module" src="./assets/main/js/script.min.js"></script>
+    <!-- end import custom js -->
+  </body>
+</html>
