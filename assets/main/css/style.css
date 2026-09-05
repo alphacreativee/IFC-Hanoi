@@ -1593,6 +1593,7 @@ a.aloading::after {
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  height: 16px;
   color: inherit;
 }
 .banner.short-banner .breadcrumb::before {
@@ -1615,6 +1616,11 @@ a.aloading::after {
 .banner.short-banner .breadcrumb span {
   color: inherit;
 }
+.banner.short-banner .breadcrumb > span {
+  display: inline-flex;
+  align-items: center;
+  height: 16px;
+}
 .banner.short-banner .breadcrumb a {
   font-size: inherit;
   line-height: inherit;
@@ -1624,6 +1630,11 @@ a.aloading::after {
   font-size: inherit;
   line-height: inherit;
   color: inherit;
+}
+.banner.short-banner .breadcrumb .letter-mask,
+.banner.short-banner .breadcrumb .gsap_split_letter {
+  height: 14px;
+  line-height: 14px;
 }
 @media (max-width: 767px) {
   .banner.short-banner .short-banner-title {
@@ -1635,7 +1646,7 @@ a.aloading::after {
     bottom: 18px;
     left: 16px;
     font-size: 12px;
-    line-height: 18px;
+    line-height: 14px;
   }
 }
 
@@ -2356,13 +2367,16 @@ a.aloading::after {
   }
   .newsPage .news-grid {
     grid-template-columns: 1fr;
-    gap: 32px;
+    gap: 40px;
   }
   .newsPage .news-content {
     padding-right: 0;
   }
   .newsPage .news-content .name {
     width: 100%;
+  }
+  .newsPage .news-arrow {
+    display: none;
   }
 }
 .newsDetail {
@@ -2403,6 +2417,8 @@ a.aloading::after {
   max-width: 100%;
   color: var(--color-primary);
   font-family: var(--font-body);
+  text-align: justify;
+  line-height: 1.3;
 }
 .newsDetail__content > *:first-child {
   margin-top: 0;
@@ -2423,6 +2439,7 @@ a.aloading::after {
   font-size: inherit;
   line-height: inherit;
   letter-spacing: 0;
+  text-align: left;
 }
 .newsDetail__content p,
 .newsDetail__content ul,
@@ -2602,7 +2619,7 @@ a.aloading::after {
   .newsDetail__inner {
     grid-template-columns: 1fr;
     gap: 64px;
-    padding: 64px 16px 80px;
+    padding: 64px 16px 40px;
   }
   .newsDetail__inner::after {
     content: none;
@@ -2991,8 +3008,8 @@ a.aloading::after {
     gap: 4px;
   }
   .gallery .filter-button {
-    font-size: 13px;
-    line-height: 18px;
+    font-size: 22px;
+    line-height: 100%;
   }
   .gallery__grid {
     grid-template-columns: 1fr;

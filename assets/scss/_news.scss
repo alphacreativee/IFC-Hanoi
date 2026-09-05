@@ -121,7 +121,7 @@
 
     .news-grid {
       grid-template-columns: 1fr;
-      gap: 32px;
+      gap: 40px;
     }
 
     .news-content {
@@ -130,6 +130,10 @@
       .name {
         width: 100%;
       }
+    }
+
+    .news-arrow {
+      display: none;
     }
   }
 }

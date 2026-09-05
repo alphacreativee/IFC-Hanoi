@@ -181,6 +181,8 @@ export function staggerText() {
   gsap.registerPlugin(SplitText);
 
   document.querySelectorAll("[staggertext]").forEach((el) => {
+    if (window.innerWidth <= 767 && el.closest(".breadcrumb")) return;
+
     const split = new SplitText(el, {
       type: "words, chars",
       wordsClass: "gsap_split_word",

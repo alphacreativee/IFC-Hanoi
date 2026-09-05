@@ -130,6 +130,7 @@
         display: inline-flex;
         align-items: center;
         gap: 6px;
+        height: 16px;
         color: inherit;
       }
 
@@ -157,6 +158,12 @@
         color: inherit;
       }
 
+      > span {
+        display: inline-flex;
+        align-items: center;
+        height: 16px;
+      }
+
       a {
         font-size: inherit;
         line-height: inherit;
@@ -167,6 +174,12 @@
         font-size: inherit;
         line-height: inherit;
         color: inherit;
+      }
+
+      .letter-mask,
+      .gsap_split_letter {
+        height: 14px;
+        line-height: 14px;
       }
     }
 
@@ -181,7 +194,7 @@
         bottom: 18px;
         left: 16px;
         font-size: 12px;
-        line-height: 18px;
+        line-height: 14px;
       }
     }
   }
