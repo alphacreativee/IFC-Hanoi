@@ -39,10 +39,15 @@ function gallery() {
       url.searchParams.set("byline", "0");
       url.searchParams.set("portrait", "0");
       url.searchParams.set("controls", "1");
+      url.searchParams.set("badge", "0");
+      url.searchParams.set("dnt", "1");
+      url.searchParams.set("loop", "1");
+      url.searchParams.set("sidedock", "0");
+      url.searchParams.set("vimeo_logo", "0");
       return url.toString();
     } catch (error) {
       const separator = src.includes("?") ? "&" : "?";
-      return `${src}${separator}title=0&byline=0&portrait=0&controls=1`;
+      return `${src}${separator}title=0&byline=0&portrait=0&controls=1&badge=0&dnt=1&loop=1&sidedock=0&vimeo_logo=0`;
     }
   };
 
@@ -52,7 +57,7 @@ function gallery() {
 
       play.insertAdjacentHTML(
         "afterbegin",
-        '<svg class="media-item__play-border" viewBox="0 0 38 38" aria-hidden="true" focusable="false"><circle cx="19" cy="19" r="18.5"></circle></svg>',
+        '<svg class="media-item__play-border" viewBox="0 0 38 38" aria-hidden="true" focusable="false"><circle cx="19" cy="19" r="18.5"></circle></svg>'
       );
     });
   };
