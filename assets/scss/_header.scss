@@ -122,7 +122,13 @@
             & > a {
               display: flex;
               align-items: center;
-              gap: 12px;
+              gap: 0;
+              .icon {
+                margin-left: 12px;
+              }
+              .gsap_split_word + .gsap_split_word {
+                margin-left: 0.25em;
+              }
               @media (max-width: 991px) {
                 justify-content: center;
                 transform: translateX(8px);

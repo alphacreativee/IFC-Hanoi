@@ -634,12 +634,18 @@ export function animationBox() {
   });
 }
 export function headerMobile() {
+  console.log("phần trên");
+
   if (window.innerWidth > 992) return;
+
+  console.log("phần giữa");
 
   const hamBtn = document.getElementById("ham-btn");
   const headerMenu = document.querySelector(".header-menu");
   const headerMain = document.getElementById("header");
   if (!hamBtn || !headerMenu) return;
+
+  console.log("phần dưới");
 
   hamBtn.addEventListener("click", () => {
     hamBtn.classList.toggle("active");
@@ -648,11 +654,14 @@ export function headerMobile() {
     document.body.classList.toggle("no-scroll");
   });
   const menuSub = document.querySelectorAll("li.menu-item-has-children > a");
+
+  console.log(menuSub);
+
   menuSub.forEach((item) => {
     item.addEventListener("click", function (e) {
       e.preventDefault();
 
-      console.log(this);
+      console.log("click");
 
       const subMenu = this.parentElement.querySelector(".sub-menu");
       const allSubMenus = Array.from(

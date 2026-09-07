@@ -1253,7 +1253,13 @@ a.aloading::after {
 #header .header-menu ul li.menu-item-has-children > a {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 0;
+}
+#header .header-menu ul li.menu-item-has-children > a .icon {
+  margin-left: 12px;
+}
+#header .header-menu ul li.menu-item-has-children > a .gsap_split_word + .gsap_split_word {
+  margin-left: 0.25em;
 }
 @media (max-width: 991px) {
   #header .header-menu ul li.menu-item-has-children > a {

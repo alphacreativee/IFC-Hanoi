@@ -30,6 +30,22 @@ function gallery() {
     return items.filter((item) => item.classList.contains(activeFilter));
   };
 
+  const getEmbedSrc = (src, provider) => {
+    if (!src || provider !== "vimeo") return src || "";
+
+    try {
+      const url = new URL(src, window.location.href);
+      url.searchParams.set("title", "0");
+      url.searchParams.set("byline", "0");
+      url.searchParams.set("portrait", "0");
+      url.searchParams.set("controls", "1");
+      return url.toString();
+    } catch (error) {
+      const separator = src.includes("?") ? "&" : "?";
+      return `${src}${separator}title=0&byline=0&portrait=0&controls=1`;
+    }
+  };
+
   const initVideoPlayBorders = () => {
     gallerySection.querySelectorAll(".media-item__play").forEach((play) => {
       if (play.querySelector(".media-item__play-border")) return;
@@ -100,7 +116,7 @@ function gallery() {
         media.appendChild(video);
       } else {
         const iframe = document.createElement("iframe");
-        iframe.src = src;
+        iframe.src = getEmbedSrc(src, provider);
         iframe.allow =
           "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
         iframe.allowFullscreen = true;
@@ -118,11 +134,19 @@ function gallery() {
     return slide;
   };
 
+  const getCaptionText = (item) => {
+    const caption = item?.querySelector(".media-item__caption");
+    return (
+      item?.dataset.galleryCaptionText ||
+      caption?.dataset.galleryCaptionText ||
+      caption?.textContent.trim() ||
+      ""
+    );
+  };
+
   const updatePopupCaption = (items, index) => {
     if (!popupCaption) return;
-    popupCaption.textContent =
-      items[index]?.querySelector(".media-item__caption")?.textContent.trim() ||
-      "";
+    popupCaption.textContent = getCaptionText(items[index]);
   };
 
   const updateMobilePagination = (index, total) => {
@@ -141,6 +165,8 @@ function gallery() {
       const caption = item.querySelector(".media-item__caption");
       if (!caption || caption.dataset.galleryStaggerInitialized) return;
       caption.dataset.galleryStaggerInitialized = "true";
+      caption.dataset.galleryCaptionText = caption.textContent.trim();
+      item.dataset.galleryCaptionText = caption.dataset.galleryCaptionText;
 
       const split = new SplitText(caption, {
         type: "words, chars",
@@ -247,10 +273,10 @@ function gallery() {
         prevEl: popup.querySelector(".swiper-button-prev")
       },
       on: {
-        slideChange() {
+        slideChange(swiper) {
           stopPopupMedia();
-          updatePopupCaption(items, popupSlider.realIndex);
-          updateMobilePagination(popupSlider.realIndex, items.length);
+          updatePopupCaption(items, swiper.realIndex);
+          updateMobilePagination(swiper.realIndex, items.length);
         }
       }
     });
