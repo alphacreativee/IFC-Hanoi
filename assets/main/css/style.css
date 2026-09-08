@@ -1814,10 +1814,12 @@ a.aloading::after {
   top: 0;
   left: auto;
   right: 0;
+  background-color: rgba(147, 65, 23, 0.8);
 }
 .workplace.layout-row .workplace-col:last-child .workplace-content {
   bottom: 0;
   left: 0;
+  background-color: rgba(18, 55, 84, 0.8);
 }
 .workplace-inner {
   padding: var(--spacing-padding);
@@ -3399,4 +3401,88 @@ a.aloading::after {
 }
 #cta .cta-item a svg path {
   transition: color 0.3s ease;
+}
+
+.core-value {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  padding: 0 60px 0;
+}
+.core-value::before {
+  content: "";
+  position: absolute;
+  inset: 0 60px 0;
+  background-color: rgba(0, 0, 0, 0.15);
+}
+.core-value-title {
+  top: 32px;
+  left: 70px;
+}
+.core-value-inner {
+  width: 100%;
+  height: 100%;
+  padding-right: 60px;
+  padding-bottom: 32px;
+}
+.core-value-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+.core-value-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.core-value-content {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  height: 100%;
+}
+.core-value-content .accordion {
+  max-width: 58.3333333333%;
+  width: 100%;
+  padding: 40px;
+  background-color: rgba(0, 0, 0, 0.01);
+  backdrop-filter: blur(10px);
+}
+.core-value-content .accordion-button,
+.core-value-content .accordion-item {
+  background-color: transparent;
+}
+.core-value-content .accordion-button {
+  padding-left: 0;
+  padding-right: 0;
+}
+.core-value-content .accordion-button:not(.collapsed) {
+  box-shadow: none;
+}
+.core-value-content .accordion-button:focus {
+  border: none;
+  box-shadow: none;
+}
+.core-value-content .accordion-item {
+  border-bottom: 1px solid var(--color-secondary);
+}
+.core-value-content .accordion-item:last-child {
+  border-bottom: 1px solid var(--color-secondary);
+}
+.core-value-content .accordion-button::after {
+  background-image: url("../../images/icons/icon-plus.svg");
+  width: 15px;
+  height: 15px;
+  background-size: 100%;
+}
+.core-value-content .accordion-button:not(.collapsed)::after {
+  transform: rotate(-45deg) !important;
+}
+.core-value-content .accordion-body {
+  padding-top: 0;
+  padding-left: 0;
 }

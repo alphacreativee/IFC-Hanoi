@@ -26,12 +26,14 @@
           top: 0;
           left: auto;
           right: 0;
+          background-color: rgba(147, 65, 23, 0.8);
         }
       }
       &:last-child {
         .workplace-content {
           bottom: 0;
           left: 0;
+          background-color: rgba(18, 55, 84, 0.8);
         }
       }
     }
