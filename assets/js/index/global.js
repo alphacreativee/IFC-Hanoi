@@ -1,6 +1,6 @@
 export function customDropdown() {
   const dropdowns = document.querySelectorAll(
-    ".dropdown-custom, .dropdown-custom-select"
+    ".dropdown-custom, .dropdown-custom-select",
   );
   if (!dropdowns.length) return;
   dropdowns.forEach((dropdown) => {
@@ -98,7 +98,7 @@ export function headerScroll() {
       } else {
         header.classList.remove("scrolled");
       }
-    }
+    },
   });
 
   return trigger;
@@ -173,7 +173,7 @@ export function getDateLightPick() {
     field: document.getElementById("datepicker"),
     minDate: new Date(),
     singleDate: false,
-    numberOfMonths: 2
+    numberOfMonths: 2,
     // lang: "en-US",
   });
 }
@@ -186,7 +186,7 @@ export function staggerText() {
     const split = new SplitText(el, {
       type: "words, chars",
       wordsClass: "gsap_split_word",
-      charsClass: "gsap_split_letter"
+      charsClass: "gsap_split_letter",
     });
 
     split.chars.forEach((letterEl) => {
@@ -220,8 +220,8 @@ export function staggerText() {
       ease: "power3.out",
       stagger: {
         each: 0.03,
-        from: "start"
-      }
+        from: "start",
+      },
     });
 
     el.addEventListener("mouseenter", () => {
@@ -239,7 +239,7 @@ export function loadingAnimation() {
     clipPath: "inset(0 0 0 100%)",
     opacity: 0,
     duration: 0.75,
-    ease: "none"
+    ease: "none",
   });
   tl.to(
     "#loading",
@@ -247,8 +247,8 @@ export function loadingAnimation() {
     {
       clipPath: "inset(0% 0% 100% 0%)",
       duration: 1,
-      ease: "power2.inOut"
-    }
+      ease: "power2.inOut",
+    },
   );
 
   return tl;
@@ -263,15 +263,15 @@ export function imageSlider() {
       speed: 2000,
       autoplay: {
         delay: 3000,
-        disableOnInteraction: false
+        disableOnInteraction: false,
       },
       pagination: {
-        el: sliderEl.querySelector(".swiper-pagination")
+        el: sliderEl.querySelector(".swiper-pagination"),
       },
       navigation: {
         nextEl: sliderEl.querySelector(".swiper-button-next"),
-        prevEl: sliderEl.querySelector(".swiper-button-prev")
-      }
+        prevEl: sliderEl.querySelector(".swiper-button-prev"),
+      },
     });
   });
 }
@@ -302,16 +302,16 @@ export function bannerSlider() {
       autoplay: hasMultipleSlides
         ? {
             delay: imageDelay,
-            disableOnInteraction: false
+            disableOnInteraction: false,
           }
         : false,
       pagination: {
-        el: sliderEl.querySelector(".swiper-pagination")
+        el: sliderEl.querySelector(".swiper-pagination"),
       },
       navigation: {
         nextEl: sliderEl.querySelector(".swiper-button-next"),
-        prevEl: sliderEl.querySelector(".swiper-button-prev")
-      }
+        prevEl: sliderEl.querySelector(".swiper-button-prev"),
+      },
     });
   });
 }
@@ -345,12 +345,48 @@ export function animationTextLine() {
                 trigger: el,
                 start: "top 85%",
                 end: "bottom 85%",
-                toggleActions: "play none none none"
+                toggleActions: "play none none none",
                 // markers: true,
-              }
-            }
+              },
+            },
           );
-        }
+        },
+      });
+    });
+  });
+}
+export function animationTextLineAuto() {
+  gsap.registerPlugin(SplitText);
+
+  document.fonts.ready.then(() => {
+    document.querySelectorAll("[el-txt-line-auto]").forEach((el) => {
+      if (el.dataset.scriptInitialized) return;
+      el.dataset.scriptInitialized = "true";
+
+      let splitTitle;
+
+      SplitText.create(el, {
+        type: "lines",
+        mask: "lines",
+        linesClass: "line",
+        autoSplit: true,
+        onSplit: (self) => {
+          splitTitle = self;
+
+          // Reveal ngay trước khi animate, tránh flash text gốc
+          gsap.set(el, { visibility: "visible" });
+
+          return gsap.fromTo(
+            self.lines,
+            { y: "100%" },
+            {
+              y: "0%",
+              duration: 0.8,
+              ease: "power3.inOut",
+              stagger: 0.05,
+            },
+          );
+        },
       });
     });
   });
@@ -373,7 +409,7 @@ export function animationTitle() {
             {
               transformOrigin: "50% 100%",
               scaleY: 0,
-              opacity: 0
+              opacity: 0,
             },
             {
               ease: "power3.out",
@@ -384,12 +420,12 @@ export function animationTitle() {
               scrollTrigger: {
                 trigger: title,
                 start: "top 85%",
-                toggleActions: "play none none none"
+                toggleActions: "play none none none",
                 // markers: true,
-              }
-            }
+              },
+            },
           );
-        }
+        },
       });
     });
   });
@@ -414,10 +450,10 @@ export function animationFade() {
           trigger: el,
           start: "top 85%",
           end: "bottom 85%",
-          toggleActions: "play none none none"
+          toggleActions: "play none none none",
           // markers: true,
-        }
-      }
+        },
+      },
     );
   });
   // ----- Fade theo danh sách (stagger) -----
@@ -445,10 +481,10 @@ export function animationFade() {
               trigger: item,
               start: "top 90%",
               end: "bottom 90%",
-              toggleActions: "play none none none"
+              toggleActions: "play none none none",
               // markers: true,
-            }
-          }
+            },
+          },
         );
       });
     } else {
@@ -466,10 +502,10 @@ export function animationFade() {
             trigger: listEl,
             start: "top 85%",
             end: "bottom 85%",
-            toggleActions: "play none none none"
+            toggleActions: "play none none none",
             // markers: true,
-          }
-        }
+          },
+        },
       );
     }
   });
@@ -483,49 +519,52 @@ export function imageParallax() {
 
     const img = el.querySelector("img");
     if (!img) return;
-    const isMobile = window.innerWidth < 991;
 
-    const percentParallax = isMobile ? 10 : 13;
+    gsap.set(img, { willChange: "transform", force3D: true });
+
     const row =
       el.closest("[parallax-row]") || el.closest(".parallax-row") || el;
 
-    // Hàm tạo animation
+    let mm = gsap.matchMedia();
+
     const createParallax = () => {
-      // Kill cái cũ nếu có (tránh bị double)
       if (el._parallaxTween) {
         el._parallaxTween.scrollTrigger?.kill();
         el._parallaxTween.kill();
+        el._parallaxTween = null;
       }
 
-      el._parallaxTween = gsap.fromTo(
-        img,
-        { yPercent: -percentParallax },
+      mm.add(
         {
-          yPercent: percentParallax,
-          ease: "none",
-          scrollTrigger: {
-            trigger: row,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true
-            // markers: true, // bật lên để debug
-          }
-        }
+          isMobile: "(max-width: 990px)",
+          isDesktop: "(min-width: 991px)",
+        },
+        (context) => {
+          const { isMobile } = context.conditions;
+          const percentParallax = isMobile ? 10 : 13;
+
+          // Chỉ "to" - GSAP tự lấy giá trị hiện tại (đã set sẵn = CSS) làm điểm bắt đầu
+          el._parallaxTween = gsap.to(img, {
+            yPercent: percentParallax,
+            ease: "none",
+            scrollTrigger: {
+              trigger: row,
+              start: "top 70%",
+              end: "bottom top",
+              scrub: 1,
+              invalidateOnRefresh: true,
+              // markers: true,
+            },
+          });
+        },
       );
     };
 
-    // Nếu ảnh đã load rồi thì chạy luôn
     if (img.complete) {
       createParallax();
     } else {
-      // Chờ ảnh load xong mới tạo ScrollTrigger
       img.addEventListener("load", createParallax, { once: true });
     }
-  });
-
-  // Quan trọng: refresh lại tất cả ScrollTrigger sau khi trang load xong
-  window.addEventListener("load", () => {
-    ScrollTrigger.refresh();
   });
 }
 export function animationBox() {
@@ -546,9 +585,9 @@ export function animationBox() {
         scrollTrigger: {
           trigger: container,
           start: startPoint,
-          toggleActions: "play none none none"
+          toggleActions: "play none none none",
           // markers: true,
-        }
+        },
       });
 
       // ----- 0. Logo (fade) - chạy đầu tiên nếu có -----
@@ -560,17 +599,18 @@ export function animationBox() {
             opacity: 1,
             y: 0,
             duration: 0.45,
-            ease: "power2.out"
+            ease: "power2.out",
           },
-          0 // bắt đầu từ đầu timeline
+          0, // bắt đầu từ đầu timeline
         );
       }
 
       // ----- 1. Title (chars) -----
       if (titleEl) {
         SplitText.create(titleEl, {
-          type: "chars",
+          type: "words, chars",
           charsClass: "char",
+          wordsClass: "word",
           autoSplit: true,
           onSplit: (self) => {
             tl.fromTo(
@@ -578,18 +618,18 @@ export function animationBox() {
               {
                 transformOrigin: "50% 100%",
                 scaleY: 0,
-                opacity: 0
+                opacity: 0,
               },
               {
                 ease: "power3.out",
                 opacity: 1,
                 scaleY: 1,
                 duration: 0.5,
-                stagger: 0.04
+                stagger: 0.04,
               },
-              logoEl ? "<+0.15" : 0 // nếu có logo thì delay nhẹ sau logo
+              logoEl ? "<+0.15" : 0, // nếu có logo thì delay nhẹ sau logo
             );
-          }
+          },
         });
       }
 
@@ -608,11 +648,11 @@ export function animationBox() {
                 y: "0%",
                 duration: 0.7,
                 ease: "power3.inOut",
-                stagger: 0.06
+                stagger: 0.06,
               },
-              "<+0.4"
+              "<+0.4",
             );
-          }
+          },
         });
       }
 
@@ -625,9 +665,9 @@ export function animationBox() {
             opacity: 1,
             y: 0,
             duration: 0.45,
-            ease: "power2.out"
+            ease: "power2.out",
           },
-          ">-0.15"
+          ">-0.15",
         );
       }
     });
@@ -665,7 +705,7 @@ export function headerMobile() {
 
       const subMenu = this.parentElement.querySelector(".sub-menu");
       const allSubMenus = Array.from(
-        document.querySelectorAll("#header .sub-menu")
+        document.querySelectorAll("#header .sub-menu"),
       ).filter((el) => el !== subMenu);
 
       allSubMenus.forEach((el) => {
@@ -692,7 +732,7 @@ export function headerMobile() {
             }
             subMenu.removeEventListener("transitionend", handler);
           },
-          { once: true }
+          { once: true },
         );
       }
     });
@@ -830,9 +870,9 @@ export function animationIntro() {
         scrollTrigger: {
           trigger: container,
           start: "top 85%",
-          toggleActions: "play none none none"
+          toggleActions: "play none none none",
           // markers: true,
-        }
+        },
       });
 
       if (isMobile) {
@@ -853,7 +893,7 @@ export function animationIntro() {
           heightLine,
           { scaleY: 0, rotate: 0, transformOrigin: "0% 0%" },
           { scaleY: 1, duration: 0.5, ease: "power2.out" },
-          "lineStart"
+          "lineStart",
         );
         tl.to(
           heightLine,
@@ -861,9 +901,9 @@ export function animationIntro() {
             rotate: 18.9,
             transformOrigin: "50% 50%",
             duration: 0.4,
-            ease: "power3.out"
+            ease: "power3.out",
           },
-          "lineStart+=0.4"
+          "lineStart+=0.4",
         );
       } else {
         console.warn("⚠️ el-line-intro không tìm thấy trong container này");
@@ -894,7 +934,7 @@ export function leasingContactForm() {
 
     const submitBtn = currentForm.find('[type="submit"]');
     const note = currentForm.find(
-      ".form-message, .form-note, .note, .section-contact__note"
+      ".form-message, .form-note, .note, .section-contact__note",
     );
 
     const getFieldValue = ($formItem) => {
@@ -922,7 +962,7 @@ export function leasingContactForm() {
       function () {
         const $formItem = $(this).closest(".form-item");
         $formItem.toggleClass("error", !$.trim($(this).val() || ""));
-      }
+      },
     );
 
     currentForm.on("submit", function (e) {
@@ -967,8 +1007,60 @@ export function leasingContactForm() {
         },
         complete() {
           submitBtn.removeClass("aloading");
-        }
+        },
       });
     });
+  });
+}
+export function revealClipImage() {
+  const sections = document.querySelectorAll(".clip-image-reveal");
+  if (!sections.length) return;
+
+  sections.forEach((section) => {
+    const imageItems = Array.from(
+      section.querySelectorAll(".design-image-item"),
+    );
+    const bgItems = Array.from(section.querySelectorAll(".design-bg-item"));
+
+    if (imageItems.length < 2 || bgItems.length < 2) {
+      return;
+    }
+
+    imageItems.forEach((item, i) => {
+      item.style.zIndex = imageItems.length - i;
+    });
+    bgItems.forEach((item, i) => {
+      item.style.zIndex = bgItems.length - i;
+    });
+
+    gsap.set(imageItems.slice(1), { clipPath: "inset(0 0 0 0)" });
+    gsap.set(bgItems.slice(1), { clipPath: "inset(0 0 0 0)" });
+
+    const steps = imageItems.length;
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: `+=${window.innerHeight * (steps - 1)}`,
+        pin: true,
+        pinType: "transform",
+        scrub: 1,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        // markers: true,
+      },
+    });
+
+    for (let i = 1; i < steps; i++) {
+      tl.to(
+        imageItems[i - 1],
+        { clipPath: "inset(0 0 100% 0)", duration: 1, ease: "none" },
+        i,
+      ).to(
+        bgItems[i - 1],
+        { clipPath: "inset(0 0 100% 0)", duration: 1, ease: "none" },
+        i,
+      );
+    }
   });
 }
