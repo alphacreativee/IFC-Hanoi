@@ -99,6 +99,13 @@
       min-height: 100vh;
       background-size: cover;
       background-position: center;
+      &:first-child {
+        img {
+          @media (max-width: 991px) {
+            object-position: 35%;
+          }
+        }
+      }
       img {
         width: 100%;
         height: 100%;

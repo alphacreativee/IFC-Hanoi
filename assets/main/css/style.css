@@ -3653,6 +3653,11 @@ a.aloading::after {
   background-size: cover;
   background-position: center;
 }
+@media (max-width: 991px) {
+  .design-bg-item:first-child img {
+    object-position: 35%;
+  }
+}
 .design-bg-item img {
   width: 100%;
   height: 100%;
