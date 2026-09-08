@@ -1090,6 +1090,10 @@ a.aloading::after {
   visibility: hidden;
 }
 
+.spacing-60 {
+  height: 60px;
+}
+
 .lightpick {
   --color-stroke: #ccc;
   --color-bg: #fff;
@@ -3409,6 +3413,7 @@ a.aloading::after {
   height: 100vh;
   overflow: hidden;
   padding: 0 60px 0;
+  margin-bottom: 60px;
 }
 .core-value::before {
   content: "";
@@ -3485,4 +3490,74 @@ a.aloading::after {
 .core-value-content .accordion-body {
   padding-top: 0;
   padding-left: 0;
+}
+
+.design {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  transform: translateZ(0);
+}
+.design-inner {
+  position: relative;
+  max-width: calc(100% - 120px);
+  width: 100%;
+  margin: 0 auto;
+}
+.design-image {
+  position: relative;
+  z-index: 2;
+}
+.design-image-list {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+.design-image-item {
+  position: absolute;
+  top: 0%;
+  right: 70px;
+  width: 540px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.design-image-item .content {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  background-color: rgba(0, 0, 0, 0.35);
+  padding: 40px;
+}
+.design-image-item .content .title {
+  max-width: 70%;
+  text-align: center;
+  margin: 0 auto;
+}
+.design-image-item .content .image {
+  width: 100%;
+  height: 275px;
+}
+.design-image-item .content .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.design-bg {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+.design-bg-item {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
 }

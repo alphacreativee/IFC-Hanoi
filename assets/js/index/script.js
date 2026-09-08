@@ -16,6 +16,7 @@ import {
   bannerSlider,
   leasingContactForm,
   animationTextLineAuto,
+  revealClipImage,
 } from "../../main/js/global.min.js?ver=1.0.10";
 
 const $ = jQuery;
@@ -113,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
   animationTitle();
   animationFade();
   initSwiper();
-
+  revealClipImage();
   const isMobile = window.innerWidth <= 991;
   if (isMobile) {
     setTimeout(() => {

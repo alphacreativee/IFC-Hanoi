@@ -1011,3 +1011,55 @@ export function leasingContactForm() {
     });
   });
 }
+export function revealClipImage() {
+  const sections = document.querySelectorAll(".clip-image-reveal");
+  if (!sections.length) return;
+
+  sections.forEach((section) => {
+    const imageItems = Array.from(
+      section.querySelectorAll(".design-image-item"),
+    );
+    const bgItems = Array.from(section.querySelectorAll(".design-bg-item"));
+
+    if (imageItems.length < 2 || bgItems.length < 2) {
+      return;
+    }
+
+    imageItems.forEach((item, i) => {
+      item.style.zIndex = imageItems.length - i;
+    });
+    bgItems.forEach((item, i) => {
+      item.style.zIndex = bgItems.length - i;
+    });
+
+    gsap.set(imageItems.slice(1), { clipPath: "inset(0 0 0 0)" });
+    gsap.set(bgItems.slice(1), { clipPath: "inset(0 0 0 0)" });
+
+    const steps = imageItems.length;
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: `+=${window.innerHeight * (steps - 1)}`,
+        pin: true,
+        pinType: "transform",
+        scrub: 1,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        // markers: true,
+      },
+    });
+
+    for (let i = 1; i < steps; i++) {
+      tl.to(
+        imageItems[i - 1],
+        { clipPath: "inset(0 0 100% 0)", duration: 1, ease: "none" },
+        i,
+      ).to(
+        bgItems[i - 1],
+        { clipPath: "inset(0 0 100% 0)", duration: 1, ease: "none" },
+        i,
+      );
+    }
+  });
+}
