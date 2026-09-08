@@ -169,3 +169,7 @@ a {
     white-space: nowrap;
   }
 }
+[el-txt-line],
+[el-txt-line-auto] {
+  visibility: hidden;
+}

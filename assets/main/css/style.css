@@ -1084,6 +1084,11 @@ a.aloading::after {
     white-space: nowrap;
   }
 }
+[el-txt-line],
+[el-txt-line-auto] {
+  visibility: hidden;
+}
+
 .lightpick {
   --color-stroke: #ccc;
   --color-bg: #fff;
@@ -1780,6 +1785,9 @@ a.aloading::after {
   .intro-bg {
     width: 100vw;
   }
+}
+.intro-p {
+  padding: 60px 0;
 }
 
 .workplace-inner {
