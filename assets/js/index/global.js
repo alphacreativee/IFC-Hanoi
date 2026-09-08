@@ -1037,11 +1037,13 @@ export function revealClipImage() {
     gsap.set(bgItems.slice(1), { clipPath: "inset(0 0 0 0)" });
 
     const steps = imageItems.length;
+    const scrollMultiplier = 1.5; // tăng số này để cuộn lâu hơn (1 = mặc định, 2 = gấp đôi...)
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
         start: "top top",
-        end: `+=${window.innerHeight * (steps - 1)}`,
+        end: `+=${window.innerHeight * (steps - 1) * scrollMultiplier}`,
         pin: true,
         pinType: "transform",
         scrub: 1,

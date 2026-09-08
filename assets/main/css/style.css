@@ -3619,11 +3619,14 @@ a.aloading::after {
     align-items: flex-end;
   }
 }
+.design-image-item:last-child .content {
+  background-color: rgba(0, 0, 0, 0.6);
+}
 .design-image-item .content {
   display: flex;
   flex-direction: column;
   gap: 32px;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.35);
   padding: 40px;
 }
 @media (max-width: 991px) {
@@ -3672,6 +3675,9 @@ a.aloading::after {
   height: 100%;
   background-size: cover;
   background-position: center;
+}
+.design-bg-item:first-child img {
+  object-position: top;
 }
 @media (max-width: 991px) {
   .design-bg-item:first-child img {
