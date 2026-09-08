@@ -3623,7 +3623,7 @@ a.aloading::after {
   display: flex;
   flex-direction: column;
   gap: 32px;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.4);
   padding: 40px;
 }
 @media (max-width: 991px) {
