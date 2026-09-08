@@ -1093,6 +1093,11 @@ a.aloading::after {
 .spacing-60 {
   height: 60px;
 }
+@media (max-width: 991px) {
+  .spacing-60 {
+    height: 32px;
+  }
+}
 
 .lightpick {
   --color-stroke: #ccc;
@@ -1794,16 +1799,36 @@ a.aloading::after {
 .intro-p {
   padding: 60px 0;
 }
+@media (max-width: 991px) {
+  .intro-p {
+    padding: 40px 16px;
+  }
+}
 
 .workplace.layout-row .workplace-inner {
   padding-top: 0;
+}
+@media (max-width: 991px) {
+  .workplace.layout-row .workplace-inner {
+    margin-bottom: 16px;
+  }
 }
 .workplace.layout-row .workplace-row {
   grid-template-columns: 1fr;
   gap: 60px 0;
 }
+@media (max-width: 991px) {
+  .workplace.layout-row .workplace-row {
+    gap: 16px;
+  }
+}
 .workplace.layout-row .workplace-image {
   aspect-ratio: 1320/460;
+}
+@media (max-width: 991px) {
+  .workplace.layout-row .workplace-image {
+    aspect-ratio: 343/240;
+  }
 }
 .workplace.layout-row .workplace-col .workplace-content {
   max-width: 41.6666666667%;
@@ -1811,8 +1836,20 @@ a.aloading::after {
   height: 100%;
   justify-content: center;
 }
+@media (max-width: 991px) {
+  .workplace.layout-row .workplace-col .workplace-content {
+    max-width: 100%;
+    height: auto;
+  }
+}
 .workplace.layout-row .workplace-col .workplace-content .description {
   max-width: 80%;
+  margin-bottom: 0;
+}
+@media (max-width: 991px) {
+  .workplace.layout-row .workplace-col .workplace-content .description {
+    max-width: 100%;
+  }
 }
 .workplace.layout-row .workplace-col:first-child .workplace-content {
   top: 0;
@@ -3415,21 +3452,43 @@ a.aloading::after {
   padding: 0 60px 0;
   margin-bottom: 60px;
 }
+@media (max-width: 991px) {
+  .core-value {
+    padding: 0 16px 0;
+    margin-bottom: 16px;
+  }
+}
 .core-value::before {
   content: "";
   position: absolute;
   inset: 0 60px 0;
   background-color: rgba(0, 0, 0, 0.15);
 }
+@media (max-width: 991px) {
+  .core-value::before {
+    inset: 0 16px 0;
+  }
+}
 .core-value-title {
   top: 32px;
   left: 70px;
+}
+@media (max-width: 991px) {
+  .core-value-title {
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }
 .core-value-inner {
   width: 100%;
   height: 100%;
   padding-right: 60px;
   padding-bottom: 32px;
+}
+@media (max-width: 991px) {
+  .core-value-inner {
+    padding: 0 24px 24px;
+  }
 }
 .core-value-bg {
   position: absolute;
@@ -3456,6 +3515,12 @@ a.aloading::after {
   padding: 40px;
   background-color: rgba(0, 0, 0, 0.01);
   backdrop-filter: blur(10px);
+}
+@media (max-width: 991px) {
+  .core-value-content .accordion {
+    max-width: 100%;
+    padding: 24px;
+  }
 }
 .core-value-content .accordion-button,
 .core-value-content .accordion-item {
@@ -3484,6 +3549,9 @@ a.aloading::after {
   height: 15px;
   background-size: 100%;
 }
+.core-value-content .accordion-button[aria-expanded=true]::after {
+  transform: rotate(-45deg) !important;
+}
 .core-value-content .accordion-button:not(.collapsed)::after {
   transform: rotate(-45deg) !important;
 }
@@ -3506,6 +3574,11 @@ a.aloading::after {
   width: 100%;
   margin: 0 auto;
 }
+@media (max-width: 991px) {
+  .design-inner {
+    max-width: calc(100% - 32px);
+  }
+}
 .design-image {
   position: relative;
   z-index: 2;
@@ -3524,6 +3597,14 @@ a.aloading::after {
   display: flex;
   align-items: center;
 }
+@media (max-width: 991px) {
+  .design-image-item {
+    right: 0;
+    left: 0;
+    width: 100%;
+    align-items: flex-end;
+  }
+}
 .design-image-item .content {
   display: flex;
   flex-direction: column;
@@ -3531,14 +3612,25 @@ a.aloading::after {
   background-color: rgba(0, 0, 0, 0.35);
   padding: 40px;
 }
+@media (max-width: 991px) {
+  .design-image-item .content {
+    padding: 24px;
+  }
+}
 .design-image-item .content .title {
   max-width: 70%;
   text-align: center;
   margin: 0 auto;
+  white-space: unset;
 }
 .design-image-item .content .image {
   width: 100%;
   height: 275px;
+}
+@media (max-width: 991px) {
+  .design-image-item .content .image {
+    display: none;
+  }
 }
 .design-image-item .content .image img {
   width: 100%;
@@ -3560,4 +3652,9 @@ a.aloading::after {
   min-height: 100vh;
   background-size: cover;
   background-position: center;
+}
+.design-bg-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

@@ -176,4 +176,7 @@ a {
 }
 .spacing-60 {
   height: 60px;
+  @media (max-width: 991px) {
+    height: 32px;
+  }
 }

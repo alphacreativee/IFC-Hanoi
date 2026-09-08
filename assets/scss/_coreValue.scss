@@ -5,21 +5,35 @@
   overflow: hidden;
   padding: 0 60px 0;
   margin-bottom: 60px;
+  @media (max-width: 991px) {
+    padding: 0 16px 0;
+    margin-bottom: 16px;
+  }
   &::before {
     content: "";
     position: absolute;
     inset: 0 60px 0;
     background-color: rgba(0, 0, 0, 0.15);
+    @media (max-width: 991px) {
+      inset: 0 16px 0;
+    }
   }
   &-title {
     top: 32px;
     left: 70px;
+    @media (max-width: 991px) {
+      left: 50%;
+      transform: translateX(-50%);
+    }
   }
   &-inner {
     width: 100%;
     height: 100%;
     padding-right: 60px;
     padding-bottom: 32px;
+    @media (max-width: 991px) {
+      padding: 0 24px 24px;
+    }
   }
   &-bg {
     position: absolute;
@@ -45,6 +59,10 @@
       padding: 40px;
       background-color: rgba(0, 0, 0, 0.01);
       backdrop-filter: blur(10px);
+      @media (max-width: 991px) {
+        max-width: 100%;
+        padding: 24px;
+      }
     }
     .accordion-button,
     .accordion-item {
@@ -73,6 +91,9 @@
       width: 15px;
       height: 15px;
       background-size: 100%;
+    }
+    .accordion-button[aria-expanded="true"]::after {
+      transform: rotate(-45deg) !important;
     }
     .accordion-button:not(.collapsed)::after {
       transform: rotate(-45deg) !important;

@@ -608,8 +608,9 @@ export function animationBox() {
       // ----- 1. Title (chars) -----
       if (titleEl) {
         SplitText.create(titleEl, {
-          type: "chars",
+          type: "words, chars",
           charsClass: "char",
+          wordsClass: "word",
           autoSplit: true,
           onSplit: (self) => {
             tl.fromTo(

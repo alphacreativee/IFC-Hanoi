@@ -124,5 +124,8 @@
   }
   &-p {
     padding: 60px 0;
+    @media (max-width: 991px) {
+      padding: 40px 16px;
+    }
   }
 }
