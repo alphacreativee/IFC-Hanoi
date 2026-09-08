@@ -1031,11 +1031,12 @@ body.no-scroll {
 
 [parallax-image] img {
   position: absolute;
-  top: 0;
+  top: 0%;
   left: 0;
-  width: 115%;
-  height: 115%;
+  width: 100%;
+  height: 130%;
   object-fit: cover;
+  transform: translateY(-13%);
 }
 
 .line-mask .line {
@@ -1841,8 +1842,8 @@ a.aloading::after {
   }
 }
 .workplace-image img {
-  width: 120%;
-  height: 120%;
+  width: 115%;
+  height: 115%;
   object-fit: cover;
 }
 .workplace-content {

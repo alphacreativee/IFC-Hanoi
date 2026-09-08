@@ -520,7 +520,6 @@ export function imageParallax() {
     const img = el.querySelector("img");
     if (!img) return;
 
-    // GPU-friendly, tránh repaint
     gsap.set(img, { willChange: "transform", force3D: true });
 
     const row =
@@ -544,21 +543,19 @@ export function imageParallax() {
           const { isMobile } = context.conditions;
           const percentParallax = isMobile ? 10 : 13;
 
-          el._parallaxTween = gsap.fromTo(
-            img,
-            { yPercent: -percentParallax },
-            {
-              yPercent: percentParallax,
-              ease: "none",
-              scrollTrigger: {
-                trigger: row,
-                start: "top bottom",
-                end: "bottom top",
-                scrub: 1, // <- thêm độ trễ mượt, tránh giật khi refresh
-                invalidateOnRefresh: true, // tự tính lại giá trị start khi refresh, tránh nhảy
-              },
+          // Chỉ "to" - GSAP tự lấy giá trị hiện tại (đã set sẵn = CSS) làm điểm bắt đầu
+          el._parallaxTween = gsap.to(img, {
+            yPercent: percentParallax,
+            ease: "none",
+            scrollTrigger: {
+              trigger: row,
+              start: "top 70%",
+              end: "bottom top",
+              scrub: 1,
+              invalidateOnRefresh: true,
+              // markers: true,
             },
-          );
+          });
         },
       );
     };
@@ -568,13 +565,6 @@ export function imageParallax() {
     } else {
       img.addEventListener("load", createParallax, { once: true });
     }
-  });
-
-  // Chỉ refresh 1 lần, debounce nhẹ để chờ layout ổn định hẳn
-  window.addEventListener("load", () => {
-    requestAnimationFrame(() => {
-      ScrollTrigger.refresh();
-    });
   });
 }
 export function animationBox() {
