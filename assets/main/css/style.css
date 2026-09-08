@@ -1790,6 +1790,34 @@ a.aloading::after {
   padding: 60px 0;
 }
 
+.workplace.layout-row .workplace-inner {
+  padding-top: 0;
+}
+.workplace.layout-row .workplace-row {
+  grid-template-columns: 1fr;
+  gap: 60px 0;
+}
+.workplace.layout-row .workplace-image {
+  aspect-ratio: 1320/460;
+}
+.workplace.layout-row .workplace-col .workplace-content {
+  max-width: 41.6666666667%;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+.workplace.layout-row .workplace-col .workplace-content .description {
+  max-width: 80%;
+}
+.workplace.layout-row .workplace-col:first-child .workplace-content {
+  top: 0;
+  left: auto;
+  right: 0;
+}
+.workplace.layout-row .workplace-col:last-child .workplace-content {
+  bottom: 0;
+  left: 0;
+}
 .workplace-inner {
   padding: var(--spacing-padding);
 }

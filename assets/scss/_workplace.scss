@@ -1,4 +1,41 @@
 .workplace {
+  &.layout-row {
+    .workplace-inner {
+      padding-top: 0;
+    }
+    .workplace-row {
+      grid-template-columns: 1fr;
+      gap: 60px 0;
+    }
+    .workplace-image {
+      aspect-ratio: 1320 / 460;
+    }
+
+    .workplace-col {
+      .workplace-content {
+        max-width: calc(5 / 12 * 100%);
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        .description {
+          max-width: 80%;
+        }
+      }
+      &:first-child {
+        .workplace-content {
+          top: 0;
+          left: auto;
+          right: 0;
+        }
+      }
+      &:last-child {
+        .workplace-content {
+          bottom: 0;
+          left: 0;
+        }
+      }
+    }
+  }
   &-inner {
     padding: var(--spacing-padding);
   }
