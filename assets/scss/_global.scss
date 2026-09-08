@@ -174,8 +174,8 @@ a {
 [el-txt-line-auto] {
   visibility: hidden;
 }
-.spacing-60 {
-  height: 60px;
+
+.spacing-32-mobile {
   @media (max-width: 991px) {
     height: 32px;
   }
