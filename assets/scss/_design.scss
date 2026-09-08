@@ -60,12 +60,16 @@
         padding: 40px;
         @media (max-width: 991px) {
           padding: 24px;
+          gap: 12px;
         }
         .title {
           max-width: 70%;
           text-align: center;
           margin: 0 auto;
           white-space: unset;
+          @media (max-width: 991px) {
+            max-width: 100%;
+          }
         }
         .image {
           width: 100%;

@@ -3615,6 +3615,7 @@ a.aloading::after {
 @media (max-width: 991px) {
   .design-image-item .content {
     padding: 24px;
+    gap: 12px;
   }
 }
 .design-image-item .content .title {
@@ -3622,6 +3623,11 @@ a.aloading::after {
   text-align: center;
   margin: 0 auto;
   white-space: unset;
+}
+@media (max-width: 991px) {
+  .design-image-item .content .title {
+    max-width: 100%;
+  }
 }
 .design-image-item .content .image {
   width: 100%;
