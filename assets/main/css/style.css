@@ -1587,7 +1587,7 @@ a.aloading::after {
   left: 50%;
   width: min(100% - 32px, 900px);
   margin: 0;
-  color: var(--color-white);
+  color: var(--color-secondary);
   font-size: 80px;
   line-height: 88px;
   text-align: center;
@@ -1605,7 +1605,7 @@ a.aloading::after {
   gap: 8px;
   width: auto;
   margin: 0;
-  color: var(--color-white);
+  color: var(--color-secondary);
   font-size: 12px;
   font-weight: 400;
   line-height: 14px;
@@ -1632,6 +1632,7 @@ a.aloading::after {
   display: block;
   width: 16px;
   height: 16px;
+  filter: brightness(0) saturate(100%) invert(91%) sepia(12%) saturate(744%) hue-rotate(337deg) brightness(107%) contrast(93%);
 }
 .banner.short-banner .breadcrumb a,
 .banner.short-banner .breadcrumb span {
