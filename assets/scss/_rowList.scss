@@ -1,0 +1,33 @@
+.row {
+  &-image {
+    .image {
+      width: 100%;
+      aspect-ratio: 865 / 756;
+      img {
+        width: 115%;
+        height: 115%;
+        object-position: center;
+      }
+    }
+  }
+  &-content {
+    .content-box {
+      padding: 0 40px;
+      @media (max-width: 991px) {
+        padding: 24px;
+      }
+      h3 {
+        margin-bottom: 12px;
+      }
+    }
+  }
+  &-item {
+    @media (max-width: 991px) {
+      flex-direction: column-reverse !important;
+      margin-bottom: 16px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
