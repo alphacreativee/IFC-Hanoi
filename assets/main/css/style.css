@@ -3769,6 +3769,20 @@ a.aloading::after {
 .row-content .content-box {
   padding: 0 40px;
 }
+@media (max-width: 991px) {
+  .row-content .content-box {
+    padding: 24px;
+  }
+}
 .row-content .content-box h3 {
   margin-bottom: 12px;
+}
+@media (max-width: 991px) {
+  .row-item {
+    flex-direction: column-reverse !important;
+    margin-bottom: 16px;
+  }
+  .row-item:last-child {
+    margin-bottom: 0;
+  }
 }
