@@ -1,6 +1,6 @@
 export function customDropdown() {
   const dropdowns = document.querySelectorAll(
-    ".dropdown-custom, .dropdown-custom-select",
+    ".dropdown-custom, .dropdown-custom-select"
   );
   if (!dropdowns.length) return;
   dropdowns.forEach((dropdown) => {
@@ -98,7 +98,7 @@ export function headerScroll() {
       } else {
         header.classList.remove("scrolled");
       }
-    },
+    }
   });
 
   return trigger;
@@ -173,7 +173,7 @@ export function getDateLightPick() {
     field: document.getElementById("datepicker"),
     minDate: new Date(),
     singleDate: false,
-    numberOfMonths: 2,
+    numberOfMonths: 2
     // lang: "en-US",
   });
 }
@@ -186,7 +186,7 @@ export function staggerText() {
     const split = new SplitText(el, {
       type: "words, chars",
       wordsClass: "gsap_split_word",
-      charsClass: "gsap_split_letter",
+      charsClass: "gsap_split_letter"
     });
 
     split.chars.forEach((letterEl) => {
@@ -220,8 +220,8 @@ export function staggerText() {
       ease: "power3.out",
       stagger: {
         each: 0.03,
-        from: "start",
-      },
+        from: "start"
+      }
     });
 
     el.addEventListener("mouseenter", () => {
@@ -239,7 +239,7 @@ export function loadingAnimation() {
     clipPath: "inset(0 0 0 100%)",
     opacity: 0,
     duration: 0.75,
-    ease: "none",
+    ease: "none"
   });
   tl.to(
     "#loading",
@@ -247,8 +247,8 @@ export function loadingAnimation() {
     {
       clipPath: "inset(0% 0% 100% 0%)",
       duration: 1,
-      ease: "power2.inOut",
-    },
+      ease: "power2.inOut"
+    }
   );
 
   return tl;
@@ -263,15 +263,15 @@ export function imageSlider() {
       speed: 2000,
       autoplay: {
         delay: 3000,
-        disableOnInteraction: false,
+        disableOnInteraction: false
       },
       pagination: {
-        el: sliderEl.querySelector(".swiper-pagination"),
+        el: sliderEl.querySelector(".swiper-pagination")
       },
       navigation: {
         nextEl: sliderEl.querySelector(".swiper-button-next"),
-        prevEl: sliderEl.querySelector(".swiper-button-prev"),
-      },
+        prevEl: sliderEl.querySelector(".swiper-button-prev")
+      }
     });
   });
 }
@@ -302,16 +302,16 @@ export function bannerSlider() {
       autoplay: hasMultipleSlides
         ? {
             delay: imageDelay,
-            disableOnInteraction: false,
+            disableOnInteraction: false
           }
         : false,
       pagination: {
-        el: sliderEl.querySelector(".swiper-pagination"),
+        el: sliderEl.querySelector(".swiper-pagination")
       },
       navigation: {
         nextEl: sliderEl.querySelector(".swiper-button-next"),
-        prevEl: sliderEl.querySelector(".swiper-button-prev"),
-      },
+        prevEl: sliderEl.querySelector(".swiper-button-prev")
+      }
     });
   });
 }
@@ -345,12 +345,12 @@ export function animationTextLine() {
                 trigger: el,
                 start: "top 85%",
                 end: "bottom 85%",
-                toggleActions: "play none none none",
+                toggleActions: "play none none none"
                 // markers: true,
-              },
-            },
+              }
+            }
           );
-        },
+        }
       });
     });
   });
@@ -383,10 +383,10 @@ export function animationTextLineAuto() {
               y: "0%",
               duration: 0.8,
               ease: "power3.inOut",
-              stagger: 0.05,
-            },
+              stagger: 0.05
+            }
           );
-        },
+        }
       });
     });
   });
@@ -409,7 +409,7 @@ export function animationTitle() {
             {
               transformOrigin: "50% 100%",
               scaleY: 0,
-              opacity: 0,
+              opacity: 0
             },
             {
               ease: "power3.out",
@@ -420,12 +420,12 @@ export function animationTitle() {
               scrollTrigger: {
                 trigger: title,
                 start: "top 85%",
-                toggleActions: "play none none none",
+                toggleActions: "play none none none"
                 // markers: true,
-              },
-            },
+              }
+            }
           );
-        },
+        }
       });
     });
   });
@@ -450,10 +450,10 @@ export function animationFade() {
           trigger: el,
           start: "top 85%",
           end: "bottom 85%",
-          toggleActions: "play none none none",
+          toggleActions: "play none none none"
           // markers: true,
-        },
-      },
+        }
+      }
     );
   });
   // ----- Fade theo danh sách (stagger) -----
@@ -481,10 +481,10 @@ export function animationFade() {
               trigger: item,
               start: "top 90%",
               end: "bottom 90%",
-              toggleActions: "play none none none",
+              toggleActions: "play none none none"
               // markers: true,
-            },
-          },
+            }
+          }
         );
       });
     } else {
@@ -502,10 +502,10 @@ export function animationFade() {
             trigger: listEl,
             start: "top 85%",
             end: "bottom 85%",
-            toggleActions: "play none none none",
+            toggleActions: "play none none none"
             // markers: true,
-          },
-        },
+          }
+        }
       );
     }
   });
@@ -537,7 +537,7 @@ export function imageParallax() {
       mm.add(
         {
           isMobile: "(max-width: 990px)",
-          isDesktop: "(min-width: 991px)",
+          isDesktop: "(min-width: 991px)"
         },
         (context) => {
           const { isMobile } = context.conditions;
@@ -552,11 +552,11 @@ export function imageParallax() {
               start: "top 70%",
               end: "bottom top",
               scrub: 1,
-              invalidateOnRefresh: true,
+              invalidateOnRefresh: true
               // markers: true,
-            },
+            }
           });
-        },
+        }
       );
     };
 
@@ -585,9 +585,9 @@ export function animationBox() {
         scrollTrigger: {
           trigger: container,
           start: startPoint,
-          toggleActions: "play none none none",
+          toggleActions: "play none none none"
           // markers: true,
-        },
+        }
       });
 
       // ----- 0. Logo (fade) - chạy đầu tiên nếu có -----
@@ -599,9 +599,9 @@ export function animationBox() {
             opacity: 1,
             y: 0,
             duration: 0.45,
-            ease: "power2.out",
+            ease: "power2.out"
           },
-          0, // bắt đầu từ đầu timeline
+          0 // bắt đầu từ đầu timeline
         );
       }
 
@@ -618,18 +618,18 @@ export function animationBox() {
               {
                 transformOrigin: "50% 100%",
                 scaleY: 0,
-                opacity: 0,
+                opacity: 0
               },
               {
                 ease: "power3.out",
                 opacity: 1,
                 scaleY: 1,
                 duration: 0.5,
-                stagger: 0.04,
+                stagger: 0.04
               },
-              logoEl ? "<+0.15" : 0, // nếu có logo thì delay nhẹ sau logo
+              logoEl ? "<+0.15" : 0 // nếu có logo thì delay nhẹ sau logo
             );
-          },
+          }
         });
       }
 
@@ -648,11 +648,11 @@ export function animationBox() {
                 y: "0%",
                 duration: 0.7,
                 ease: "power3.inOut",
-                stagger: 0.06,
+                stagger: 0.06
               },
-              "<+0.4",
+              "<+0.4"
             );
-          },
+          }
         });
       }
 
@@ -665,9 +665,9 @@ export function animationBox() {
             opacity: 1,
             y: 0,
             duration: 0.45,
-            ease: "power2.out",
+            ease: "power2.out"
           },
-          ">-0.15",
+          ">-0.15"
         );
       }
     });
@@ -705,7 +705,7 @@ export function headerMobile() {
 
       const subMenu = this.parentElement.querySelector(".sub-menu");
       const allSubMenus = Array.from(
-        document.querySelectorAll("#header .sub-menu"),
+        document.querySelectorAll("#header .sub-menu")
       ).filter((el) => el !== subMenu);
 
       allSubMenus.forEach((el) => {
@@ -732,7 +732,7 @@ export function headerMobile() {
             }
             subMenu.removeEventListener("transitionend", handler);
           },
-          { once: true },
+          { once: true }
         );
       }
     });
@@ -870,9 +870,9 @@ export function animationIntro() {
         scrollTrigger: {
           trigger: container,
           start: "top 85%",
-          toggleActions: "play none none none",
+          toggleActions: "play none none none"
           // markers: true,
-        },
+        }
       });
 
       if (isMobile) {
@@ -893,7 +893,7 @@ export function animationIntro() {
           heightLine,
           { scaleY: 0, rotate: 0, transformOrigin: "0% 0%" },
           { scaleY: 1, duration: 0.5, ease: "power2.out" },
-          "lineStart",
+          "lineStart"
         );
         tl.to(
           heightLine,
@@ -901,9 +901,9 @@ export function animationIntro() {
             rotate: 18.9,
             transformOrigin: "50% 50%",
             duration: 0.4,
-            ease: "power3.out",
+            ease: "power3.out"
           },
-          "lineStart+=0.4",
+          "lineStart+=0.4"
         );
       } else {
         console.warn("⚠️ el-line-intro không tìm thấy trong container này");
@@ -934,7 +934,7 @@ export function leasingContactForm() {
 
     const submitBtn = currentForm.find('[type="submit"]');
     const note = currentForm.find(
-      ".form-message, .form-note, .note, .section-contact__note",
+      ".form-message, .form-note, .note, .section-contact__note"
     );
 
     const getFieldValue = ($formItem) => {
@@ -962,7 +962,7 @@ export function leasingContactForm() {
       function () {
         const $formItem = $(this).closest(".form-item");
         $formItem.toggleClass("error", !$.trim($(this).val() || ""));
-      },
+      }
     );
 
     currentForm.on("submit", function (e) {
@@ -1007,7 +1007,7 @@ export function leasingContactForm() {
         },
         complete() {
           submitBtn.removeClass("aloading");
-        },
+        }
       });
     });
   });
@@ -1018,7 +1018,7 @@ export function revealClipImage() {
 
   sections.forEach((section) => {
     const imageItems = Array.from(
-      section.querySelectorAll(".design-image-item"),
+      section.querySelectorAll(".design-image-item")
     );
     const bgItems = Array.from(section.querySelectorAll(".design-bg-item"));
 
@@ -1046,21 +1046,131 @@ export function revealClipImage() {
         pinType: "transform",
         scrub: 1,
         anticipatePin: 1,
-        invalidateOnRefresh: true,
+        invalidateOnRefresh: true
         // markers: true,
-      },
+      }
     });
 
     for (let i = 1; i < steps; i++) {
       tl.to(
         imageItems[i - 1],
         { clipPath: "inset(0 0 100% 0)", duration: 1, ease: "none" },
-        i,
+        i
       ).to(
         bgItems[i - 1],
         { clipPath: "inset(0 0 100% 0)", duration: 1, ease: "none" },
-        i,
+        i
       );
     }
+  });
+}
+
+export function facilitiesSection() {
+  const sections = document.querySelectorAll(".facilities");
+  if (!sections.length) return;
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  sections.forEach((section) => {
+    const features = section.querySelectorAll("[data-facility-feature]");
+
+    if (features.length) {
+      gsap.fromTo(
+        features,
+        {
+          autoAlpha: 0,
+          x: 80
+        },
+        {
+          autoAlpha: 1,
+          x: 0,
+          duration: 1,
+          ease: "power3.out",
+          stagger: 0.16,
+          scrollTrigger: {
+            trigger: section.querySelector(".facilities__visual") || section,
+            start: "top 72%",
+            once: true
+          }
+        }
+      );
+    }
+
+    const sliderEl = section.querySelector(".facilities__slider");
+    if (!sliderEl || sliderEl.dataset.facilitiesInitialized === "true") return;
+
+    sliderEl.dataset.facilitiesInitialized = "true";
+
+    new Swiper(sliderEl, {
+      slidesPerView: 1,
+      spaceBetween: 16,
+      loop: true,
+      speed: 1000,
+      grabCursor: true,
+      navigation: {
+        nextEl: section.querySelector(".facilities__nav--next"),
+        prevEl: section.querySelector(".facilities__nav--prev")
+      },
+      breakpoints: {
+        992: {
+          slidesPerView: 2,
+          spaceBetween: 16
+        }
+      }
+    });
+  });
+}
+
+// function này nữa build lại function thì bỏ function này
+export function stackingPlanImageDrag() {
+  const imageWraps = document.querySelectorAll(".stackingPlan__image");
+  if (!imageWraps.length) return;
+
+  imageWraps.forEach((wrap) => {
+    if (wrap.dataset.dragInitialized === "true") return;
+
+    wrap.dataset.dragInitialized = "true";
+
+    const image = wrap.querySelector("img");
+    if (image) {
+      image.setAttribute("draggable", "false");
+      image.addEventListener("dragstart", (event) => event.preventDefault());
+    }
+
+    let isDown = false;
+    let startX = 0;
+    let scrollLeft = 0;
+
+    wrap.addEventListener("pointerdown", (event) => {
+      if (wrap.scrollWidth <= wrap.clientWidth) return;
+
+      isDown = true;
+      startX = event.clientX;
+      scrollLeft = wrap.scrollLeft;
+      wrap.classList.add("is-dragging");
+      wrap.setPointerCapture(event.pointerId);
+    });
+
+    wrap.addEventListener("pointermove", (event) => {
+      if (!isDown) return;
+
+      event.preventDefault();
+      wrap.scrollLeft = scrollLeft - (event.clientX - startX);
+    });
+
+    const stopDrag = (event) => {
+      if (!isDown) return;
+
+      isDown = false;
+      wrap.classList.remove("is-dragging");
+
+      if (wrap.hasPointerCapture(event.pointerId)) {
+        wrap.releasePointerCapture(event.pointerId);
+      }
+    };
+
+    wrap.addEventListener("pointerup", stopDrag);
+    wrap.addEventListener("pointercancel", stopDrag);
+    wrap.addEventListener("pointerleave", stopDrag);
   });
 }

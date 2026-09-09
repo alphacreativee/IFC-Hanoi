@@ -5,6 +5,10 @@
       @media (max-width: 991px) {
         margin-bottom: 16px;
       }
+
+      &.spacing-top-60 {
+        padding-top: 60px;
+      }
     }
     .workplace-row {
       grid-template-columns: 1fr;
