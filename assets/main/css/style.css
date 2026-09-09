@@ -3756,3 +3756,19 @@ a.aloading::after {
     object-fit: contain;
   }
 }
+
+.row-image .image {
+  width: 100%;
+  aspect-ratio: 865/756;
+}
+.row-image .image img {
+  width: 115%;
+  height: 115%;
+  object-position: center;
+}
+.row-content .content-box {
+  padding: 0 40px;
+}
+.row-content .content-box h3 {
+  margin-bottom: 12px;
+}
