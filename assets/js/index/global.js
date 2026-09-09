@@ -531,7 +531,8 @@ export function animationFadeListAuto() {
           {
             opacity: 1,
             y: 0,
-            duration: 0.8,
+            duration: 1,
+
             ease: "power3.out",
             scrollTrigger: {
               trigger: item,
@@ -551,7 +552,8 @@ export function animationFadeListAuto() {
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
+          duration: 1,
+          delay: 0.4,
           ease: "power3.out",
           stagger: 0.15,
           scrollTrigger: {
