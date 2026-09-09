@@ -24,7 +24,7 @@
   &-item {
     @media (max-width: 991px) {
       flex-direction: column-reverse !important;
-      margin-bottom: 16px;
+      margin-bottom: 32px;
       &:last-child {
         margin-bottom: 0;
       }

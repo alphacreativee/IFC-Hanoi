@@ -4231,7 +4231,7 @@ a.aloading::after {
 @media (max-width: 991px) {
   .row-item {
     flex-direction: column-reverse !important;
-    margin-bottom: 16px;
+    margin-bottom: 32px;
   }
   .row-item:last-child {
     margin-bottom: 0;
