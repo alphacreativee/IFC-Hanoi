@@ -18,7 +18,8 @@ import {
   animationTextLineAuto,
   revealClipImage,
   facilitiesSection,
-  stackingPlanImageDrag
+  stackingPlanImageDrag,
+  animationFadeListAuto,
 } from "../../main/js/global.min.js?ver=1.0.11";
 
 const $ = jQuery;
@@ -26,7 +27,7 @@ const $ = jQuery;
 const lenis = new Lenis({
   duration: 1.2,
   easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  smooth: true
+  smooth: true,
 });
 
 // Connect Lenis to GSAP ScrollTrigger
@@ -76,8 +77,8 @@ function initParallaxSwiper(swiperEl, options = {}) {
           if (image) image.style.transition = `${speed}ms ${easing}`;
         });
       },
-      ...(options.on || {})
-    }
+      ...(options.on || {}),
+    },
   });
 }
 
@@ -91,8 +92,8 @@ function initSwiper() {
   const swiperParallax = initParallaxSwiper(swiperEl, {
     navigation: {
       nextEl: containerSwiperEl.querySelector(".swiper-button-next"),
-      prevEl: containerSwiperEl.querySelector(".swiper-button-prev")
-    }
+      prevEl: containerSwiperEl.querySelector(".swiper-button-prev"),
+    },
   });
 }
 
@@ -132,6 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(() => {
         init();
         animationTextLineAuto();
+        animationFadeListAuto();
       })
       .catch((err) => console.error("Loading error:", err));
   } else {

@@ -1096,6 +1096,10 @@ a.aloading::after {
   }
 }
 
+[el-fade-list-auto] > * {
+  opacity: 0;
+}
+
 .lightpick {
   --color-stroke: #ccc;
   --color-bg: #fff;

@@ -180,3 +180,6 @@ a {
     height: 32px;
   }
 }
+[el-fade-list-auto] > * {
+  opacity: 0;
+}
