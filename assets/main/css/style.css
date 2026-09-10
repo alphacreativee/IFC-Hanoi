@@ -2296,7 +2296,7 @@ a.aloading::after {
 
 .hospitality.layout-row .hospitality-row {
   grid-template-columns: 1fr;
-  gap: 0;
+  gap: 64px;
 }
 @media (max-width: 991px) {
   .hospitality.layout-row .hospitality-row {

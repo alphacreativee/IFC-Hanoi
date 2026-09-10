@@ -2,7 +2,7 @@
   &.layout-row {
     .hospitality-row {
       grid-template-columns: 1fr;
-      gap: 0;
+      gap: 64px;
       @media (max-width: 991px) {
         gap: 32px;
       }
