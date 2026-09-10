@@ -1364,7 +1364,7 @@ a.aloading::after {
 #header .header-lang .value-select,
 #header .header-lang .dropdown-custom-item {
   font-size: 15px;
-  padding: 8px;
+  padding: 8px 0 8px 8px;
   color: var(--color-secondary);
   text-transform: uppercase;
   cursor: pointer;
