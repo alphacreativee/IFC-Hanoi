@@ -3452,7 +3452,7 @@ a.aloading::after {
 .core-value {
   position: relative;
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 70px);
   overflow: hidden;
   padding: 0 60px 0;
 }
@@ -3519,6 +3519,7 @@ a.aloading::after {
   padding: 40px;
   background-color: rgba(0, 0, 0, 0.01);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 @media (max-width: 991px) {
   .core-value-content .accordion {

@@ -1125,8 +1125,17 @@ export function leasingContactForm() {
 //   });
 // }
 export function revealClipImage() {
+  gsap.registerPlugin(ScrollTrigger);
+
   const sections = document.querySelectorAll(".clip-image-reveal");
   if (!sections.length) return;
+
+  const isMobile = window.matchMedia("(max-width: 991px)").matches;
+
+  // Lấy chiều cao viewport ổn định, tránh bị đổi khi address bar mobile ẩn/hiện
+  const vh = window.visualViewport
+    ? window.visualViewport.height
+    : window.innerHeight;
 
   sections.forEach((section) => {
     const imageItems = Array.from(
@@ -1138,28 +1147,33 @@ export function revealClipImage() {
 
     imageItems.forEach((item, i) => {
       item.style.zIndex = imageItems.length - i;
+      item.style.willChange = "clip-path";
     });
     bgItems.forEach((item, i) => {
       item.style.zIndex = bgItems.length - i;
+      item.style.willChange = "clip-path";
     });
 
-    // item[0] hiện đủ; các item còn lại ẩn hoàn toàn bằng clip (không dùng opacity)
     gsap.set(imageItems.slice(1), { clipPath: "inset(100% 0 0 0)" });
     gsap.set(bgItems.slice(1), { clipPath: "inset(100% 0 0 0)" });
 
     const steps = imageItems.length;
-    const scrollMultiplier = 1.5;
+    // Mobile: giảm quãng đường scroll để đỡ nặng tính toán
+    const scrollMultiplier = isMobile ? 1 : 1.5;
+    // Mobile: scrub lớn hơn để mượt hơn (đỡ bám sát scroll -> đỡ tốn hiệu năng)
+    const scrubValue = isMobile ? 0.8 : 1;
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
         start: "top top",
-        end: `+=${window.innerHeight * (steps - 1) * scrollMultiplier}`,
+        end: `+=${vh * (steps - 1) * scrollMultiplier}`,
         pin: true,
         pinType: "transform",
-        scrub: 1,
+        scrub: scrubValue,
         anticipatePin: 1,
-        invalidateOnRefresh: true,
+        invalidateOnRefresh: false,
+        // markers: true,
       },
     });
 
@@ -1172,7 +1186,7 @@ export function revealClipImage() {
         .to(
           imageItems[i],
           { clipPath: "inset(0% 0 0 0)", duration: 1, ease: "none" },
-          i, // chạy đúng cùng lúc, cùng tốc độ -> luôn khớp khít, không hở/chồng
+          i,
         )
         .to(
           bgItems[i - 1],
@@ -1185,6 +1199,13 @@ export function revealClipImage() {
           i,
         );
     }
+
+    // Dọn will-change sau khi timeline hoàn tất để tránh browser giữ layer thừa
+    tl.eventCallback("onComplete", () => {
+      [...imageItems, ...bgItems].forEach((item) => {
+        item.style.willChange = "auto";
+      });
+    });
   });
 }
 
