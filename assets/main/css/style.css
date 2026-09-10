@@ -3666,6 +3666,7 @@ a.aloading::after {
 @media (max-width: 991px) {
   .design {
     padding: 0;
+    transform: none;
   }
 }
 .design-inner {
