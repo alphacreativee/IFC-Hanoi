@@ -70,21 +70,17 @@
       .content {
         display: flex;
         flex-direction: column;
-        gap: 32px;
-        // height: 580px;
+        gap: 24px;
         background-color: rgba(0, 0, 0, 0.35);
-        // backdrop-filter: blur(6px);
-        // -webkit-backdrop-filter: blur(6px);
-        // will-change: backdrop-filter, transform;
-        // transform: translateZ(0);
-        padding: 40px;
+
+        padding: 32px;
 
         @media (max-width: 991px) {
           padding: 24px;
           gap: 12px;
         }
         .title {
-          max-width: 70%;
+          // max-width: 70%;
           text-align: center;
           margin: 0 auto;
           white-space: unset;
