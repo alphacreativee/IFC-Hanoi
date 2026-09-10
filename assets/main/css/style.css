@@ -3719,9 +3719,9 @@ a.aloading::after {
 .design-image-item .content {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 24px;
   background-color: rgba(0, 0, 0, 0.35);
-  padding: 40px;
+  padding: 32px;
 }
 @media (max-width: 991px) {
   .design-image-item .content {
@@ -3730,7 +3730,6 @@ a.aloading::after {
   }
 }
 .design-image-item .content .title {
-  max-width: 70%;
   text-align: center;
   margin: 0 auto;
   white-space: unset;
@@ -4305,8 +4304,8 @@ a.aloading::after {
   aspect-ratio: 865/756;
 }
 .row-image .image img {
-  width: 115%;
-  height: 115%;
+  width: 130%;
+  height: 130%;
   object-position: center;
 }
 .row-content .content-box {
