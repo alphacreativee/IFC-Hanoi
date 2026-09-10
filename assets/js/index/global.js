@@ -724,7 +724,7 @@ export function animationBox() {
             duration: 0.45,
             ease: "power2.out",
           },
-          ">-0.15",
+          "<+0.4",
         );
       }
       // ----- 3. Button -----
