@@ -1132,7 +1132,11 @@ export function revealClipImage() {
 
   const isMobile = window.matchMedia("(max-width: 991px)").matches;
 
-  // Lấy chiều cao viewport ổn định, tránh bị đổi khi address bar mobile ẩn/hiện
+  // Fix giật khi pin scroll trên iOS (rubber-band scroll xung đột với pin)
+  if (isMobile) {
+    ScrollTrigger.normalizeScroll(true);
+  }
+
   const vh = window.visualViewport
     ? window.visualViewport.height
     : window.innerHeight;
@@ -1147,20 +1151,28 @@ export function revealClipImage() {
 
     imageItems.forEach((item, i) => {
       item.style.zIndex = imageItems.length - i;
-      item.style.willChange = "clip-path";
     });
     bgItems.forEach((item, i) => {
       item.style.zIndex = bgItems.length - i;
-      item.style.willChange = "clip-path";
     });
 
     gsap.set(imageItems.slice(1), { clipPath: "inset(100% 0 0 0)" });
     gsap.set(bgItems.slice(1), { clipPath: "inset(100% 0 0 0)" });
 
+    // Chỉ bật will-change cho item đang active (giảm số layer GPU phải giữ)
+    const setActiveWillChange = (idx) => {
+      [...imageItems, ...bgItems].forEach((item) => {
+        item.style.willChange = "auto";
+      });
+      [imageItems[idx - 1], imageItems[idx], bgItems[idx - 1], bgItems[idx]]
+        .filter(Boolean)
+        .forEach((item) => {
+          item.style.willChange = "clip-path";
+        });
+    };
+
     const steps = imageItems.length;
-    // Mobile: giảm quãng đường scroll để đỡ nặng tính toán
     const scrollMultiplier = isMobile ? 1 : 1.5;
-    // Mobile: scrub lớn hơn để mượt hơn (đỡ bám sát scroll -> đỡ tốn hiệu năng)
     const scrubValue = isMobile ? 0.8 : 1;
 
     const tl = gsap.timeline({
@@ -1169,20 +1181,23 @@ export function revealClipImage() {
         start: "top top",
         end: `+=${vh * (steps - 1) * scrollMultiplier}`,
         pin: true,
-        pinType: "transform",
+        pinType: isMobile ? "fixed" : "transform", // fixed ổn định hơn trên 1 số iOS/Safari khi pin bị giật
         scrub: scrubValue,
         anticipatePin: 1,
         invalidateOnRefresh: false,
+        fastScrollEnd: true,
+        preventOverlaps: true,
         // markers: true,
       },
     });
 
     for (let i = 1; i < steps; i++) {
-      tl.to(
-        imageItems[i - 1],
-        { clipPath: "inset(0 0 100% 0)", duration: 1, ease: "none" },
-        i,
-      )
+      tl.call(() => setActiveWillChange(i), null, i - 0.01)
+        .to(
+          imageItems[i - 1],
+          { clipPath: "inset(0 0 100% 0)", duration: 1, ease: "none" },
+          i,
+        )
         .to(
           imageItems[i],
           { clipPath: "inset(0% 0 0 0)", duration: 1, ease: "none" },
@@ -1200,7 +1215,6 @@ export function revealClipImage() {
         );
     }
 
-    // Dọn will-change sau khi timeline hoàn tất để tránh browser giữ layer thừa
     tl.eventCallback("onComplete", () => {
       [...imageItems, ...bgItems].forEach((item) => {
         item.style.willChange = "auto";
