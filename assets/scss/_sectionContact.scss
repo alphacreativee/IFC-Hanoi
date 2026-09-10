@@ -3,7 +3,8 @@
 
   &__inner {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 0.98fr);
+    grid-template-columns: repeat(2, 1fr);
+    align-items: stretch;
     gap: 16px;
     padding: 60px;
   }
@@ -133,10 +134,13 @@
   &__media {
     position: relative;
     min-width: 0;
-    aspect-ratio: 780 / 600;
+    height: auto;
+    min-height: 0;
     overflow: hidden;
 
     img {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -184,7 +188,7 @@
   }
 }
 
-@media (max-width: 1199px) {
+@media (max-width: 991px) {
   .section-contact {
     &__inner {
       grid-template-columns: 1fr;
@@ -198,6 +202,13 @@
 
     &__heading {
       margin-bottom: var(--space-40);
+    }
+
+    &__media {
+      position: relative;
+      height: auto;
+      min-height: 0;
+      aspect-ratio: 430 / 300;
     }
   }
 }
@@ -220,10 +231,6 @@
     .form-row {
       grid-template-columns: 1fr;
       gap: 26px;
-    }
-
-    &__media {
-      aspect-ratio: 1 / 1.08;
     }
 
     &__info-value {
