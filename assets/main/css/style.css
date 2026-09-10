@@ -2367,6 +2367,12 @@ a.aloading::after {
   text-align: justify;
   max-width: calc(100% - 100px);
 }
+.hospitality.layout-row .hospitality-desc p {
+  margin-bottom: 24px;
+}
+.hospitality.layout-row .hospitality-desc p:last-child {
+  margin-bottom: 0;
+}
 @media (max-width: 991px) {
   .hospitality.layout-row .hospitality-desc {
     max-width: 100%;

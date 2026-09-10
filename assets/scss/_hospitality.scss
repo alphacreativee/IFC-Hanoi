@@ -63,6 +63,12 @@
     .hospitality-desc {
       text-align: justify;
       max-width: calc(100% - 100px);
+      p {
+        margin-bottom: 24px;
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
       @media (max-width: 991px) {
         max-width: 100%;
       }

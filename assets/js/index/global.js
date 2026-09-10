@@ -636,6 +636,7 @@ export function animationBox() {
       const logoEl = container.querySelector("[box-logo]");
       const titleEl = container.querySelector("[box-title]");
       const descEl = container.querySelector("[box-desc]");
+      const descElFade = container.querySelector("[box-desc-fade]");
       const btnEl = container.querySelector("[box-btn]");
       const startPoint = container.dataset.start || "top 80%";
 
@@ -713,7 +714,19 @@ export function animationBox() {
           },
         });
       }
-
+      if (descElFade) {
+        tl.fromTo(
+          descElFade,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.45,
+            ease: "power2.out",
+          },
+          ">-0.15",
+        );
+      }
       // ----- 3. Button -----
       if (btnEl) {
         tl.fromTo(
