@@ -1890,8 +1890,8 @@ a.aloading::after {
   }
 }
 .workplace-image img {
-  width: 115%;
-  height: 115%;
+  width: 130%;
+  height: 130%;
   object-fit: cover;
 }
 .workplace-content {
@@ -3666,6 +3666,7 @@ a.aloading::after {
 @media (max-width: 991px) {
   .design {
     padding: 0;
+    transform: none;
   }
 }
 .design-inner {

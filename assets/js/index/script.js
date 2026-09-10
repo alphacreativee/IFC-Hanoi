@@ -20,7 +20,7 @@ import {
   facilitiesSection,
   stackingPlanImageDrag,
   animationFadeListAuto
-} from "../../main/js/global.min.js?ver=1.0.12";
+} from "../../main/js/global.min.js?ver=1.0.13";
 
 const $ = jQuery;
 

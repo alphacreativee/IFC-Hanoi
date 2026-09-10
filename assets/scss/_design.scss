@@ -20,6 +20,7 @@
   align-items: center;
   @media (max-width: 991px) {
     padding: 0;
+    transform: none;
   }
   &-inner {
     position: relative;
