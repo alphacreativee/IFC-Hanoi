@@ -599,7 +599,7 @@ export function imageParallax() {
         },
         (context) => {
           const { isMobile } = context.conditions;
-          const percentParallax = isMobile ? 10 : 13;
+          const percentParallax = isMobile ? 10 : -10;
 
           // Chỉ "to" - GSAP tự lấy giá trị hiện tại (đã set sẵn = CSS) làm điểm bắt đầu
           el._parallaxTween = gsap.to(img, {

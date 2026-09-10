@@ -1,7 +1,11 @@
 .facilities {
   // background-color: #fff;
   color: var(--color-primary);
-
+  &.has-spacing-bottom {
+    @media (max-width: 991px) {
+      padding-bottom: 32px;
+    }
+  }
   &__inner {
     width: 100%;
     padding: 60px;
