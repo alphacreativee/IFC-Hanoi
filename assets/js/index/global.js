@@ -732,18 +732,12 @@ export function animationBox() {
   });
 }
 export function headerMobile() {
-  console.log("phần trên");
-
   if (window.innerWidth > 992) return;
-
-  console.log("phần giữa");
 
   const hamBtn = document.getElementById("ham-btn");
   const headerMenu = document.querySelector(".header-menu");
   const headerMain = document.getElementById("header");
   if (!hamBtn || !headerMenu) return;
-
-  console.log("phần dưới");
 
   hamBtn.addEventListener("click", () => {
     hamBtn.classList.toggle("active");
