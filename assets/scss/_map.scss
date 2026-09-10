@@ -1,0 +1,65 @@
+.map {
+  &-image {
+    overflow: hidden;
+  }
+  svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    transition: transform 0.4s ease;
+
+    path {
+      transform-box: fill-box;
+      transform-origin: center;
+      transition:
+        fill 0.3s ease,
+        opacity 0.3s ease,
+        transform 0.3s ease;
+
+      &.active {
+        fill: var(--color-third);
+        transform: scale(2);
+      }
+    }
+  }
+  &-point {
+    &-group {
+      &-title {
+        margin-bottom: 12px;
+      }
+    }
+    &-item {
+      gap: 8px;
+      margin-bottom: 4px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    &-number {
+      width: 16px;
+      height: 16px;
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      font-size: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+    &-name {
+      font-size: 12px;
+      line-height: 16px;
+      color: var(--color-primary);
+      transition: all 0.3s ease;
+    }
+  }
+}
+
+.map-point-item {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+
+  &.dimmed {
+    opacity: 0.4;
+  }
+}
