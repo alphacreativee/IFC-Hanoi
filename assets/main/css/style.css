@@ -4444,6 +4444,7 @@ a.aloading::after {
 }
 .map svg path.active {
   fill: var(--color-third);
+  transform: scale(1.1);
 }
 .map-point-info {
   grid-template-columns: 1fr 1fr;
