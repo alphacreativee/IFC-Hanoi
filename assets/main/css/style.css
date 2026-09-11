@@ -4373,3 +4373,57 @@ a.aloading::after {
     display: none;
   }
 }
+
+.map-image {
+  overflow: hidden;
+}
+.map svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.map svg path {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: fill 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+.map svg path.active {
+  fill: var(--color-third);
+  transform: scale(2);
+}
+.map-point-group-title {
+  margin-bottom: 12px;
+}
+.map-point-item {
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.map-point-item:last-child {
+  margin-bottom: 0;
+}
+.map-point-number {
+  width: 16px;
+  height: 16px;
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-size: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+.map-point-name {
+  font-size: 12px;
+  line-height: 16px;
+  color: var(--color-primary);
+  transition: all 0.3s ease;
+}
+
+.map-point-item {
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+.map-point-item.dimmed {
+  opacity: 0.4;
+}
