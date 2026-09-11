@@ -1,124 +1,4 @@
-// export function hoverHighlightPath() {
-//   const triggers = document.querySelectorAll(".map-point-item");
-//   if (!triggers.length) return;
-
-//   const svg = document.querySelector(".map svg"); // đổi selector nếu SVG có id/class riêng
-//   if (!svg) return;
-
-//   triggers.forEach((trigger) => {
-//     // Tìm class dạng "point-X" trong classList
-//     const pointClass = Array.from(trigger.classList).find((cls) =>
-//       cls.startsWith("point-"),
-//     );
-
-//     if (!pointClass) return;
-
-//     const path = svg.querySelector(`#${pointClass}`);
-//     if (!path) return;
-
-//     trigger.addEventListener("mouseenter", () => {
-//       path.classList.add("active");
-//     });
-
-//     trigger.addEventListener("mouseleave", () => {
-//       path.classList.remove("active");
-//     });
-//   });
-// }
-// export function hoverHighlightPath() {
-//   const triggers = document.querySelectorAll(".map-point-item");
-//   if (!triggers.length) return;
-
-//   const svg = document.querySelector(".map svg");
-//   if (!svg) return;
-
-//   const pairs = Array.from(triggers)
-//     .map((trigger) => {
-//       const pointClass = Array.from(trigger.classList).find((cls) =>
-//         cls.startsWith("point-"),
-//       );
-//       if (!pointClass) return null;
-
-//       const path = svg.querySelector(`#${pointClass}`);
-//       if (!path) return null;
-
-//       return { trigger, path };
-//     })
-//     .filter(Boolean);
-
-//   if (!pairs.length) return;
-
-//   pairs.forEach(({ trigger, path }) => {
-//     trigger.addEventListener("mouseenter", () => {
-//       pairs.forEach((item) => {
-//         const isActive = item.path === path;
-
-//         item.path.classList.toggle("active", isActive);
-//         item.path.classList.toggle("dimmed", !isActive);
-//       });
-//     });
-
-//     trigger.addEventListener("mouseleave", () => {
-//       pairs.forEach((item) => {
-//         item.path.classList.remove("active", "dimmed");
-//       });
-//     });
-//   });
-// }
-// export function hoverHighlightPath() {
-//   const triggers = document.querySelectorAll(".map-point-item");
-//   if (!triggers.length) return;
-
-//   const svg = document.querySelector(".map svg");
-//   if (!svg) return;
-
-//   const pairs = Array.from(triggers)
-//     .map((trigger) => {
-//       const pointClass = Array.from(trigger.classList).find((cls) =>
-//         cls.startsWith("point-"),
-//       );
-//       if (!pointClass) return null;
-
-//       const path = svg.querySelector(`#${pointClass}`);
-//       if (!path) return null;
-
-//       return { trigger, path };
-//     })
-//     .filter(Boolean);
-
-//   if (!pairs.length) return;
-
-//   pairs.forEach(({ trigger, path }) => {
-//     trigger.addEventListener("mouseenter", () => {
-//       pairs.forEach((item) => {
-//         const isActive = item.path === path;
-//         item.path.classList.toggle("active", isActive);
-//         item.path.classList.toggle("dimmed", !isActive);
-//       });
-
-//       // Lấy tâm của path (theo tọa độ nội bộ SVG) để làm transform-origin
-//       const bbox = path.getBBox();
-//       const centerX = bbox.x + bbox.width / 2;
-//       const centerY = bbox.y + bbox.height / 2;
-
-//       const viewBox = svg.viewBox.baseVal;
-//       // Tính % vị trí tâm path so với toàn viewBox -> dùng cho transform-origin
-//       const originXPercent = ((centerX - viewBox.x) / viewBox.width) * 100;
-//       const originYPercent = ((centerY - viewBox.y) / viewBox.height) * 100;
-
-//       svg.style.transformOrigin = `${originXPercent}% ${originYPercent}%`;
-//       svg.classList.add("zoomed");
-//     });
-
-//     trigger.addEventListener("mouseleave", () => {
-//       pairs.forEach((item) => {
-//         item.path.classList.remove("active", "dimmed");
-//       });
-//       svg.classList.remove("zoomed");
-//     });
-//   });
-// }
-export function hoverHighlightPath() {
+function hoverHighlightPath() {
   if (!document.querySelector(".map")) return;
   const triggers = document.querySelectorAll(".map-point-item");
   if (!triggers.length) return;
@@ -128,7 +8,7 @@ export function hoverHighlightPath() {
   if (!svg || !container) return;
 
   const isTouch = window.matchMedia("(hover: none)").matches;
-  const isMobile = window.matchMedia("(max-width: 991px)").matches; // 👈 breakpoint áp dụng zoom
+  const isMobile = window.matchMedia("(max-width: 991px)").matches;
 
   const pairs = Array.from(triggers)
     .map((trigger) => {
@@ -136,8 +16,8 @@ export function hoverHighlightPath() {
         cls.startsWith("point-"),
       );
       if (!pointClass) return null;
-
       const path = svg.querySelector(`#${pointClass}`);
+      path.style.cursor = "pointer";
       if (!path) return null;
 
       return { trigger, path };
@@ -148,7 +28,8 @@ export function hoverHighlightPath() {
 
   const resetZoom = () => {
     pairs.forEach((item) => {
-      item.path.classList.remove("active", "dimmed");
+      item.path.classList.remove("active");
+      item.trigger.classList.remove("active");
     });
 
     if (isMobile) {
@@ -159,7 +40,6 @@ export function hoverHighlightPath() {
   };
 
   const zoomToPath = (path) => {
-    // Chỉ tính toán + áp transform khi ở mobile
     if (!isMobile) return;
 
     const viewBox = svg.viewBox.baseVal;
@@ -197,30 +77,49 @@ export function hoverHighlightPath() {
     dx = Math.min(upperX, Math.max(lowerX, dx));
     dy = Math.min(upperY, Math.max(lowerY, dy));
 
-    svg.style.transformOrigin = `${Ox}px ${Oy}px`;
+    // Làm tròn để tránh subpixel rendering gây nhòe
+    dx = Math.round(dx);
+    dy = Math.round(dy);
+    const Ox_r = Math.round(Ox);
+    const Oy_r = Math.round(Oy);
+
+    svg.style.transformOrigin = `${Ox_r}px ${Oy_r}px`;
     svg.style.transform = `translate(${dx}px, ${dy}px) scale(${s})`;
     svg.classList.add("zoomed");
   };
 
-  pairs.forEach(({ trigger, path }) => {
-    const activate = () => {
-      pairs.forEach((item) => {
-        const isActive = item.path === path;
-        item.path.classList.toggle("active", isActive);
-        item.path.classList.toggle("dimmed", !isActive);
-      });
-      zoomToPath(path); // tự bỏ qua nếu không phải mobile
-    };
+  const activate = (path) => {
+    pairs.forEach((item) => {
+      const isActive = item.path === path;
+      item.path.classList.toggle("active", isActive);
+      item.trigger.classList.toggle("active", isActive);
+    });
+    zoomToPath(path);
+  };
 
+  pairs.forEach(({ trigger, path }) => {
     if (isTouch) {
+      // Mobile: tap vào trigger
       trigger.addEventListener("click", (e) => {
         e.stopPropagation();
         const alreadyActive = path.classList.contains("active");
-        alreadyActive ? resetZoom() : activate();
+        alreadyActive ? resetZoom() : activate(path);
+      });
+
+      // Mobile: tap trực tiếp vào path trên SVG cũng active tương ứng
+      path.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const alreadyActive = path.classList.contains("active");
+        alreadyActive ? resetZoom() : activate(path);
       });
     } else {
-      trigger.addEventListener("mouseenter", activate);
+      // Desktop: hover vào trigger
+      trigger.addEventListener("mouseenter", () => activate(path));
       trigger.addEventListener("mouseleave", resetZoom);
+
+      // Desktop: hover trực tiếp vào path trên SVG cũng active tương ứng
+      path.addEventListener("mouseenter", () => activate(path));
+      path.addEventListener("mouseleave", resetZoom);
     }
   });
 
@@ -235,3 +134,7 @@ export function hoverHighlightPath() {
     });
   }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  hoverHighlightPath();
+});
