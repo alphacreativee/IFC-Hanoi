@@ -22,17 +22,17 @@
   &-image {
     overflow: hidden;
     width: 100%;
-    aspect-ratio: 755 / 657;
+    aspect-ratio: 755 / 600;
   }
   svg {
     width: 100%;
     height: 100%;
     display: block;
     transition: transform 0.4s ease;
-
     path {
       transform-box: fill-box;
       transform-origin: center;
+      pointer-events: visiblePainted;
       transition:
         fill 0.3s ease,
         opacity 0.3s ease,
@@ -40,7 +40,7 @@
 
       &.active {
         fill: var(--color-third);
-        transform: scale(2);
+        // transform: scale(1);
       }
     }
   }
@@ -153,19 +153,40 @@
     }
   }
 }
-.line-animation {
-  animation: dashMove 0.75s linear infinite;
-  &.reverse {
-    animation: dashMoveReverse 0.75s linear infinite;
-  }
+// .line-animation {
+//   animation: dashMove 0.75s linear infinite;
+//   &.reverse {
+//     animation: dashMoveReverse 0.75s linear infinite;
+//   }
+// }
+// @keyframes dashMoveReverse {
+//   to {
+//     stroke-dashoffset: 7.41;
+//   }
+// }
+// @keyframes dashMove {
+//   to {
+//     stroke-dashoffset: -7.41;
+//   }
+// }
+// .line-primary-animation {
+//   filter: drop-shadow(0 0 4px #0a3754)
+//     drop-shadow(0 0 8px rgba(10, 55, 84, 0.6));
+// }
+.pin-ifc {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pinPulse 1.5s ease-in-out infinite;
 }
-@keyframes dashMoveReverse {
-  to {
-    stroke-dashoffset: 7.41;
+
+@keyframes pinPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    // opacity: 1;
   }
-}
-@keyframes dashMove {
-  to {
-    stroke-dashoffset: -7.41;
+  50% {
+    transform: scale(1.1);
+    // opacity: 0.85;
   }
 }

@@ -16,8 +16,8 @@ function hoverHighlightPath() {
         cls.startsWith("point-"),
       );
       if (!pointClass) return null;
-
       const path = svg.querySelector(`#${pointClass}`);
+      path.style.cursor = "pointer";
       if (!path) return null;
 
       return { trigger, path };
@@ -77,30 +77,49 @@ function hoverHighlightPath() {
     dx = Math.min(upperX, Math.max(lowerX, dx));
     dy = Math.min(upperY, Math.max(lowerY, dy));
 
-    svg.style.transformOrigin = `${Ox}px ${Oy}px`;
+    // Làm tròn để tránh subpixel rendering gây nhòe
+    dx = Math.round(dx);
+    dy = Math.round(dy);
+    const Ox_r = Math.round(Ox);
+    const Oy_r = Math.round(Oy);
+
+    svg.style.transformOrigin = `${Ox_r}px ${Oy_r}px`;
     svg.style.transform = `translate(${dx}px, ${dy}px) scale(${s})`;
     svg.classList.add("zoomed");
   };
 
-  pairs.forEach(({ trigger, path }) => {
-    const activate = () => {
-      pairs.forEach((item) => {
-        const isActive = item.path === path;
-        item.path.classList.toggle("active", isActive);
-        item.trigger.classList.toggle("active", isActive);
-      });
-      zoomToPath(path);
-    };
+  const activate = (path) => {
+    pairs.forEach((item) => {
+      const isActive = item.path === path;
+      item.path.classList.toggle("active", isActive);
+      item.trigger.classList.toggle("active", isActive);
+    });
+    zoomToPath(path);
+  };
 
+  pairs.forEach(({ trigger, path }) => {
     if (isTouch) {
+      // Mobile: tap vào trigger
       trigger.addEventListener("click", (e) => {
         e.stopPropagation();
         const alreadyActive = path.classList.contains("active");
-        alreadyActive ? resetZoom() : activate();
+        alreadyActive ? resetZoom() : activate(path);
+      });
+
+      // Mobile: tap trực tiếp vào path trên SVG cũng active tương ứng
+      path.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const alreadyActive = path.classList.contains("active");
+        alreadyActive ? resetZoom() : activate(path);
       });
     } else {
-      trigger.addEventListener("mouseenter", activate);
+      // Desktop: hover vào trigger
+      trigger.addEventListener("mouseenter", () => activate(path));
       trigger.addEventListener("mouseleave", resetZoom);
+
+      // Desktop: hover trực tiếp vào path trên SVG cũng active tương ứng
+      path.addEventListener("mouseenter", () => activate(path));
+      path.addEventListener("mouseleave", resetZoom);
     }
   });
 
@@ -115,6 +134,7 @@ function hoverHighlightPath() {
     });
   }
 }
+
 document.addEventListener("DOMContentLoaded", () => {
   hoverHighlightPath();
 });

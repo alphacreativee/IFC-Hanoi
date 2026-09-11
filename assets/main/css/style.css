@@ -4428,7 +4428,7 @@ a.aloading::after {
 .map-image {
   overflow: hidden;
   width: 100%;
-  aspect-ratio: 755/657;
+  aspect-ratio: 755/600;
 }
 .map svg {
   width: 100%;
@@ -4439,11 +4439,11 @@ a.aloading::after {
 .map svg path {
   transform-box: fill-box;
   transform-origin: center;
+  pointer-events: visiblePainted;
   transition: fill 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
 }
 .map svg path.active {
   fill: var(--color-third);
-  transform: scale(2);
 }
 .map-point-info {
   grid-template-columns: 1fr 1fr;
@@ -4554,20 +4554,17 @@ a.aloading::after {
   line-height: 16px;
 }
 
-.line-animation {
-  animation: dashMove 0.75s linear infinite;
-}
-.line-animation.reverse {
-  animation: dashMoveReverse 0.75s linear infinite;
+.pin-ifc {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pinPulse 1.5s ease-in-out infinite;
 }
 
-@keyframes dashMoveReverse {
-  to {
-    stroke-dashoffset: 7.41;
+@keyframes pinPulse {
+  0%, 100% {
+    transform: scale(1);
   }
-}
-@keyframes dashMove {
-  to {
-    stroke-dashoffset: -7.41;
+  50% {
+    transform: scale(1.1);
   }
 }
