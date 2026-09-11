@@ -14,14 +14,15 @@ import {
   headerMobile,
   animationIntro,
   bannerSlider,
+  bannerVideoCover,
   leasingContactForm,
   animationTextLineAuto,
   revealClipImage,
   facilitiesSection,
   stackingPlanImageDrag,
   animationFadeListAuto
-} from "../../main/js/global.min.js?ver=1.0.13";
-import { hoverHighlightPath } from "../../main/js/map.min.js?ver=1.0.13";
+} from "../../main/js/global.min.js?ver=1.0.25";
+// import { hoverHighlightPath } from "../../main/js/map.min.js?ver=1.0.13";
 const $ = jQuery;
 
 const lenis = new Lenis({
@@ -103,6 +104,7 @@ function init() {
   createFilterTab();
   headerScroll();
   bannerSlider();
+  bannerVideoCover();
   imageParallax();
   animationBox();
   headerMobile();
@@ -120,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
   revealClipImage();
   facilitiesSection();
   stackingPlanImageDrag();
-  hoverHighlightPath();
+  // hoverHighlightPath();
   const isMobile = window.innerWidth <= 991;
   if (isMobile) {
     setTimeout(() => {

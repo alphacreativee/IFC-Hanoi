@@ -2,10 +2,10 @@
   &.layout-row {
     .hospitality-row {
       grid-template-columns: 1fr;
-      gap: 64px;
-      @media (max-width: 991px) {
-        gap: 32px;
-      }
+      gap: 40px;
+      // @media (max-width: 991px) {
+      //   gap: 32px;
+      // }
     }
     .hospitality-inner {
       padding: 0;
@@ -13,6 +13,11 @@
     .hospitality-col {
       flex-direction: row;
       box-shadow: none;
+      padding: 0 60px;
+
+      @media (max-width: 991px) {
+        padding: 0 16px;
+      }
 
       &:nth-child(even) {
         flex-direction: row-reverse;

@@ -315,6 +315,43 @@ export function bannerSlider() {
     });
   });
 }
+
+export function bannerVideoCover() {
+  const videos = document.querySelectorAll(".banner .video");
+  if (!videos.length) return;
+
+  const videoRatio = 16 / 9;
+
+  const resizeVideo = (video) => {
+    const iframe = video.querySelector("iframe");
+    if (!iframe) return;
+
+    const rect = video.getBoundingClientRect();
+    if (!rect.width || !rect.height) return;
+
+    const containerRatio = rect.width / rect.height;
+
+    if (containerRatio > videoRatio) {
+      iframe.style.width = `${rect.width}px`;
+      iframe.style.height = `${rect.width / videoRatio}px`;
+    } else {
+      iframe.style.width = `${rect.height * videoRatio}px`;
+      iframe.style.height = `${rect.height}px`;
+    }
+  };
+
+  const resizeAllVideos = () => {
+    videos.forEach(resizeVideo);
+  };
+
+  resizeAllVideos();
+  window.addEventListener("resize", resizeAllVideos);
+
+  if (window.ResizeObserver) {
+    const resizeObserver = new ResizeObserver(resizeAllVideos);
+    videos.forEach((video) => resizeObserver.observe(video));
+  }
+}
 export function animationTextLine() {
   gsap.registerPlugin(SplitText, ScrollTrigger);
 
