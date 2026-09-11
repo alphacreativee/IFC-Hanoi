@@ -1056,7 +1056,7 @@ export function animationIntro() {
 }
 
 export function leasingContactForm() {
-  const $forms = $(".section-contact__form");
+  const $forms = $(".section-contact__form, .brochure-popup__form");
   if (!$forms.length) return;
 
   $forms.each(function () {
@@ -1065,6 +1065,7 @@ export function leasingContactForm() {
     currentForm.data("leasingFormInitialized", true);
 
     const submitBtn = currentForm.find('[type="submit"]');
+    const isBrochureForm = currentForm.hasClass("brochure-popup__form");
     const note = currentForm.find(
       ".form-message, .form-note, .note, .section-contact__note",
     );
@@ -1088,12 +1089,29 @@ export function leasingContactForm() {
       return isValid;
     };
 
+    const downloadBrochure = () => {
+      const brochureUrl =
+        currentForm.attr("data-brochure-url") ||
+        "./assets/images/del/IFC_Hanoi_Brochure.pdf";
+      const fileName = brochureUrl.split("/").pop() || "IFC_Hanoi_Brochure.pdf";
+      const link = document.createElement("a");
+
+      link.href = brochureUrl;
+      link.download = fileName;
+      link.style.display = "none";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    };
+
     currentForm.on(
       "input change",
       ".form-item.required input, .form-item.required textarea, .form-item.required select",
       function () {
         const $formItem = $(this).closest(".form-item");
-        $formItem.toggleClass("error", !$.trim($(this).val() || ""));
+        if ($.trim($(this).val() || "")) {
+          $formItem.removeClass("error");
+        }
       },
     );
 
@@ -1101,6 +1119,45 @@ export function leasingContactForm() {
       e.preventDefault();
 
       if (!validateForm()) return;
+
+      if (isBrochureForm) {
+        const formData = new FormData(currentForm[0]);
+        const emailRecepient = submitBtn.attr("email_recepient");
+
+        formData.append("action", "brochure_form");
+        if (emailRecepient) {
+          formData.append("email_recepient", emailRecepient);
+        }
+
+        $.ajax({
+          url:
+            typeof ajaxUrl !== "undefined"
+              ? ajaxUrl
+              : currentForm.attr("action") || window.location.href,
+          type: "POST",
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend() {
+            submitBtn.addClass("aloading");
+          },
+          success(response) {
+            if (response.success) {
+              downloadBrochure();
+              currentForm[0].reset();
+              currentForm.find(".form-item").removeClass("error");
+              currentForm
+                .closest("[data-brochure-popup]")
+                .removeClass("active")
+                .attr("aria-hidden", "true");
+            }
+          },
+          complete() {
+            submitBtn.removeClass("aloading");
+          },
+        });
+        return;
+      }
 
       const formData = new FormData(currentForm[0]);
       const emailRecepient = submitBtn.attr("email_recepient");
@@ -1142,6 +1199,53 @@ export function leasingContactForm() {
         },
       });
     });
+  });
+}
+
+export function brochurePopup() {
+  if (document.documentElement.dataset.brochurePopupInitialized === "true") {
+    return;
+  }
+
+  document.documentElement.dataset.brochurePopupInitialized = "true";
+
+  const getPopup = () => document.querySelector("[data-brochure-popup]");
+
+  const openPopup = () => {
+    const popup = getPopup();
+    if (!popup) return;
+
+    popup.classList.add("active");
+    popup.setAttribute("aria-hidden", "false");
+    leasingContactForm();
+  };
+
+  const closePopup = () => {
+    const popup = getPopup();
+    if (!popup) return;
+
+    popup.classList.remove("active");
+    popup.setAttribute("aria-hidden", "true");
+  };
+
+  document.addEventListener("click", (event) => {
+    const openButton = event.target.closest("[data-brochure-popup-open]");
+    if (openButton) {
+      event.preventDefault();
+      openPopup();
+      return;
+    }
+
+    if (event.target.closest("[data-brochure-popup-close]")) {
+      event.preventDefault();
+      closePopup();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closePopup();
+    }
   });
 }
 // export function revealClipImage() {

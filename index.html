@@ -750,6 +750,64 @@
       </section>
     </main>
     <!-- layout -->
+    <div
+      class="brochure-popup"
+      data-brochure-popup
+      data-lenis-prevent
+      aria-hidden="true"
+    >
+      <div
+        class="brochure-popup__backdrop"
+        data-brochure-popup-close
+        data-lenis-prevent
+      ></div>
+      <div class="brochure-popup__dialog" role="dialog" aria-modal="true">
+        <button
+          class="brochure-popup__close"
+          type="button"
+          aria-label="Close brochure form"
+          data-brochure-popup-close
+        ></button>
+        <form
+          class="brochure-popup__form"
+          action="#"
+          data-brochure-url="./assets/images/del/IFC_Hanoi_Brochure.pdf"
+        >
+          <div class="form-item required">
+            <input type="text" name="name" placeholder="Name" />
+          </div>
+          <div class="form-row">
+            <div class="form-item required">
+              <input type="tel" name="phone" placeholder="Phone" />
+            </div>
+            <div class="form-item required">
+              <input type="email" name="email" placeholder="Email" />
+            </div>
+          </div>
+          <div class="form-item required">
+            <input type="text" name="company" placeholder="Company name" />
+          </div>
+          <div class="form-item">
+            <textarea
+              name="message"
+              rows="2"
+              placeholder="Message (optional)"
+            ></textarea>
+          </div>
+          <button
+            class="brochure-popup__button"
+            type="submit"
+            email_recepient="contact@ifchanoi.com"
+          >
+            <span class="brochure-popup__button-icon">→</span>
+            <span class="brochure-popup__button-label">Download brochure</span>
+          </button>
+          <div class="form-message" style="display: none">
+            Submit form successfully !!!
+          </div>
+        </form>
+      </div>
+    </div>
     <!-- footer -->
     <script>
       fetch("./components/footer.html")

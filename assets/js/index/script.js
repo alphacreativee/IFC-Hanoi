@@ -20,8 +20,9 @@ import {
   revealClipImage,
   facilitiesSection,
   stackingPlanImageDrag,
-  animationFadeListAuto
-} from "../../main/js/global.min.js?ver=1.0.25";
+  animationFadeListAuto,
+  brochurePopup
+} from "../../main/js/global.min.js?ver=1.0.27";
 // import { hoverHighlightPath } from "../../main/js/map.min.js?ver=1.0.13";
 const $ = jQuery;
 
@@ -109,6 +110,7 @@ function init() {
   animationBox();
   headerMobile();
   animationIntro();
+  brochurePopup();
   leasingContactForm();
 
   // getDateLightPick();
