@@ -1,8 +1,17 @@
 .row {
+  &-list {
+    padding-bottom: 60px;
+
+    @media (max-width: 991px) {
+      padding-bottom: 32px;
+    }
+  }
+
   &-image {
     .image {
       width: 100%;
       aspect-ratio: 865 / 756;
+      max-height: 756px;
       img {
         width: 130%;
         height: 130%;
@@ -22,9 +31,21 @@
     }
   }
   &-item {
+    padding: 0 60px;
+
+    &:not(:first-child) {
+      padding-top: 40px;
+
+      @media (max-width: 991px) {
+        padding-top: 0;
+      }
+    }
+
     @media (max-width: 991px) {
       flex-direction: column-reverse !important;
       margin-bottom: 32px;
+      padding: 0 16px;
+
       &:last-child {
         margin-bottom: 0;
       }

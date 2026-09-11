@@ -2,10 +2,10 @@
   &.layout-row {
     .hospitality-row {
       grid-template-columns: 1fr;
-      gap: 64px;
-      @media (max-width: 991px) {
-        gap: 32px;
-      }
+      gap: 40px;
+      // @media (max-width: 991px) {
+      //   gap: 32px;
+      // }
     }
     .hospitality-inner {
       padding: 0;
@@ -13,6 +13,11 @@
     .hospitality-col {
       flex-direction: row;
       box-shadow: none;
+      padding: 0 60px;
+
+      @media (max-width: 991px) {
+        padding: 0 16px;
+      }
 
       &:nth-child(even) {
         flex-direction: row-reverse;
@@ -30,6 +35,7 @@
       .image {
         width: 100%;
         aspect-ratio: 865 / 756;
+        max-height: 756px;
         img {
           width: 130%;
           height: 130%;
@@ -45,6 +51,12 @@
       @media (max-width: 991px) {
         max-width: 100%;
         padding-bottom: 0;
+      }
+
+      .hospitality-desc {
+        @media (max-width: 991px) {
+          margin-top: 24px;
+        }
       }
     }
     .hospitality-art {
@@ -65,12 +77,18 @@
       max-width: calc(100% - 100px);
       p {
         margin-bottom: 24px;
+
+        @media (max-width: 991px) {
+          margin-bottom: 16px;
+        }
+
         &:last-child {
           margin-bottom: 0;
         }
       }
       @media (max-width: 991px) {
         max-width: 100%;
+        text-align: center;
       }
     }
   }
