@@ -359,6 +359,36 @@ export function animationTextLineAuto() {
   gsap.registerPlugin(SplitText);
 
   document.fonts.ready.then(() => {
+    document.querySelectorAll("[el-title-auto]").forEach((title) => {
+      if (title.dataset.scriptInitialized) return;
+      title.dataset.scriptInitialized = "true";
+
+      SplitText.create(title, {
+        type: "chars",
+        charsClass: "char",
+        autoSplit: true,
+        onSplit: (self) => {
+          gsap.set(title, { visibility: "visible" });
+
+          return gsap.fromTo(
+            self.chars,
+            {
+              transformOrigin: "50% 100%",
+              scaleY: 0,
+              opacity: 0,
+            },
+            {
+              ease: "power3.out",
+              opacity: 1,
+              scaleY: 1,
+              duration: 0.5,
+              stagger: 0.05,
+            },
+          );
+        },
+      });
+    });
+
     document.querySelectorAll("[el-txt-line-auto]").forEach((el) => {
       if (el.dataset.scriptInitialized) return;
       el.dataset.scriptInitialized = "true";
