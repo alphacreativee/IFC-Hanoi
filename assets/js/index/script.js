@@ -21,14 +21,15 @@ import {
   facilitiesSection,
   stackingPlanImageDrag,
   animationFadeListAuto,
-} from "../../main/js/global.min.js?ver=1.0.25";
+  brochurePopup
+} from "../../main/js/global.min.js?ver=1.0.27";
 // import { hoverHighlightPath } from "../../main/js/map.min.js?ver=1.0.13";
 const $ = jQuery;
 
 const lenis = new Lenis({
   duration: 1.2,
   easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  smooth: true,
+  smooth: true
 });
 
 // Connect Lenis to GSAP ScrollTrigger
@@ -78,8 +79,8 @@ function initParallaxSwiper(swiperEl, options = {}) {
           if (image) image.style.transition = `${speed}ms ${easing}`;
         });
       },
-      ...(options.on || {}),
-    },
+      ...(options.on || {})
+    }
   });
 }
 
@@ -93,8 +94,8 @@ function initSwiper() {
   const swiperParallax = initParallaxSwiper(swiperEl, {
     navigation: {
       nextEl: containerSwiperEl.querySelector(".swiper-button-next"),
-      prevEl: containerSwiperEl.querySelector(".swiper-button-prev"),
-    },
+      prevEl: containerSwiperEl.querySelector(".swiper-button-prev")
+    }
   });
 }
 
@@ -109,6 +110,7 @@ function init() {
   animationBox();
   headerMobile();
   animationIntro();
+  brochurePopup();
   leasingContactForm();
 
   // getDateLightPick();
