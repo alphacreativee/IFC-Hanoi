@@ -40,14 +40,17 @@
         opacity 0.3s ease,
         stroke 0.3s ease,
         stroke-width 0.3s ease,
-        filter 0.3s ease;
-
+        filter 0.3s ease,
+        transform 0.3s ease;
+      // cursor: url("../../images/icons/icon-cursor-map.jpg");
+      cursor: default;
       &.active {
         stroke: #fff;
         stroke-width: 1px;
         stroke-linejoin: round;
         vector-effect: non-scaling-stroke;
         filter: drop-shadow(0 0 4px var(--color-third));
+        // transform: scale(1.1) translateZ(0);
       }
     }
   }
@@ -69,13 +72,15 @@
     &-item {
       gap: 8px;
       margin-bottom: 4px;
-      cursor: pointer;
+      // cursor: url("../../images/icons/icon-cursor-map.jpg");
+      cursor: default;
       &.active {
         .map-point-number {
           background-color: var(--color-third);
         }
         .map-point-name {
           color: var(--color-third);
+          cursor: default;
         }
       }
       &:last-child {

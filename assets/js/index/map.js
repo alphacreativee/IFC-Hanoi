@@ -18,7 +18,7 @@ function hoverHighlightPath() {
       if (!pointClass) return null;
       const path = svg.querySelector(`#${pointClass}`);
       if (!path) return null;
-      path.style.cursor = "pointer";
+      // path.style.cursor = "pointer";
 
       return { trigger, path };
     })
