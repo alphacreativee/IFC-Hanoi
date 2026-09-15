@@ -4329,9 +4329,6 @@ a.aloading::after {
   left: 74.5%;
   width: 20.5%;
 }
-.stackingPlan__label--h5, .stackingPlan__label--h4, .stackingPlan__label--h3, .stackingPlan__label--h2, .stackingPlan__label--h1, .stackingPlan__label--o4, .stackingPlan__label--o3, .stackingPlan__label--o1 {
-  transform: translateY(-60px);
-}
 .stackingPlan__label--b1 {
   top: 69.2%;
   left: 31.3%;
@@ -4428,15 +4425,47 @@ a.aloading::after {
   .stackingPlan__label--o1 {
     top: 68.2%;
   }
-  .stackingPlan__label--h5, .stackingPlan__label--h4, .stackingPlan__label--h3, .stackingPlan__label--h2, .stackingPlan__label--h1, .stackingPlan__label--o4, .stackingPlan__label--o3, .stackingPlan__label--o1 {
-    transform: translateY(-22px);
-  }
   .stackingPlan__label strong {
     display: inline;
     width: auto;
     white-space: normal;
     font-size: 12px;
     margin-right: 4px;
+  }
+}
+.stackingPlan__label-group {
+  position: absolute;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+}
+.stackingPlan__label-group .stackingPlan__label {
+  position: static;
+  width: 100%;
+  transform: none;
+}
+.stackingPlan__label-group--left {
+  top: calc(56.8% - 60px);
+  left: 5%;
+  gap: 8px;
+}
+.stackingPlan__label-group--right {
+  top: calc(58.4% - 60px);
+  left: 74.5%;
+  gap: 8px;
+}
+@media (max-width: 767px) {
+  .stackingPlan__label-group {
+    width: 220px;
+  }
+  .stackingPlan__label-group--left {
+    top: calc(55.5% - 22px);
+    left: 0;
+  }
+  .stackingPlan__label-group--right {
+    top: calc(57.8% - 22px);
+    left: 75%;
   }
 }
 .stackingPlan__cta {
