@@ -18,9 +18,12 @@ function hoverHighlightPath() {
       if (!pointClass) return null;
       const path = svg.querySelector(`#${pointClass}`);
       if (!path) return null;
-      // path.style.cursor = "pointer";
+      const numberPath = svg.querySelector(
+        `[data-point-target="${pointClass}"]`,
+      );
+      const interactivePaths = [path, numberPath].filter(Boolean);
 
-      return { trigger, path };
+      return { trigger, path, interactivePaths };
     })
     .filter(Boolean);
 
@@ -97,7 +100,7 @@ function hoverHighlightPath() {
     zoomToPath(path);
   };
 
-  pairs.forEach(({ trigger, path }) => {
+  pairs.forEach(({ trigger, path, interactivePaths }) => {
     if (isTouch) {
       // Mobile: tap vào trigger
       trigger.addEventListener("click", (e) => {
@@ -106,20 +109,28 @@ function hoverHighlightPath() {
         alreadyActive ? resetZoom() : activate(path);
       });
 
-      // Mobile: tap trực tiếp vào path trên SVG cũng active tương ứng
-      path.addEventListener("click", (e) => {
-        e.stopPropagation();
-        const alreadyActive = path.classList.contains("active");
-        alreadyActive ? resetZoom() : activate(path);
+      // Mobile: tap vào nền hoặc chữ số của marker.
+      interactivePaths.forEach((interactivePath) => {
+        interactivePath.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const alreadyActive = path.classList.contains("active");
+          alreadyActive ? resetZoom() : activate(path);
+        });
       });
     } else {
       // Desktop: hover vào trigger
       trigger.addEventListener("mouseenter", () => activate(path));
       trigger.addEventListener("mouseleave", resetZoom);
 
-      // Desktop: hover trực tiếp vào path trên SVG cũng active tương ứng
-      path.addEventListener("mouseenter", () => activate(path));
-      path.addEventListener("mouseleave", resetZoom);
+      // Desktop: nền và chữ số hoạt động như một marker duy nhất.
+      interactivePaths.forEach((interactivePath) => {
+        interactivePath.addEventListener("mouseenter", () => activate(path));
+        interactivePath.addEventListener("mouseleave", (e) => {
+          if (!interactivePaths.includes(e.relatedTarget)) {
+            resetZoom();
+          }
+        });
+      });
     }
   });
 

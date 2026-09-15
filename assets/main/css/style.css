@@ -5126,6 +5126,11 @@ a.aloading::after {
   vector-effect: non-scaling-stroke;
   filter: drop-shadow(0 0 4px var(--color-third));
 }
+.map svg .map-point-path,
+.map svg .map-point-number-path {
+  pointer-events: all;
+  cursor: default;
+}
 .map-point-info {
   grid-template-columns: 1fr 1fr;
   gap: 40px;
