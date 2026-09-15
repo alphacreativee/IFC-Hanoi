@@ -4210,10 +4210,8 @@ a.aloading::after {
 .stackingPlan__label {
   position: absolute;
   z-index: 3;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 0 6px;
+  display: block;
+  max-width: 320px;
   border: 0;
   padding: 0;
   color: var(--color-primary);
@@ -4232,31 +4230,16 @@ a.aloading::after {
   font-size: 14px;
   font-weight: 800;
   line-height: 1.15;
-}
-.stackingPlan__label span {
-  color: currentColor;
-}
-.stackingPlan__label .stackingPlan__label-row {
-  display: block;
-  width: 100%;
-  white-space: nowrap;
-}
-.stackingPlan__label .stackingPlan__label-row strong,
-.stackingPlan__label .stackingPlan__label-row span {
-  display: inline;
-  width: auto;
-}
-.stackingPlan__label .stackingPlan__label-row strong {
   margin-right: 4px;
-  font-size: 14px;
-}
-.stackingPlan__label .stackingPlan__label-row span {
-  font-size: 12px;
 }
 .stackingPlan__label:hover, .stackingPlan__label.active {
   color: var(--color-third);
 }
+.stackingPlan__label.is-no-popup {
+  cursor: default;
+}
 .stackingPlan__label--tower {
+  display: flex;
   justify-content: center;
   font-family: var(--font-heading);
   font-size: 36px;
@@ -4268,13 +4251,6 @@ a.aloading::after {
 }
 .stackingPlan__label--tower span {
   font-size: inherit;
-}
-.stackingPlan__label--left strong,
-.stackingPlan__label--left span, .stackingPlan__label--right strong,
-.stackingPlan__label--right span, .stackingPlan__label--bottom strong,
-.stackingPlan__label--bottom span {
-  display: block;
-  width: 100%;
 }
 .stackingPlan__label--hospitality-title {
   top: 2%;
@@ -4341,7 +4317,7 @@ a.aloading::after {
 .stackingPlan__label--o4 {
   top: 58.4%;
   left: 74.5%;
-  width: 20.5%;
+  width: 25%;
 }
 .stackingPlan__label--o3 {
   top: 61.8%;
@@ -4352,6 +4328,9 @@ a.aloading::after {
   top: 65.2%;
   left: 74.5%;
   width: 20.5%;
+}
+.stackingPlan__label--h5, .stackingPlan__label--h4, .stackingPlan__label--h3, .stackingPlan__label--h2, .stackingPlan__label--h1, .stackingPlan__label--o4, .stackingPlan__label--o3, .stackingPlan__label--o1 {
+  transform: translateY(-60px);
 }
 .stackingPlan__label--b1 {
   top: 69.2%;
@@ -4365,25 +4344,10 @@ a.aloading::after {
   width: 310px;
   transform: none;
 }
-.stackingPlan__label--h5, .stackingPlan__label--h4, .stackingPlan__label--h3, .stackingPlan__label--h2, .stackingPlan__label--h1, .stackingPlan__label--o4, .stackingPlan__label--o3, .stackingPlan__label--o1, .stackingPlan__label--b1, .stackingPlan__label--b2 {
-  white-space: nowrap;
-}
-.stackingPlan__label--h5 strong,
-.stackingPlan__label--h5 span, .stackingPlan__label--h4 strong,
-.stackingPlan__label--h4 span, .stackingPlan__label--h3 strong,
-.stackingPlan__label--h3 span, .stackingPlan__label--h2 strong,
-.stackingPlan__label--h2 span, .stackingPlan__label--h1 strong,
-.stackingPlan__label--h1 span, .stackingPlan__label--o4 strong,
-.stackingPlan__label--o4 span, .stackingPlan__label--o3 strong,
-.stackingPlan__label--o3 span, .stackingPlan__label--o1 strong,
-.stackingPlan__label--o1 span, .stackingPlan__label--b1 strong,
-.stackingPlan__label--b1 span, .stackingPlan__label--b2 strong,
-.stackingPlan__label--b2 span {
-  display: inline;
-  width: auto;
-}
-.stackingPlan__label--h5 strong, .stackingPlan__label--h4 strong, .stackingPlan__label--h3 strong, .stackingPlan__label--h2 strong, .stackingPlan__label--h1 strong, .stackingPlan__label--o4 strong, .stackingPlan__label--o3 strong, .stackingPlan__label--o1 strong, .stackingPlan__label--b1 strong, .stackingPlan__label--b2 strong {
-  margin-right: 4px;
+@media (max-width: 1300px) {
+  .stackingPlan__label--h1 {
+    max-width: 250px;
+  }
 }
 @media (max-width: 1199px) {
   .stackingPlan__label {
@@ -4464,13 +4428,13 @@ a.aloading::after {
   .stackingPlan__label--o1 {
     top: 68.2%;
   }
-  .stackingPlan__label strong,
-  .stackingPlan__label span {
+  .stackingPlan__label--h5, .stackingPlan__label--h4, .stackingPlan__label--h3, .stackingPlan__label--h2, .stackingPlan__label--h1, .stackingPlan__label--o4, .stackingPlan__label--o3, .stackingPlan__label--o1 {
+    transform: translateY(-22px);
+  }
+  .stackingPlan__label strong {
     display: inline;
     width: auto;
     white-space: normal;
-  }
-  .stackingPlan__label strong {
     font-size: 12px;
     margin-right: 4px;
   }
@@ -4648,9 +4612,6 @@ a.aloading::after {
   .stackingPlanPopup__dialog {
     max-height: calc(100dvh - 32px);
     padding: 44px 0 28px;
-  }
-  .stackingPlanPopup__slider {
-    padding-bottom: 70px;
   }
   .stackingPlanPopup__content {
     max-width: 500px;

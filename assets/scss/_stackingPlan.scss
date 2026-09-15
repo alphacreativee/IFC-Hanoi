@@ -166,10 +166,8 @@
   &__label {
     position: absolute;
     z-index: 3;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 0 6px;
+    display: block;
+    max-width: 320px;
     border: 0;
     padding: 0;
     color: var(--color-primary);
@@ -188,31 +186,7 @@
       font-size: 14px;
       font-weight: 800;
       line-height: 1.15;
-    }
-
-    span {
-      color: currentColor;
-    }
-
-    .stackingPlan__label-row {
-      display: block;
-      width: 100%;
-      white-space: nowrap;
-
-      strong,
-      span {
-        display: inline;
-        width: auto;
-      }
-
-      strong {
-        margin-right: 4px;
-        font-size: 14px;
-      }
-
-      span {
-        font-size: 12px;
-      }
+      margin-right: 4px;
     }
 
     &:hover,
@@ -220,7 +194,12 @@
       color: var(--color-third);
     }
 
+    &.is-no-popup {
+      cursor: default;
+    }
+
     &--tower {
+      display: flex;
       justify-content: center;
       font-family: var(--font-heading);
       font-size: 36px;
@@ -232,16 +211,6 @@
 
       span {
         font-size: inherit;
-      }
-    }
-
-    &--left,
-    &--right,
-    &--bottom {
-      strong,
-      span {
-        display: block;
-        width: 100%;
       }
     }
 
@@ -322,7 +291,7 @@
     &--o4 {
       top: 58.4%;
       left: 74.5%;
-      width: 20.5%;
+      width: 25%;
     }
 
     &--o3 {
@@ -335,6 +304,17 @@
       top: 65.2%;
       left: 74.5%;
       width: 20.5%;
+    }
+
+    &--h5,
+    &--h4,
+    &--h3,
+    &--h2,
+    &--h1,
+    &--o4,
+    &--o3,
+    &--o1 {
+      transform: translateY(-60px);
     }
 
     &--b1 {
@@ -351,26 +331,9 @@
       transform: none;
     }
 
-    &--h5,
-    &--h4,
-    &--h3,
-    &--h2,
-    &--h1,
-    &--o4,
-    &--o3,
-    &--o1,
-    &--b1,
-    &--b2 {
-      white-space: nowrap;
-
-      strong,
-      span {
-        display: inline;
-        width: auto;
-      }
-
-      strong {
-        margin-right: 4px;
+    @media (max-width: 1300px) {
+      &--h1 {
+        max-width: 250px;
       }
     }
 
@@ -481,14 +444,21 @@
         top: 68.2%;
       }
 
-      strong,
-      span {
-        display: inline;
-        width: auto;
-        white-space: normal;
+      &--h5,
+      &--h4,
+      &--h3,
+      &--h2,
+      &--h1,
+      &--o4,
+      &--o3,
+      &--o1 {
+        transform: translateY(-22px);
       }
 
       strong {
+        display: inline;
+        width: auto;
+        white-space: normal;
         font-size: 12px;
         margin-right: 4px;
       }
@@ -701,7 +671,7 @@
     }
 
     &__slider {
-      padding-bottom: 70px;
+      // padding-bottom: 70px;
     }
 
     &__content {
