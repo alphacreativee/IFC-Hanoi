@@ -17,8 +17,8 @@ function hoverHighlightPath() {
       );
       if (!pointClass) return null;
       const path = svg.querySelector(`#${pointClass}`);
-      path.style.cursor = "pointer";
       if (!path) return null;
+      path.style.cursor = "pointer";
 
       return { trigger, path };
     })
@@ -134,7 +134,75 @@ function hoverHighlightPath() {
     });
   }
 }
+function animateLineLogo() {
+  const line = document.querySelector(".line-stroke-logo");
+  if (!line) {
+    console.log("❌ Không tìm thấy .line-stroke-logo");
+    return;
+  }
 
+  const length = line.getTotalLength();
+  console.log("✅ length =", length);
+
+  const dashLength = length * 0.5;
+  line.style.strokeDasharray = `${dashLength} ${length - dashLength}`;
+  line.style.setProperty("--line-length", length);
+}
+
+document.addEventListener("DOMContentLoaded", animateLineLogo);
 document.addEventListener("DOMContentLoaded", () => {
   hoverHighlightPath();
 });
+function animateVerticalLine() {
+  const line = document.querySelector(".line-vertical-run");
+  if (!line) return;
+
+  const length = line.getTotalLength();
+  const dashLength = length * 0.4; // đoạn sáng chiếm 40% độ dài, chỉnh tùy ý
+
+  line.style.strokeDasharray = `${dashLength} ${length - dashLength}`;
+
+  line.animate([{ strokeDashoffset: 0 }, { strokeDashoffset: -length }], {
+    duration: 1500,
+    iterations: Infinity,
+    easing: "linear",
+  });
+}
+
+document.addEventListener("DOMContentLoaded", animateVerticalLine);
+function animatePinOutlineRun() {
+  const outline = document.querySelector(".pin-outline-run");
+  if (!outline) return;
+
+  const length = outline.getTotalLength();
+  const dashLength = length * 0.25;
+
+  outline.style.strokeDasharray = `${dashLength} ${length - dashLength}`;
+
+  outline.animate([{ strokeDashoffset: 0 }, { strokeDashoffset: -length }], {
+    duration: 3000,
+    iterations: Infinity,
+    easing: "linear",
+  });
+}
+
+document.addEventListener("DOMContentLoaded", animatePinOutlineRun);
+function animateLineDashRun() {
+  const lines = document.querySelectorAll(".line-dash-run");
+  if (!lines.length) return;
+
+  lines.forEach((line) => {
+    const length = line.getTotalLength();
+    const dashLength = length * 0.9;
+
+    line.style.strokeDasharray = `${dashLength} ${length - dashLength}`;
+
+    line.animate([{ strokeDashoffset: -length }, { strokeDashoffset: 0 }], {
+      duration: 3000,
+      iterations: Infinity,
+      easing: "linear",
+    });
+  });
+}
+
+document.addEventListener("DOMContentLoaded", animateLineDashRun);

@@ -5123,12 +5123,14 @@ a.aloading::after {
 .map svg path {
   transform-box: fill-box;
   transform-origin: center;
-  pointer-events: visiblePainted;
+  shape-rendering: geometricPrecision;
+  backface-visibility: hidden;
+  will-change: transform;
   transition: fill 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
 }
 .map svg path.active {
   fill: var(--color-third);
-  transform: scale(1.1);
+  transform: scale(1.1) translateZ(0);
 }
 .map-point-info {
   grid-template-columns: 1fr 1fr;
@@ -5239,17 +5241,65 @@ a.aloading::after {
   line-height: 16px;
 }
 
-.pin-ifc {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: pinPulse 1.5s ease-in-out infinite;
-}
-
 @keyframes pinPulse {
   0%, 100% {
     transform: scale(1);
   }
   50% {
     transform: scale(1.1);
+  }
+}
+.line-primary-highlight {
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 2px #ffffff) drop-shadow(0 0 4px #ffffff);
+  }
+  50% {
+    filter: drop-shadow(0 0 4px #ffffff) drop-shadow(0 0 10px #ffffff);
+  }
+}
+.pin-ifc-outline {
+  filter: drop-shadow(0 0 3px #ffffff);
+  animation: pinOutlineRun 2s linear infinite;
+}
+
+@keyframes pinOutlineRun {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: calc(var(--pin-length) * -1);
+  }
+}
+.line-stroke-logo {
+  animation: lineLogoRun 3s linear infinite;
+  filter: drop-shadow(0 0 2px #fff);
+}
+
+@keyframes lineLogoRun {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -231;
+  }
+}
+.pin-outline-run {
+  filter: drop-shadow(0 0 4px #ffffff);
+}
+
+.square-change-clr {
+  animation: fillChangeColor 1s ease-in-out infinite alternate;
+}
+
+@keyframes fillChangeColor {
+  from {
+    fill: #b78565;
+  }
+  to {
+    fill: #0a3754;
   }
 }
