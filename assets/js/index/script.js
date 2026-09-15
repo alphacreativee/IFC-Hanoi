@@ -19,11 +19,9 @@ import {
   animationTextLineAuto,
   revealClipImage,
   facilitiesSection,
-  stackingPlanImageDrag,
   animationFadeListAuto,
   brochurePopup
-} from "../../main/js/global.min.js?ver=1.0.27";
-// import { hoverHighlightPath } from "../../main/js/map.min.js?ver=1.0.13";
+} from "../../main/js/global.min.js?ver=1.0.28";
 const $ = jQuery;
 
 const lenis = new Lenis({
@@ -123,8 +121,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initSwiper();
   revealClipImage();
   facilitiesSection();
-  stackingPlanImageDrag();
-  // hoverHighlightPath();
   const isMobile = window.innerWidth <= 991;
   if (isMobile) {
     setTimeout(() => {
