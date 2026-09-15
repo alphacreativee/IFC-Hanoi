@@ -5126,7 +5126,8 @@ a.aloading::after {
   shape-rendering: geometricPrecision;
   backface-visibility: hidden;
   will-change: transform;
-  transition: fill 0.3s ease, opacity 0.3s ease, stroke 0.3s ease, stroke-width 0.3s ease, filter 0.3s ease;
+  transition: fill 0.3s ease, opacity 0.3s ease, stroke 0.3s ease, stroke-width 0.3s ease, filter 0.3s ease, transform 0.3s ease;
+  cursor: url("../../images/icons/icon-cursor-map.jpg");
 }
 .map svg path.active {
   stroke: #fff;
@@ -5134,6 +5135,7 @@ a.aloading::after {
   stroke-linejoin: round;
   vector-effect: non-scaling-stroke;
   filter: drop-shadow(0 0 4px var(--color-third));
+  transform: scale(1.1) translateZ(0);
 }
 .map-point-info {
   grid-template-columns: 1fr 1fr;
@@ -5152,7 +5154,7 @@ a.aloading::after {
 .map-point-item {
   gap: 8px;
   margin-bottom: 4px;
-  cursor: pointer;
+  cursor: url("../../images/icons/icon-cursor-map.jpg");
 }
 .map-point-item.active .map-point-number {
   background-color: var(--color-third);
