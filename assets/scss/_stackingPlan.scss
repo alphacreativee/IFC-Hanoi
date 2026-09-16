@@ -202,7 +202,7 @@
       display: flex;
       justify-content: center;
       font-family: var(--font-heading);
-      font-size: 36px;
+      font-size: 30px;
       line-height: 0.92;
       text-align: center;
       text-transform: uppercase;
@@ -216,7 +216,7 @@
 
     &--hospitality-title {
       top: 2%;
-      left: calc(50% - 132px);
+      left: calc(50% - 130px);
       width: 190px;
       transform: translateX(-50%);
     }
@@ -334,7 +334,7 @@
       }
 
       &--tower {
-        font-size: 32px;
+        font-size: 30px;
       }
 
       &--hospitality-title {
@@ -342,7 +342,7 @@
       }
 
       &--office-title {
-        left: calc(50% + 110px);
+        left: calc(50% + 95px);
       }
     }
 

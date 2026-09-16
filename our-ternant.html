@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Tenants | IFC Hanoi</title>
+    <link
+      rel="icon"
+      href="./assets/images/icons/logo-full-primary.svg"
+      type="image/x-icon"
+    />
+    <meta
+      name="description"
+      content="Discover the retail and lifestyle tenants at IFC Hanoi."
+    />
+    <link rel="stylesheet" href="./assets/libs/bootstrap.min.css" />
+    <link rel="stylesheet" href="./assets/libs/lenis.css" />
+    <link rel="stylesheet" href="./assets/libs/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="./assets/libs/lightpick.min.css" />
+    <link rel="stylesheet" href="./assets/fonts/KingSans/font.css" />
+    <link rel="stylesheet" href="./assets/fonts/BeVNPro/font.css" />
+    <link rel="stylesheet" href="./assets/main/css/style.min.css" />
+    <script>
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+
+      var assetUrl = window.location.origin;
+    </script>
+  </head>
+
+  <body>
+    <script>
+      fetch("./components/cta.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("cta").innerHTML = data;
+        });
+    </script>
+    <div id="cta" class="cta position-fixed"></div>
+
+    <script>
+      fetch("./components/loading.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("loading").innerHTML = data;
+        });
+    </script>
+    <div
+      id="loading"
+      class="loading position-fixed top-0 start-0 end-0 w-100 h-100 bgc-primary d-flex align-items-center justify-content-center"
+    ></div>
+
+    <script>
+      fetch("./components/header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+          const currentPath = window.location.pathname || "/";
+          const navLinks = document.querySelectorAll(".header-menu ul>li>a");
+
+          navLinks.forEach((link) => {
+            const linkPath = link.getAttribute("href");
+            if (!linkPath) return;
+
+            const currentSegment = currentPath.split("/").pop() || "";
+            const linkSegment = linkPath.split("/").pop() || "";
+            if (currentSegment === linkSegment) link.classList.add("active");
+          });
+        });
+    </script>
+    <header
+      id="header"
+      class="header position-fixed top-0 start-0 end-0 w-100"
+    ></header>
+
+    <main>
+      <section class="banner short-banner position-relative">
+        <div class="banner-inner h-100">
+          <div class="swiper image-slider h-100">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <div class="banner-box position-relative">
+                  <div class="img">
+                    <img
+                      src="./assets/images/del/banner-contact.webp"
+                      alt="IFC Hanoi tenants"
+                    />
+                  </div>
+                  <h1
+                    class="short-banner-title font-heading text-uppercase"
+                    el-title-auto
+                  >
+                    Our Tenants
+                  </h1>
+                  <nav class="breadcrumb font-body" aria-label="Breadcrumb">
+                    <a class="breadcrumb-home" href="./index.html" staggertext>
+                      <img
+                        src="./assets/images/icons/icon-home.svg"
+                        alt=""
+                        width="16"
+                        height="16"
+                      />
+                      <span>IFC</span>
+                    </a>
+                    <span>/</span>
+                    <span>Workplace</span>
+                    <span>/</span>
+                    <span>Our Tenants</span>
+                  </nav>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="ourTernant" aria-labelledby="our-tenant-heading">
+        <div class="ourTernant__inner">
+          <h2 id="our-tenant-heading" class="visually-hidden">Our Tenants</h2>
+
+          <div class="ourTernant__floor-select">
+            <label class="visually-hidden" for="tenant-floor-select">
+              Select a floor
+            </label>
+            <select id="tenant-floor-select" data-floor-select>
+              <option value="b1f">B1F</option>
+              <option value="1f">1F</option>
+              <option value="2f">2F</option>
+              <option value="3f">3F</option>
+            </select>
+            <svg viewBox="0 0 12 8" aria-hidden="true">
+              <path d="m1 1 5 5 5-5" />
+            </svg>
+          </div>
+
+          <div
+            class="ourTernant__floor-tabs"
+            role="tablist"
+            aria-label="Select a floor"
+          >
+            <button
+              class="ourTernant__floor-tab active"
+              type="button"
+              role="tab"
+              aria-selected="true"
+              data-floor-tab
+              data-floor="b1f"
+              data-plan="./assets/images/stacking-plan/1F-2.jpg"
+            >
+              B1F
+            </button>
+            <button
+              class="ourTernant__floor-tab"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              tabindex="-1"
+              data-floor-tab
+              data-floor="1f"
+              data-plan="./assets/images/stacking-plan/2F-2.jpg"
+            >
+              1F
+            </button>
+            <button
+              class="ourTernant__floor-tab"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              tabindex="-1"
+              data-floor-tab
+              data-floor="2f"
+              data-plan="./assets/images/stacking-plan/3F-2.jpg"
+            >
+              2F
+            </button>
+            <button
+              class="ourTernant__floor-tab"
+              type="button"
+              role="tab"
+              aria-selected="false"
+              tabindex="-1"
+              data-floor-tab
+              data-floor="3f"
+              data-plan="./assets/images/stacking-plan/4F-2.jpg"
+            >
+              3F
+            </button>
+          </div>
+
+          <div class="ourTernant__overview">
+            <div
+              class="ourTernant__tenant-list"
+              role="tablist"
+              aria-label="Select a tenant"
+              data-tenant-list
+            ></div>
+
+            <div class="ourTernant__plan" aria-live="polite">
+              <img
+                class="ourTernant__plan-image"
+                src="./assets/images/stacking-plan/1F-2.jpg"
+                alt="B1F floor plan"
+                data-floor-plan
+              />
+            </div>
+          </div>
+
+          <div
+            class="ourTernant__detail"
+            aria-live="polite"
+            data-tenant-detail
+          ></div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      fetch("./components/footer.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("footer").innerHTML = data;
+        });
+    </script>
+    <footer id="footer"></footer>
+
+    <script src="./assets/libs/jquery-3.7.1.js"></script>
+    <script src="./assets/libs/lenis.min.js"></script>
+    <script src="./assets/libs/gsap.min.js"></script>
+    <script src="./assets/libs/ScrollTrigger.min.js"></script>
+    <script src="./assets/libs/SplitText.min.js"></script>
+    <script src="./assets/libs/bootstrap.bundle.min.js"></script>
+    <script src="./assets/libs/swiper-bundle.min.js"></script>
+    <script src="./assets/libs/moment.min.js"></script>
+    <script src="./assets/libs/lightpick.min.js"></script>
+    <script type="module" src="./assets/main/js/script.min.js"></script>
+    <script src="./assets/main/js/our-ternant.min.js"></script>
+  </body>
+</html>
