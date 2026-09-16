@@ -1,6 +1,6 @@
-.ourTernant {
+.ourTenant {
   padding: 72px 60px 100px;
-  overflow: hidden;
+  overflow: clip;
   background: var(--color-white);
   color: var(--color-primary);
 
@@ -22,27 +22,70 @@
     display: none;
     margin-bottom: 36px;
 
-    select {
+    .dropdown-custom-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       width: 100%;
-      height: 52px;
-      padding: 0 48px 0 16px;
-      border: 1px solid rgba(18, 55, 84, 0.3);
-      border-radius: 0;
-      background: var(--color-white);
+      height: 48px;
+      padding: 0 24px;
+      border: 1px solid var(--color-primary);
+      border-radius: 24px;
+      background: transparent;
       color: var(--color-primary);
       font-family: var(--font-heading);
-      font-size: 22px;
+      font-size: 18px;
       line-height: 1;
       cursor: pointer;
-      appearance: none;
-      -webkit-appearance: none;
+      text-align: center;
+      justify-content: center;
 
       &:focus {
-        border-color: var(--color-third);
+        border-color: var(--color-primary);
       }
     }
 
-    svg {
+    .dropdown-custom-text {
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+
+    .dropdown-custom-menu {
+      position: absolute;
+      top: calc(100% + 4px);
+      right: 0;
+      left: 0;
+      z-index: 10;
+      display: none;
+      border: 1px solid rgba(18, 55, 84, 0.3);
+      border-radius: 24px;
+      background: var(--color-white);
+    }
+
+    .dropdown-custom-menu.dropdown--active {
+      display: block;
+    }
+
+    .dropdown-custom-item {
+      padding: 14px 16px;
+      color: var(--color-primary);
+      font-family: var(--font-heading);
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+      text-align: center;
+
+      &:hover {
+        background: rgba(246, 231, 206, 0.12);
+      }
+
+      &.active {
+        color: var(--color-third);
+      }
+    }
+
+    .icon svg {
       position: absolute;
       top: 50%;
       right: 18px;
@@ -107,6 +150,13 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
+    align-self: start;
+    position: sticky;
+    top: 109px;
+  }
+
+  &__right-column {
+    min-width: 0;
   }
 
   &__tenant-card {
@@ -114,7 +164,7 @@
     align-items: center;
     justify-content: center;
     min-height: 124px;
-    padding: 20px;
+    padding: 10px;
     overflow: hidden;
     border: 1px solid rgba(18, 55, 84, 0.24);
     background: var(--color-white);
@@ -178,16 +228,16 @@
 
   &__tenant-logo-image {
     display: block;
-    width: auto;
-    max-width: 132px;
+    width: 100%;
+    max-width: 100%;
     height: auto;
-    max-height: 66px;
     object-fit: contain;
   }
 
   &__plan {
     position: relative;
     min-height: 490px;
+    margin-bottom: 56px;
   }
 
   &__plan-image {
@@ -206,11 +256,16 @@
   }
 
   &__detail {
-    width: calc(100% - 468px);
-    margin: 56px 0 0 auto;
+    width: auto;
+    max-width: 100%;
+    min-width: 0;
+    margin: 0 0 0 auto;
   }
 
   &__article {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
     animation: tenantReveal 0.55s ease both;
   }
 
@@ -225,7 +280,7 @@
   &__title {
     margin: 0;
     font-family: var(--font-heading);
-    font-size: 42px;
+    font-size: 35px;
     font-weight: 400;
     line-height: 1;
     text-transform: uppercase;
@@ -234,7 +289,7 @@
   &__meta {
     margin: 0;
 
-    div {
+    > div {
       display: grid;
       grid-template-columns: 92px 1fr;
       gap: 0;
@@ -266,14 +321,30 @@
       color: inherit;
       transition: color 0.3s ease;
 
-      &:hover {
-        color: var(--color-third);
+      &[data-meta-stagger] {
+        display: inline-block;
+        line-height: 1.2;
+
+        .letter-mask {
+          height: 1.2em;
+          line-height: 1.2em;
+          vertical-align: top;
+        }
+
+        .letter-col {
+          height: 2.4em;
+        }
+
+        .gsap_split_letter {
+          height: 1.2em;
+          line-height: 1.2em;
+        }
       }
+
     }
   }
 
   &__copy {
-    margin-bottom: 36px;
     font-family: var(--font-body);
     font-size: 15px;
     line-height: 1.45;
@@ -290,6 +361,10 @@
 
   &__media {
     position: relative;
+    margin-top: 36px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
     aspect-ratio: 16 / 9;
     overflow: hidden;
 
@@ -298,6 +373,12 @@
     .swiper-slide {
       width: 100%;
       height: 100%;
+    }
+
+    &-slider {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
     }
 
     .swiper-slide {
@@ -315,8 +396,8 @@
       position: absolute;
       z-index: 3;
       top: 50%;
-      right: 22px;
-      left: 22px;
+      right: 16px;
+      left: 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -329,28 +410,28 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 52px;
-      height: 30px;
-      padding: 4px 0;
+      width: 40px;
+      height: 40px;
+      padding: 0;
       border: 0;
-      background: transparent;
+      background-color: rgba(0, 0, 0, 0.2);
       color: var(--color-secondary);
       pointer-events: auto;
+      transition: background-color 0.3s ease;
 
-      svg {
+      img {
         display: block;
-        width: 52px;
-        height: 22px;
-        overflow: visible;
+        width: 28px;
+        height: 28px;
       }
 
-      path {
-        fill: none;
-        stroke: currentColor;
-        stroke-width: 1;
-        stroke-linecap: butt;
-        stroke-linejoin: round;
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.4);
       }
+    }
+
+    &-prev img {
+      transform: rotate(180deg);
     }
 
     &.is-single &-nav {
@@ -371,20 +452,26 @@
 }
 
 @media (max-width: 991px) {
-  .ourTernant {
+  .ourTenant {
     padding: 64px 16px 72px;
+
+    &__inner {
+      display: block;
+    }
 
     &__floor-tabs {
       margin-bottom: 48px;
     }
 
     &__overview {
+      display: grid;
       grid-template-columns: 1fr;
       gap: 32px;
     }
 
     &__tenant-list {
       max-width: 680px;
+      position: static;
     }
 
     &__plan,
@@ -392,15 +479,19 @@
       min-height: 360px;
     }
 
+    &__plan {
+      margin-bottom: 48px;
+    }
+
     &__detail {
       width: 100%;
-      margin-top: 48px;
+      margin-top: 0;
     }
   }
 }
 
 @media (max-width: 767px) {
-  .ourTernant {
+  .ourTenant {
     &__floor-select {
       display: block;
     }
@@ -415,7 +506,7 @@
 
     &__tenant-card {
       min-height: 94px;
-      padding: 14px 10px;
+      padding: 10px;
       font-size: 19px;
     }
 
@@ -435,6 +526,31 @@
 
     &__copy {
       text-align: left;
+    }
+
+    &__media-prev,
+    &__media-next {
+      width: 40px;
+      height: 40px;
+    }
+
+    &__media {
+      aspect-ratio: auto;
+      overflow: visible;
+
+      &-slider {
+        aspect-ratio: 16 / 9;
+        height: auto;
+        overflow: hidden;
+      }
+
+      &-nav {
+        position: static;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 24px;
+        transform: none;
+      }
     }
   }
 }

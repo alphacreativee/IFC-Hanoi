@@ -181,6 +181,8 @@ export function staggerText() {
   gsap.registerPlugin(SplitText);
 
   document.querySelectorAll("[staggertext]").forEach((el) => {
+    if (el.dataset.staggerInitialized) return;
+    el.dataset.staggerInitialized = "true";
     if (window.innerWidth <= 767 && el.closest(".breadcrumb")) return;
 
     const split = new SplitText(el, {
@@ -827,13 +829,9 @@ export function headerMobile() {
   });
   const menuSub = document.querySelectorAll("li.menu-item-has-children > a");
 
-  console.log(menuSub);
-
   menuSub.forEach((item) => {
     item.addEventListener("click", function (e) {
       e.preventDefault();
-
-      console.log("click");
 
       const subMenu = this.parentElement.querySelector(".sub-menu");
       const allSubMenus = Array.from(
@@ -1456,4 +1454,3 @@ export function facilitiesSection() {
     });
   });
 }
-
