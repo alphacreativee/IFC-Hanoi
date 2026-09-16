@@ -5583,7 +5583,7 @@ a.aloading::after {
   margin-bottom: 12px;
 }
 .map-time-list {
-  max-width: 300px;
+  max-width: 400px;
   width: 100%;
 }
 @media (max-width: 767px) {
