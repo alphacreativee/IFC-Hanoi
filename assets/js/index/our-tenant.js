@@ -120,4 +120,63 @@ if (root) {
     "b1f";
 
   showFloor(initialFloor);
+
+  const detail = root.querySelector(".ourTenant__detail");
+  const exploreButton = root.querySelector(".ourTenant__scroll-explore");
+
+  if (detail && exploreButton) {
+    const hideExploreButton = () => {
+      exploreButton.classList.remove("is-visible");
+      exploreButton.classList.add("is-hiding");
+      window.setTimeout(() => exploreButton.classList.remove("is-hiding"), 400);
+    };
+
+    const rightColumn = root.querySelector(".ourTenant__right-column");
+    const positionExploreButton = () => {
+      if (!rightColumn) return;
+      const isMobile = window.innerWidth <= 767;
+      const center = isMobile
+        ? window.innerWidth / 2
+        : rightColumn.getBoundingClientRect().left + rightColumn.getBoundingClientRect().width / 2;
+      exploreButton.style.left = `${center}px`;
+    };
+
+    positionExploreButton();
+    window.addEventListener("resize", positionExploreButton);
+
+    const banner = document.querySelector(".banner");
+    const updateExploreVisibility = () => {
+      const bannerFinished =
+        !banner || banner.getBoundingClientRect().bottom <= 0;
+      const detailRect = detail.getBoundingClientRect();
+      const detailVisible = detailRect.top < window.innerHeight && detailRect.bottom > 0;
+
+      if (!bannerFinished || detailVisible) {
+        hideExploreButton();
+      } else {
+        exploreButton.classList.remove("is-hiding");
+        exploreButton.classList.add("is-visible");
+      }
+    };
+
+    const observer = new IntersectionObserver(updateExploreVisibility, {
+      threshold: 0.1
+    });
+
+    observer.observe(detail);
+    if (banner) observer.observe(banner);
+    window.addEventListener("scroll", updateExploreVisibility, { passive: true });
+    updateExploreVisibility();
+    exploreButton.addEventListener("click", () => {
+      const target = detail;
+      const start = window.pageYOffset;
+      const targetTop = target.getBoundingClientRect().top + start - 109;
+      if (window.siteLenis) {
+        window.siteLenis.scrollTo(targetTop, { duration: 1.2 });
+      } else {
+        window.scrollTo({ top: targetTop, behavior: "smooth" });
+      }
+      hideExploreButton();
+    });
+  }
 }

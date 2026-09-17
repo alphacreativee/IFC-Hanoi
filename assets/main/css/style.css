@@ -3595,10 +3595,15 @@ a.aloading::after {
   line-height: 1;
   text-align: center;
   cursor: pointer;
-  transition: border-color 0.35s ease;
+  transition: border-color 0.35s ease, background-color 0.35s ease;
 }
-.ourTenant__tenant-card:hover, .ourTenant__tenant-card.active {
-  border-color: var(--color-third);
+.ourTenant__tenant-card:hover {
+  border-color: #c75b23;
+  background-color: rgba(199, 91, 35, 0.1);
+}
+.ourTenant__tenant-card.active {
+  border-color: #c75b23;
+  background-color: transparent;
 }
 .ourTenant__tenant-logo {
   display: inline-flex;
@@ -3644,6 +3649,54 @@ a.aloading::after {
   position: relative;
   min-height: 490px;
   margin-bottom: 56px;
+}
+.ourTenant__scroll-explore {
+  position: fixed;
+  left: 75%;
+  bottom: 24px;
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  border: 1px solid #ebd0a2;
+  border-radius: 24px;
+  background: #f6e7ce;
+  color: var(--color-primary);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 12px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.ourTenant__scroll-explore.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  animation: tenantExploreBounce 1.4s ease-in-out infinite;
+}
+.ourTenant__scroll-explore.is-hiding {
+  animation: none;
+  transform: translate(-50%, 12px);
+}
+.ourTenant__scroll-explore-icon {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+.ourTenant__scroll-explore-icon svg {
+  display: block;
+  width: 12px;
+  height: 14px;
+}
+.ourTenant__scroll-explore-icon svg path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.2;
+}
+.ourTenant__scroll-explore:hover .ourTenant__scroll-explore-icon {
+  transform: translateX(-5px);
 }
 .ourTenant__plan-image {
   display: block;
@@ -3822,6 +3875,14 @@ a.aloading::after {
     transform: translateY(0);
   }
 }
+@keyframes tenantExploreBounce {
+  0%, 100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -7px);
+  }
+}
 @media (max-width: 991px) {
   .ourTenant {
     padding: 64px 16px 72px;
@@ -3853,6 +3914,10 @@ a.aloading::after {
   }
 }
 @media (max-width: 767px) {
+  .ourTenant__scroll-explore {
+    left: 50%;
+    bottom: 16px;
+  }
   .ourTenant__floor-select {
     display: block;
   }
