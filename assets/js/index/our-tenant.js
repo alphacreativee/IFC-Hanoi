@@ -16,7 +16,13 @@ if (root) {
     const next = detail.querySelector(".ourTenant__media-next");
     const slides = slider?.querySelectorAll(".swiper-slide");
 
-    if (!slider || !previous || !next || slides.length < 2 || sliders.has(detail)) {
+    if (
+      !slider ||
+      !previous ||
+      !next ||
+      slides.length < 2 ||
+      sliders.has(detail)
+    ) {
       return;
     }
 
@@ -101,18 +107,39 @@ if (root) {
     }
   }
 
+  let interactionLocked = false;
+  let unlockTimer = null;
+
+  function runTenantInteraction(callback) {
+    if (interactionLocked) return;
+
+    interactionLocked = true;
+    root.classList.add("is-switching");
+    callback();
+
+    window.clearTimeout(unlockTimer);
+    unlockTimer = window.setTimeout(() => {
+      interactionLocked = false;
+      root.classList.remove("is-switching");
+    }, 550);
+  }
+
   floorTabs.forEach((tab) => {
-    tab.addEventListener("click", () => showFloor(tab.dataset.floor));
+    tab.addEventListener("click", () => {
+      runTenantInteraction(() => showFloor(tab.dataset.floor));
+    });
   });
 
   floorSelect?.querySelectorAll("[data-floor-option]").forEach((option) => {
     option.addEventListener("click", () => {
-      showFloor(option.dataset.floorOption);
+      runTenantInteraction(() => showFloor(option.dataset.floorOption));
     });
   });
 
   tenantCards.forEach((card) => {
-    card.addEventListener("click", () => showTenant(card.dataset.tenant));
+    card.addEventListener("click", () => {
+      runTenantInteraction(() => showTenant(card.dataset.tenant));
+    });
   });
 
   const initialFloor =
@@ -137,21 +164,49 @@ if (root) {
       const isMobile = window.innerWidth <= 767;
       const center = isMobile
         ? window.innerWidth / 2
-        : rightColumn.getBoundingClientRect().left + rightColumn.getBoundingClientRect().width / 2;
+        : rightColumn.getBoundingClientRect().left +
+          rightColumn.getBoundingClientRect().width / 2;
       exploreButton.style.left = `${center}px`;
     };
 
     positionExploreButton();
     window.addEventListener("resize", positionExploreButton);
 
-    const banner = document.querySelector(".banner");
+    const plan = root.querySelector(".ourTenant__plan");
+    let exploreDismissed = false;
     const updateExploreVisibility = () => {
-      const bannerFinished =
-        !banner || banner.getBoundingClientRect().bottom <= 0;
-      const detailRect = detail.getBoundingClientRect();
-      const detailVisible = detailRect.top < window.innerHeight && detailRect.bottom > 0;
+      if (exploreDismissed) {
+        hideExploreButton();
+        return;
+      }
 
-      if (!bannerFinished || detailVisible) {
+      const detailRect = detail.getBoundingClientRect();
+      const detailVisible =
+        detailRect.top < window.innerHeight && detailRect.bottom > 0;
+      const isMobile = window.innerWidth <= 767;
+
+      if (isMobile && plan) {
+        const planRect = plan.getBoundingClientRect();
+        const planEnteredOneThird =
+          planRect.top <= window.innerHeight - planRect.height / 3 &&
+          planRect.bottom > 0;
+
+        if (planEnteredOneThird && !detailVisible) {
+          exploreButton.classList.remove("is-hiding");
+          exploreButton.classList.add("is-visible");
+        } else {
+          hideExploreButton();
+        }
+        return;
+      }
+
+      const planRect = plan?.getBoundingClientRect();
+      const planHalfVisible =
+        planRect &&
+        planRect.top <= window.innerHeight - planRect.height / 2 &&
+        planRect.bottom > 0;
+
+      if (!planHalfVisible || detailVisible) {
         hideExploreButton();
       } else {
         exploreButton.classList.remove("is-hiding");
@@ -164,10 +219,13 @@ if (root) {
     });
 
     observer.observe(detail);
-    if (banner) observer.observe(banner);
-    window.addEventListener("scroll", updateExploreVisibility, { passive: true });
+    if (plan) observer.observe(plan);
+    window.addEventListener("scroll", updateExploreVisibility, {
+      passive: true
+    });
     updateExploreVisibility();
     exploreButton.addEventListener("click", () => {
+      exploreDismissed = true;
       const target = detail;
       const start = window.pageYOffset;
       const targetTop = target.getBoundingClientRect().top + start - 109;

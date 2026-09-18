@@ -3446,6 +3446,11 @@ a.aloading::after {
   background: var(--color-white);
   color: var(--color-primary);
 }
+.ourTenant.is-switching [data-tenant],
+.ourTenant.is-switching [data-floor-tab],
+.ourTenant.is-switching [data-floor-option] {
+  pointer-events: none;
+}
 .ourTenant__inner {
   width: 100%;
   max-width: 1440px;
@@ -3564,10 +3569,19 @@ a.aloading::after {
   transform-origin: bottom left;
 }
 .ourTenant__overview {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(300px, 424px) minmax(0, 1fr);
   align-items: start;
   gap: 44px;
+}
+.ourTenant.is-switching .ourTenant__overview::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  background: rgba(255, 255, 255, 0.3);
+  pointer-events: all;
 }
 .ourTenant__tenant-list {
   display: grid;
@@ -3917,6 +3931,10 @@ a.aloading::after {
   .ourTenant__scroll-explore {
     left: 50%;
     bottom: 16px;
+    width: 100%;
+    max-width: 200px;
+    justify-content: center;
+    font-size: 12px;
   }
   .ourTenant__floor-select {
     display: block;

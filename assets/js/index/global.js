@@ -1087,21 +1087,6 @@ export function leasingContactForm() {
       return isValid;
     };
 
-    const downloadBrochure = () => {
-      const brochureUrl =
-        currentForm.attr("data-brochure-url") ||
-        "./assets/images/del/IFC_Hanoi_Brochure.pdf";
-      const fileName = brochureUrl.split("/").pop() || "IFC_Hanoi_Brochure.pdf";
-      const link = document.createElement("a");
-
-      link.href = brochureUrl;
-      link.download = fileName;
-      link.style.display = "none";
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-    };
-
     currentForm.on(
       "input change",
       ".form-item.required input, .form-item.required textarea, .form-item.required select",
@@ -1141,13 +1126,18 @@ export function leasingContactForm() {
           },
           success(response) {
             if (response.success) {
-              downloadBrochure();
+              const brochureUrl =
+                currentForm.attr("data-brochure-url") ||
+                "./assets/images/del/IFC_Hanoi_Brochure.pdf";
+
               currentForm[0].reset();
               currentForm.find(".form-item").removeClass("error");
               currentForm
                 .closest("[data-brochure-popup]")
                 .removeClass("active")
                 .attr("aria-hidden", "true");
+
+              window.open(brochureUrl, "_blank", "noopener,noreferrer");
             }
           },
           complete() {
