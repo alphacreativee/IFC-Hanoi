@@ -116,6 +116,17 @@
       height: auto;
     }
   }
+  .slider-content:not(.is-ready) .retail-btn {
+    opacity: 0;
+  }
+  &-btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 48px;
+    @media (max-width: 991px) {
+      margin-top: 24px;
+    }
+  }
   &-img {
     width: 100%;
     height: 100%;

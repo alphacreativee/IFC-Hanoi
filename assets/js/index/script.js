@@ -21,6 +21,7 @@ import {
   facilitiesSection,
   animationFadeListAuto,
   brochurePopup,
+  sliderAwards,
 } from "../../main/js/global.min.js?ver=1.0.28";
 const $ = jQuery;
 
@@ -121,6 +122,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initSwiper();
   revealClipImage();
   facilitiesSection();
+  sliderAwards();
   const isMobile = window.innerWidth <= 991;
   if (isMobile) {
     setTimeout(() => {

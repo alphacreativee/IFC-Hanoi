@@ -1,0 +1,50 @@
+.awards {
+  position: relative;
+  &-inner {
+    margin-bottom: 60px;
+    position: relative;
+  }
+  &-name {
+    font-size: 18px;
+    font-family: var(--font-heading);
+    color: var(--color-primary);
+    text-transform: uppercase;
+    text-align: center;
+  }
+  .swiper-awards {
+    padding: 0 60px;
+    &.is-static {
+      .swiper-wrapper {
+        justify-content: center;
+        gap: 40px;
+      }
+      .swiper-slide {
+        width: 247px;
+      }
+    }
+  }
+  .awards-button {
+    width: 44px;
+    height: 44px;
+    background-color: rgba(0, 0, 0, 0.2);
+    top: 50%;
+    margin-top: 0;
+    &::after {
+      content: unset;
+    }
+    svg {
+      width: auto;
+      height: auto;
+    }
+  }
+  .awards-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .awards-image {
+    width: 247px;
+    aspect-ratio: 1;
+  }
+}

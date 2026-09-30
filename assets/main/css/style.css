@@ -1696,8 +1696,8 @@ a.aloading::after {
   left: 60px;
   z-index: 2;
   max-width: 400px;
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 16px;
+  background-color: rgba(0, 0, 0, 0.37);
+  padding: 40px;
 }
 .banner-content .title {
   margin-bottom: 10px;
@@ -2414,6 +2414,19 @@ a.aloading::after {
 }
 .retail .slider-retail .swiper-slide {
   height: auto;
+}
+.retail .slider-content:not(.is-ready) .retail-btn {
+  opacity: 0;
+}
+.retail-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+}
+@media (max-width: 991px) {
+  .retail-btn {
+    margin-top: 24px;
+  }
 }
 .retail-img {
   width: 100%;
@@ -5302,4 +5315,52 @@ a.aloading::after {
   to {
     fill: #0a3754;
   }
+}
+.awards {
+  position: relative;
+}
+.awards-inner {
+  margin-bottom: 60px;
+  position: relative;
+}
+.awards-name {
+  font-size: 18px;
+  font-family: var(--font-heading);
+  color: var(--color-primary);
+  text-transform: uppercase;
+  text-align: center;
+}
+.awards .swiper-awards {
+  padding: 0 60px;
+}
+.awards .swiper-awards.is-static .swiper-wrapper {
+  justify-content: center;
+  gap: 40px;
+}
+.awards .swiper-awards.is-static .swiper-slide {
+  width: 247px;
+}
+.awards .awards-button {
+  width: 44px;
+  height: 44px;
+  background-color: rgba(0, 0, 0, 0.2);
+  top: 50%;
+  margin-top: 0;
+}
+.awards .awards-button::after {
+  content: unset;
+}
+.awards .awards-button svg {
+  width: auto;
+  height: auto;
+}
+.awards .awards-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.awards .awards-image {
+  width: 247px;
+  aspect-ratio: 1;
 }
