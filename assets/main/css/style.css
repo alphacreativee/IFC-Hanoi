@@ -1096,6 +1096,10 @@ a.aloading::after {
   opacity: 0;
 }
 
+[el-fade-in-auto] {
+  opacity: 0;
+}
+
 .lightpick {
   --color-stroke: #ccc;
   --color-bg: #fff;
@@ -5888,7 +5892,7 @@ a.aloading::after {
   width: 44px;
   height: 44px;
   background-color: rgba(0, 0, 0, 0.2);
-  top: 50%;
+  top: calc(50% - 22px);
   margin-top: 0;
 }
 .awards .awards-button::after {
