@@ -1417,16 +1417,20 @@ export function revealClipImage() {
 
   const isMobile = window.matchMedia("(max-width: 991px)").matches;
 
-  // Không resize/refresh khi thanh địa chỉ mobile co giãn
-  ScrollTrigger.config({ ignoreMobileResize: true });
-
-  sections.forEach((section) => {
+  /* =========================================================
+   * DESKTOP: giữ nguyên code gốc (clip-path)
+   * ======================================================= */
+  function initDesktop(section) {
     const imageItems = Array.from(
       section.querySelectorAll(".design-image-item"),
     );
     const bgItems = Array.from(section.querySelectorAll(".design-bg-item"));
 
     if (imageItems.length < 2 || bgItems.length < 2) return;
+
+    const vh = window.visualViewport
+      ? window.visualViewport.height
+      : window.innerHeight;
 
     imageItems.forEach((item, i) => {
       item.style.zIndex = imageItems.length - i;
@@ -1438,29 +1442,42 @@ export function revealClipImage() {
     gsap.set(imageItems.slice(1), { clipPath: "inset(100% 0 0 0)" });
     gsap.set(bgItems.slice(1), { clipPath: "inset(100% 0 0 0)" });
 
+    // Chỉ bật will-change cho item đang active
+    const setActiveWillChange = (idx) => {
+      [...imageItems, ...bgItems].forEach((item) => {
+        item.style.willChange = "auto";
+      });
+      [imageItems[idx - 1], imageItems[idx], bgItems[idx - 1], bgItems[idx]]
+        .filter(Boolean)
+        .forEach((item) => {
+          item.style.willChange = "clip-path";
+        });
+    };
+
     const steps = imageItems.length;
-    const scrollMultiplier = isMobile ? 1 : 1.5;
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
         start: "top top",
-        end: () => `+=${window.innerHeight * (steps - 1) * scrollMultiplier}`,
+        end: `+=${vh * (steps - 1) * 1.5}`,
         pin: true,
-        // Desktop giữ transform, mobile để mặc định (fixed)
-        ...(isMobile ? {} : { pinType: "transform" }),
-        scrub: isMobile ? true : 1,
-        invalidateOnRefresh: true,
+        pinType: "transform",
+        scrub: 1,
+        anticipatePin: 1,
+        invalidateOnRefresh: false,
+        fastScrollEnd: true,
         preventOverlaps: true,
       },
     });
 
     for (let i = 1; i < steps; i++) {
-      tl.to(
-        imageItems[i - 1],
-        { clipPath: "inset(0 0 100% 0)", duration: 1, ease: "none" },
-        i,
-      )
+      tl.call(() => setActiveWillChange(i), null, i - 0.01)
+        .to(
+          imageItems[i - 1],
+          { clipPath: "inset(0 0 100% 0)", duration: 1, ease: "none" },
+          i,
+        )
         .to(
           imageItems[i],
           { clipPath: "inset(0% 0 0 0)", duration: 1, ease: "none" },
@@ -1477,6 +1494,91 @@ export function revealClipImage() {
           i,
         );
     }
+
+    tl.eventCallback("onComplete", () => {
+      [...imageItems, ...bgItems].forEach((item) => {
+        item.style.willChange = "auto";
+      });
+    });
+  }
+
+  /* =========================================================
+   * MOBILE: reveal bằng transform (GPU), không dùng clip-path
+   * ======================================================= */
+  function initMobile(section) {
+    const imageEls = Array.from(section.querySelectorAll(".design-image-item"));
+    const bgEls = Array.from(section.querySelectorAll(".design-bg-item"));
+    if (imageEls.length < 2 || bgEls.length < 2) return;
+
+    // Bọc từng item vào wrapper overflow:hidden
+    function wrapItems(items) {
+      return items.map((item, i) => {
+        const wrap = document.createElement("div");
+        wrap.style.cssText =
+          "position:absolute;inset:0;overflow:hidden;will-change:transform;";
+        wrap.style.zIndex = items.length - i;
+        item.parentNode.insertBefore(wrap, item);
+        wrap.appendChild(item);
+        item.style.willChange = "transform";
+        return { wrap, inner: item };
+      });
+    }
+
+    const images = wrapItems(imageEls);
+    const bgs = wrapItems(bgEls);
+
+    // Item từ thứ 2 trở đi nằm bên dưới, ẩn
+    [images, bgs].forEach((group) => {
+      group.forEach(({ wrap, inner }, i) => {
+        if (i > 0) {
+          gsap.set(wrap, { yPercent: 100 });
+          gsap.set(inner, { yPercent: -100 });
+        }
+      });
+    });
+
+    const steps = images.length;
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: () => `+=${window.innerHeight * (steps - 1)}`,
+        pin: true,
+        scrub: true,
+        invalidateOnRefresh: true,
+        preventOverlaps: true,
+      },
+    });
+
+    for (let i = 1; i < steps; i++) {
+      [images, bgs].forEach((group) => {
+        const prev = group[i - 1];
+        const cur = group[i];
+
+        tl.to(prev.wrap, { yPercent: -100, duration: 1, ease: "none" }, i)
+          .to(prev.inner, { yPercent: 100, duration: 1, ease: "none" }, i)
+          .to(cur.wrap, { yPercent: 0, duration: 1, ease: "none" }, i)
+          .to(cur.inner, { yPercent: 0, duration: 1, ease: "none" }, i);
+      });
+    }
+  }
+
+  if (isMobile) {
+    ScrollTrigger.config({ ignoreMobileResize: true });
+  }
+
+  sections.forEach((section) => {
+    if (section.dataset.scriptInitialized) return;
+    section.dataset.scriptInitialized = "true";
+
+    // Class thay cho :first-child / :last-child (mobile bị bọc wrapper nên selector cũ khớp sai)
+    const bgEls = section.querySelectorAll(".design-bg-item");
+    const imageEls = section.querySelectorAll(".design-image-item");
+    bgEls[0]?.classList.add("is-first");
+    imageEls[imageEls.length - 1]?.classList.add("is-last");
+
+    isMobile ? initMobile(section) : initDesktop(section);
   });
 }
 export function facilitiesSection() {
