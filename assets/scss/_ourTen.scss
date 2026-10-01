@@ -1,0 +1,60 @@
+.our-tenants {
+  &-heading {
+    margin-bottom: 60px;
+    h3 {
+      margin-bottom: 16px;
+    }
+    .description {
+      max-width: 50%;
+      text-align: center;
+      @media (max-width: 991px) {
+        max-width: 100%;
+      }
+    }
+  }
+  .marquee {
+    &-wrap {
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 16px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    &-scroll {
+      display: flex;
+      position: relative;
+      will-change: transform;
+    }
+    &-list {
+      will-change: transform;
+      &-wrap {
+        flex: none;
+      }
+    }
+    &-item {
+      margin: 0 16px;
+      flex: none;
+      max-width: 150px;
+      @media (max-width: 991px) {
+        margin: 0 16px;
+        max-width: 140px;
+      }
+      .logo-icon {
+        width: 100%;
+        height: 112px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          width: auto;
+          height: auto;
+          display: block;
+        }
+      }
+    }
+  }
+}

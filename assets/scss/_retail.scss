@@ -35,6 +35,9 @@
         display: block;
         position: relative;
         width: 32px;
+        @media (max-width: 991px) {
+          width: 24px;
+        }
         &::before {
           content: "";
           position: absolute;
@@ -68,12 +71,7 @@
     visibility: hidden;
     transition: all 0.2s ease;
     @media (max-width: 991px) {
-      bottom: 40px;
-      right: 40px;
-      left: 40px;
-      top: auto;
-      transform: unset;
-      width: calc(100% - 80px);
+      width: calc(100% - 125px);
     }
     &.is-ready {
       opacity: 1;

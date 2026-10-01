@@ -23,7 +23,8 @@ import {
   brochurePopup,
   sliderAwards,
   sliderStones,
-} from "../../main/js/global.min.js?ver=1.0.28";
+  marqueeSection,
+} from "../../main/js/global.min.js?ver=1.0.61";
 const $ = jQuery;
 
 const lenis = new Lenis({
@@ -113,7 +114,7 @@ function init() {
   animationIntro();
   brochurePopup();
   leasingContactForm();
-  sliderStones();
+  marqueeSection();
   // getDateLightPick();
 }
 
@@ -125,6 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
   revealClipImage();
   facilitiesSection();
   sliderAwards();
+  sliderStones();
   const isMobile = window.innerWidth <= 991;
   if (isMobile) {
     setTimeout(() => {
