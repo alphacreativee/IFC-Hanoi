@@ -1724,7 +1724,7 @@ export function sliderStones() {
 
     new Swiper(sliderEl, {
       slidesPerView: "auto",
-      spaceBetween: 60,
+      spaceBetween: 32,
       speed: 800,
       grabCursor: true,
       navigation: {
@@ -1734,6 +1734,11 @@ export function sliderStones() {
       pagination: {
         el: wrapper.querySelector(".swiper-pagination"),
         clickable: true,
+      },
+      breakpoints: {
+        991: {
+          spaceBetween: 60,
+        },
       },
     });
   });

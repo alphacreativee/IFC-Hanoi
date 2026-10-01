@@ -5936,18 +5936,28 @@ a.aloading::after {
   align-items: flex-start;
   gap: 30px;
 }
+@media (max-width: 991px) {
+  .stones-list {
+    gap: 12px;
+  }
+}
 .stones-item {
   flex: 0 0 400px;
   width: 400px;
 }
 @media (max-width: 991px) {
   .stones-item {
-    flex: none;
-    width: 100%;
+    flex: 0 0 260px;
+    width: 260px;
   }
 }
 .stones .swiper-stones {
   padding: 0 60px;
+}
+@media (max-width: 991px) {
+  .stones .swiper-stones {
+    padding: 0 16px;
+  }
 }
 .stones .swiper-stones .swiper-slide {
   width: max-content;
@@ -5961,12 +5971,25 @@ a.aloading::after {
   margin-bottom: 40px;
   padding-left: 16px;
 }
+@media (max-width: 991px) {
+  .stones-year {
+    font-size: 32px;
+    line-height: 30px;
+    margin-bottom: 24px;
+  }
+}
 .stones-name {
   text-transform: uppercase;
   color: var(--color-primary);
   font-family: var(--font-heading);
   font-size: 36px;
   margin-bottom: 24px;
+}
+@media (max-width: 991px) {
+  .stones-name {
+    font-size: 24px;
+    line-height: 1.1;
+  }
 }
 .stones-desc {
   font-size: 14px;
@@ -5983,6 +6006,11 @@ a.aloading::after {
 .stones-image {
   width: 100%;
   aspect-ratio: 350/200;
+}
+@media (max-width: 991px) {
+  .stones-image {
+    aspect-ratio: 345/200;
+  }
 }
 .stones-image img {
   width: 100%;
