@@ -22,6 +22,7 @@ import {
   animationFadeListAuto,
   brochurePopup,
   sliderAwards,
+  sliderStones,
 } from "../../main/js/global.min.js?ver=1.0.28";
 const $ = jQuery;
 
@@ -112,7 +113,7 @@ function init() {
   animationIntro();
   brochurePopup();
   leasingContactForm();
-
+  sliderStones();
   // getDateLightPick();
 }
 

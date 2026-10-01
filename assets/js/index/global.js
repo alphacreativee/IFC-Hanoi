@@ -1707,3 +1707,34 @@ export function sliderAwards() {
     desktopMQ.addEventListener("change", update);
   });
 }
+export function sliderStones() {
+  const sliders = document.querySelectorAll(".swiper-stones");
+  if (!sliders.length) return;
+
+  sliders.forEach((sliderEl) => {
+    if (sliderEl.dataset.scriptInitialized) return;
+    sliderEl.dataset.scriptInitialized = "true";
+
+    const wrapper =
+      sliderEl.closest(".stones-main") ||
+      sliderEl.closest("section") ||
+      sliderEl.parentElement;
+
+    const slideCount = sliderEl.querySelectorAll(".swiper-slide").length;
+
+    new Swiper(sliderEl, {
+      slidesPerView: "auto",
+      spaceBetween: 60,
+      speed: 800,
+      grabCursor: true,
+      navigation: {
+        nextEl: wrapper.querySelector(".swiper-button-next"),
+        prevEl: wrapper.querySelector(".swiper-button-prev"),
+      },
+      pagination: {
+        el: wrapper.querySelector(".swiper-pagination"),
+        clickable: true,
+      },
+    });
+  });
+}
