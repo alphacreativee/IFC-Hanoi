@@ -1311,6 +1311,104 @@ export function brochurePopup() {
 //     }
 //   });
 // }
+// export function revealClipImage() {
+//   gsap.registerPlugin(ScrollTrigger);
+
+//   const sections = document.querySelectorAll(".clip-image-reveal");
+//   if (!sections.length) return;
+
+//   const isMobile = window.matchMedia("(max-width: 991px)").matches;
+
+//   // Fix giật khi pin scroll trên iOS (rubber-band scroll xung đột với pin)
+//   if (isMobile) {
+//     ScrollTrigger.normalizeScroll(true);
+//   }
+
+//   const vh = window.visualViewport
+//     ? window.visualViewport.height
+//     : window.innerHeight;
+
+//   sections.forEach((section) => {
+//     const imageItems = Array.from(
+//       section.querySelectorAll(".design-image-item"),
+//     );
+//     const bgItems = Array.from(section.querySelectorAll(".design-bg-item"));
+
+//     if (imageItems.length < 2 || bgItems.length < 2) return;
+
+//     imageItems.forEach((item, i) => {
+//       item.style.zIndex = imageItems.length - i;
+//     });
+//     bgItems.forEach((item, i) => {
+//       item.style.zIndex = bgItems.length - i;
+//     });
+
+//     gsap.set(imageItems.slice(1), { clipPath: "inset(100% 0 0 0)" });
+//     gsap.set(bgItems.slice(1), { clipPath: "inset(100% 0 0 0)" });
+
+//     // Chỉ bật will-change cho item đang active (giảm số layer GPU phải giữ)
+//     const setActiveWillChange = (idx) => {
+//       [...imageItems, ...bgItems].forEach((item) => {
+//         item.style.willChange = "auto";
+//       });
+//       [imageItems[idx - 1], imageItems[idx], bgItems[idx - 1], bgItems[idx]]
+//         .filter(Boolean)
+//         .forEach((item) => {
+//           item.style.willChange = "clip-path";
+//         });
+//     };
+
+//     const steps = imageItems.length;
+//     const scrollMultiplier = isMobile ? 1 : 1.5;
+//     const scrubValue = isMobile ? 0.8 : 1;
+
+//     const tl = gsap.timeline({
+//       scrollTrigger: {
+//         trigger: section,
+//         start: "top top",
+//         end: `+=${vh * (steps - 1) * scrollMultiplier}`,
+//         pin: true,
+//         pinType: isMobile ? "fixed" : "transform", // fixed ổn định hơn trên 1 số iOS/Safari khi pin bị giật
+//         scrub: scrubValue,
+//         anticipatePin: 1,
+//         invalidateOnRefresh: false,
+//         fastScrollEnd: true,
+//         preventOverlaps: true,
+//         // markers: true,
+//       },
+//     });
+
+//     for (let i = 1; i < steps; i++) {
+//       tl.call(() => setActiveWillChange(i), null, i - 0.01)
+//         .to(
+//           imageItems[i - 1],
+//           { clipPath: "inset(0 0 100% 0)", duration: 1, ease: "none" },
+//           i,
+//         )
+//         .to(
+//           imageItems[i],
+//           { clipPath: "inset(0% 0 0 0)", duration: 1, ease: "none" },
+//           i,
+//         )
+//         .to(
+//           bgItems[i - 1],
+//           { clipPath: "inset(0 0 100% 0)", duration: 1, ease: "none" },
+//           i,
+//         )
+//         .to(
+//           bgItems[i],
+//           { clipPath: "inset(0% 0 0 0)", duration: 1, ease: "none" },
+//           i,
+//         );
+//     }
+
+//     tl.eventCallback("onComplete", () => {
+//       [...imageItems, ...bgItems].forEach((item) => {
+//         item.style.willChange = "auto";
+//       });
+//     });
+//   });
+// }
 export function revealClipImage() {
   gsap.registerPlugin(ScrollTrigger);
 
@@ -1319,14 +1417,8 @@ export function revealClipImage() {
 
   const isMobile = window.matchMedia("(max-width: 991px)").matches;
 
-  // Fix giật khi pin scroll trên iOS (rubber-band scroll xung đột với pin)
-  if (isMobile) {
-    ScrollTrigger.normalizeScroll(true);
-  }
-
-  const vh = window.visualViewport
-    ? window.visualViewport.height
-    : window.innerHeight;
+  // Không resize/refresh khi thanh địa chỉ mobile co giãn
+  ScrollTrigger.config({ ignoreMobileResize: true });
 
   sections.forEach((section) => {
     const imageItems = Array.from(
@@ -1346,45 +1438,29 @@ export function revealClipImage() {
     gsap.set(imageItems.slice(1), { clipPath: "inset(100% 0 0 0)" });
     gsap.set(bgItems.slice(1), { clipPath: "inset(100% 0 0 0)" });
 
-    // Chỉ bật will-change cho item đang active (giảm số layer GPU phải giữ)
-    const setActiveWillChange = (idx) => {
-      [...imageItems, ...bgItems].forEach((item) => {
-        item.style.willChange = "auto";
-      });
-      [imageItems[idx - 1], imageItems[idx], bgItems[idx - 1], bgItems[idx]]
-        .filter(Boolean)
-        .forEach((item) => {
-          item.style.willChange = "clip-path";
-        });
-    };
-
     const steps = imageItems.length;
     const scrollMultiplier = isMobile ? 1 : 1.5;
-    const scrubValue = isMobile ? 0.8 : 1;
 
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
         start: "top top",
-        end: `+=${vh * (steps - 1) * scrollMultiplier}`,
+        end: () => `+=${window.innerHeight * (steps - 1) * scrollMultiplier}`,
         pin: true,
-        pinType: isMobile ? "fixed" : "transform", // fixed ổn định hơn trên 1 số iOS/Safari khi pin bị giật
-        scrub: scrubValue,
-        anticipatePin: 1,
-        invalidateOnRefresh: false,
-        fastScrollEnd: true,
+        // Desktop giữ transform, mobile để mặc định (fixed)
+        ...(isMobile ? {} : { pinType: "transform" }),
+        scrub: isMobile ? true : 1,
+        invalidateOnRefresh: true,
         preventOverlaps: true,
-        // markers: true,
       },
     });
 
     for (let i = 1; i < steps; i++) {
-      tl.call(() => setActiveWillChange(i), null, i - 0.01)
-        .to(
-          imageItems[i - 1],
-          { clipPath: "inset(0 0 100% 0)", duration: 1, ease: "none" },
-          i,
-        )
+      tl.to(
+        imageItems[i - 1],
+        { clipPath: "inset(0 0 100% 0)", duration: 1, ease: "none" },
+        i,
+      )
         .to(
           imageItems[i],
           { clipPath: "inset(0% 0 0 0)", duration: 1, ease: "none" },
@@ -1401,15 +1477,8 @@ export function revealClipImage() {
           i,
         );
     }
-
-    tl.eventCallback("onComplete", () => {
-      [...imageItems, ...bgItems].forEach((item) => {
-        item.style.willChange = "auto";
-      });
-    });
   });
 }
-
 export function facilitiesSection() {
   const sections = document.querySelectorAll(".facilities");
   if (!sections.length) return;
