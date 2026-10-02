@@ -1748,7 +1748,7 @@ export function marqueeSection() {
     if (element.dataset.scriptInitialized) return;
     element.dataset.scriptInitialized = "true";
 
-    document
+    element
       .querySelectorAll("[data-marquee-scroll-direction-target]")
       .forEach((marquee) => {
         // Query marquee elements
