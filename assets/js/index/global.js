@@ -1866,3 +1866,112 @@ export function marqueeSection() {
       });
   });
 }
+export function sliderRow() {
+  gsap.registerPlugin(SplitText, ScrollTrigger);
+
+  const sections = document.querySelectorAll(".slider-row");
+  if (!sections.length) return;
+
+  sections.forEach((section) => {
+    if (section.dataset.scriptInitialized) return;
+    section.dataset.scriptInitialized = "true";
+
+    const sliderEl = section.querySelector(".slider-row-row");
+    const contentBox = section.querySelector(".content-change");
+    if (!sliderEl || !contentBox) return;
+
+    const slideCount = sliderEl.querySelectorAll(".swiper-slide").length;
+    const nextEl = section.querySelector(".swiper-button-next");
+    const prevEl = section.querySelector(".swiper-button-prev");
+
+    // Ít hơn 2 slide thì ẩn nút điều hướng
+    if (slideCount < 2) {
+      section
+        .querySelector(".slider-pagination")
+        ?.style.setProperty("display", "none");
+    }
+
+    let currentSplits = [];
+    let hasPlayedIntro = false;
+
+    // ----- Dán content-basic của slide active sang content-change -----
+    function updateContent(activeIndex, shouldAnimate = true) {
+      const activeSlide =
+        sliderEl.querySelectorAll(".swiper-slide")[activeIndex];
+      const source = activeSlide?.querySelector(".content-basic");
+      if (!source) return;
+
+      // Dọn hiệu ứng và SplitText cũ
+      currentSplits.forEach((s) => s.revert());
+      currentSplits = [];
+      gsap.killTweensOf(contentBox.querySelectorAll(".line"));
+      contentBox.innerHTML = "";
+
+      // Clone phần tử con (không clone chính .content-basic để tránh dính CSS ẩn)
+      Array.from(source.children).forEach((child) => {
+        contentBox.appendChild(child.cloneNode(true));
+      });
+
+      if (!shouldAnimate) return;
+
+      // Animate từng khối text
+      const targets = contentBox.querySelectorAll(
+        ".text, p, h1, h2, h3, h4, h5, h6",
+      );
+      const list = targets.length ? Array.from(targets) : [contentBox];
+
+      list.forEach((el) => {
+        SplitText.create(el, {
+          type: "lines",
+          mask: "lines",
+          linesClass: "line",
+          autoSplit: true,
+          onSplit: (self) => {
+            currentSplits.push(self);
+            return gsap.fromTo(
+              self.lines,
+              { y: "100%" },
+              {
+                y: "0%",
+                duration: 0.8,
+                ease: "power3.inOut",
+                stagger: 0.05,
+              },
+            );
+          },
+        });
+      });
+    }
+
+    // ----- Init Swiper -----
+    const swiper = new Swiper(sliderEl, {
+      slidesPerView: 1,
+      spaceBetween: 16,
+      speed: 800,
+      grabCursor: true,
+      navigation: { nextEl, prevEl },
+      on: {
+        slideChange: function () {
+          // Chỉ animate khi intro đã chạy (tránh animate khi chưa cuộn tới)
+          updateContent(this.activeIndex, hasPlayedIntro);
+        },
+      },
+    });
+
+    // Trạng thái ban đầu: đổ content nhưng chưa animate
+    updateContent(0, false);
+    gsap.set(contentBox, { autoAlpha: 0 });
+
+    // ----- Animate lần đầu khi cuộn tới -----
+    ScrollTrigger.create({
+      trigger: section,
+      start: "top 75%",
+      once: true,
+      onEnter: () => {
+        hasPlayedIntro = true;
+        gsap.set(contentBox, { autoAlpha: 1 });
+        updateContent(swiper.activeIndex, true);
+      },
+    });
+  });
+}

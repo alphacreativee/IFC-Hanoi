@@ -24,6 +24,7 @@ import {
   sliderAwards,
   sliderStones,
   marqueeSection,
+  sliderRow,
 } from "../../main/js/global.min.js?ver=1.0.65";
 const $ = jQuery;
 
@@ -127,6 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
   facilitiesSection();
   sliderAwards();
   sliderStones();
+  sliderRow();
   const isMobile = window.innerWidth <= 991;
   if (isMobile) {
     setTimeout(() => {
