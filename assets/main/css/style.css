@@ -989,12 +989,17 @@ body.no-scroll {
 }
 .global-button .icon {
   width: 18px;
-  aspect-ratio: 1;
+  height: 18px;
   transition: transform 0.3s ease;
 }
 .global-button .icon svg {
   color: var(--color-default);
   transition: color 0.3s ease;
+}
+.global-button .icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 .global-button.button-primary {
   border: 1px solid rgba(18, 55, 84, 0.5);
@@ -1821,7 +1826,6 @@ a.aloading::after {
   display: block;
   width: 16px;
   height: 16px;
-  filter: brightness(0) saturate(100%) invert(91%) sepia(12%) saturate(744%) hue-rotate(337deg) brightness(107%) contrast(93%);
 }
 .banner.short-banner .breadcrumb a,
 .banner.short-banner .breadcrumb span {
