@@ -2397,7 +2397,7 @@ a.aloading::after {
 }
 @media (max-width: 991px) {
   .retail .slider-content {
-    width: calc(100% - 125px);
+    width: calc(100% - 160px);
   }
 }
 .retail .slider-content.is-ready {

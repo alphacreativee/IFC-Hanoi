@@ -71,7 +71,7 @@
     visibility: hidden;
     transition: all 0.2s ease;
     @media (max-width: 991px) {
-      width: calc(100% - 125px);
+      width: calc(100% - 160px);
     }
     &.is-ready {
       opacity: 1;
