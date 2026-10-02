@@ -1869,24 +1869,23 @@ export function marqueeSection() {
 export function sliderRow() {
   gsap.registerPlugin(SplitText, ScrollTrigger);
 
-  const sections = document.querySelectorAll(".slider-row");
-  if (!sections.length) return;
+  const wrappers = document.querySelectorAll(".slider-row-wrapper");
+  if (!wrappers.length) return;
 
-  sections.forEach((section) => {
-    if (section.dataset.scriptInitialized) return;
-    section.dataset.scriptInitialized = "true";
+  wrappers.forEach((wrapper) => {
+    if (wrapper.dataset.scriptInitialized) return;
+    wrapper.dataset.scriptInitialized = "true";
 
-    const sliderEl = section.querySelector(".slider-row-row");
-    const contentBox = section.querySelector(".content-change");
+    const sliderEl = wrapper.querySelector(".slider-row-row");
+    const contentBox = wrapper.querySelector(".content-change");
     if (!sliderEl || !contentBox) return;
 
     const slideCount = sliderEl.querySelectorAll(".swiper-slide").length;
-    const nextEl = section.querySelector(".swiper-button-next");
-    const prevEl = section.querySelector(".swiper-button-prev");
+    const nextEl = wrapper.querySelector(".swiper-button-next");
+    const prevEl = wrapper.querySelector(".swiper-button-prev");
 
-    // Ít hơn 2 slide thì ẩn nút điều hướng
     if (slideCount < 2) {
-      section
+      wrapper
         .querySelector(".slider-pagination")
         ?.style.setProperty("display", "none");
     }
@@ -1896,31 +1895,37 @@ export function sliderRow() {
 
     // ----- Dán content-basic của slide active sang content-change -----
     function updateContent(activeIndex, shouldAnimate = true) {
-      const activeSlide =
-        sliderEl.querySelectorAll(".swiper-slide")[activeIndex];
+      const activeSlide = swiper.slides[activeIndex];
       const source = activeSlide?.querySelector(".content-basic");
       if (!source) return;
 
-      // Dọn hiệu ứng và SplitText cũ
+      // Dọn hiệu ứng và SplitText cũ của riêng slider này
       currentSplits.forEach((s) => s.revert());
       currentSplits = [];
       gsap.killTweensOf(contentBox.querySelectorAll(".line"));
       contentBox.innerHTML = "";
 
-      // Clone phần tử con (không clone chính .content-basic để tránh dính CSS ẩn)
+      // Clone phần tử con (.text hoặc ul), không clone chính .content-basic
       Array.from(source.children).forEach((child) => {
         contentBox.appendChild(child.cloneNode(true));
       });
 
       if (!shouldAnimate) return;
 
-      // Animate từng khối text
-      const targets = contentBox.querySelectorAll(
-        ".text, p, h1, h2, h3, h4, h5, h6",
+      // Các khối chữ cần animate: .text, .label (trong li), p, heading
+      const targets = Array.from(
+        contentBox.querySelectorAll(".text, .label, p, h1, h2, h3, h4, h5, h6"),
       );
-      const list = targets.length ? Array.from(targets) : [contentBox];
+      const list = targets.length ? targets : [contentBox];
 
-      list.forEach((el) => {
+      list.forEach((el, i) => {
+        // Có li thì delay theo thứ tự li, không thì delay theo thứ tự phần tử
+        const li = el.closest("li");
+        const order = li
+          ? Array.from(li.parentElement.children).indexOf(li)
+          : i;
+        const delay = order * 0.1;
+
         SplitText.create(el, {
           type: "lines",
           mask: "lines",
@@ -1936,6 +1941,7 @@ export function sliderRow() {
                 duration: 0.8,
                 ease: "power3.inOut",
                 stagger: 0.05,
+                delay,
               },
             );
           },
@@ -1952,19 +1958,18 @@ export function sliderRow() {
       navigation: { nextEl, prevEl },
       on: {
         slideChange: function () {
-          // Chỉ animate khi intro đã chạy (tránh animate khi chưa cuộn tới)
           updateContent(this.activeIndex, hasPlayedIntro);
         },
       },
     });
 
-    // Trạng thái ban đầu: đổ content nhưng chưa animate
+    // Trạng thái ban đầu: đổ content nhưng ẩn, chưa animate
     updateContent(0, false);
     gsap.set(contentBox, { autoAlpha: 0 });
 
     // ----- Animate lần đầu khi cuộn tới -----
     ScrollTrigger.create({
-      trigger: section,
+      trigger: wrapper,
       start: "top 75%",
       once: true,
       onEnter: () => {
