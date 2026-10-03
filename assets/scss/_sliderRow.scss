@@ -1,8 +1,9 @@
 .slider-row {
-  padding: 0 60px;
+  padding: 0 60px 60px;
   @media (max-width: 991px) {
     padding: 0 16px;
     margin-top: 40px;
+    padding-bottom: 40px;
   }
   &-wrapper {
     display: flex;

@@ -25,7 +25,7 @@ import {
   sliderStones,
   marqueeSection,
   sliderRow,
-} from "../../main/js/global.min.js?ver=1.0.65";
+} from "../../main/js/global.min.js?ver=1.0.67";
 const $ = jQuery;
 
 const lenis = new Lenis({
