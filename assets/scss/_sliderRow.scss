@@ -1,11 +1,26 @@
 .slider-row {
   padding: 0 60px;
+  @media (max-width: 991px) {
+    padding: 0 16px;
+    margin-top: 40px;
+  }
   &-wrapper {
     display: flex;
+    margin-bottom: 40px;
+    @media (max-width: 991px) {
+      flex-direction: column-reverse;
+      gap: 24px;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
     &.flex-md-row-reverse {
       .slider-row-content {
         padding-right: 0;
         padding-left: 55px;
+        @media (max-width: 991px) {
+          padding-left: 0;
+        }
       }
       .stones-button {
         left: 55px;
@@ -54,11 +69,19 @@
     justify-content: center;
     position: relative;
     padding-right: 55px;
+    @media (max-width: 991px) {
+      padding-right: 0;
+      max-width: 100%;
+    }
     .slider-pagination {
       display: flex;
       align-items: center;
       gap: 12px;
       margin-top: 40px;
+      @media (max-width: 991px) {
+        margin-top: 24px;
+        justify-content: center;
+      }
     }
     .stones-button {
       position: static !important;
@@ -76,14 +99,25 @@
         ul {
           li {
             display: grid;
-            grid-template-columns: minmax(140px, max-content) max-content;
+            grid-template-columns: minmax(140px, max-content) minmax(0, 1fr);
             gap: 32px;
             margin-bottom: 8px;
+            @media (max-width: 991px) {
+              grid-template-columns: minmax(120px, max-content) minmax(0, 1fr);
+              gap: 16px;
+            }
             &:last-child {
               margin-bottom: 0;
             }
             .label {
               text-transform: uppercase;
+            }
+            .text {
+              .line {
+                white-space: normal;
+                overflow-wrap: anywhere;
+                word-break: break-word;
+              }
             }
           }
         }
@@ -97,6 +131,9 @@
     }
     .title {
       margin-bottom: 40px;
+      @media (max-width: 991px) {
+        margin-bottom: 24px;
+      }
     }
     @media (max-width: 991px) {
       max-width: 100%;

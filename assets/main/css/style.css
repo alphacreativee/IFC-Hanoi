@@ -6126,12 +6126,33 @@ a.aloading::after {
 .slider-row {
   padding: 0 60px;
 }
+@media (max-width: 991px) {
+  .slider-row {
+    padding: 0 16px;
+    margin-top: 40px;
+  }
+}
 .slider-row-wrapper {
   display: flex;
+  margin-bottom: 40px;
+}
+@media (max-width: 991px) {
+  .slider-row-wrapper {
+    flex-direction: column-reverse;
+    gap: 24px;
+  }
+}
+.slider-row-wrapper:last-child {
+  margin-bottom: 0;
 }
 .slider-row-wrapper.flex-md-row-reverse .slider-row-content {
   padding-right: 0;
   padding-left: 55px;
+}
+@media (max-width: 991px) {
+  .slider-row-wrapper.flex-md-row-reverse .slider-row-content {
+    padding-left: 0;
+  }
 }
 .slider-row-wrapper.flex-md-row-reverse .stones-button {
   left: 55px;
@@ -6183,11 +6204,23 @@ a.aloading::after {
   position: relative;
   padding-right: 55px;
 }
+@media (max-width: 991px) {
+  .slider-row-content {
+    padding-right: 0;
+    max-width: 100%;
+  }
+}
 .slider-row-content .slider-pagination {
   display: flex;
   align-items: center;
   gap: 12px;
   margin-top: 40px;
+}
+@media (max-width: 991px) {
+  .slider-row-content .slider-pagination {
+    margin-top: 24px;
+    justify-content: center;
+  }
 }
 .slider-row-content .stones-button {
   position: static !important;
@@ -6204,9 +6237,15 @@ a.aloading::after {
 }
 .slider-row-content .content-change.content-ul-list ul li {
   display: grid;
-  grid-template-columns: minmax(140px, max-content) max-content;
+  grid-template-columns: minmax(140px, max-content) minmax(0, 1fr);
   gap: 32px;
   margin-bottom: 8px;
+}
+@media (max-width: 991px) {
+  .slider-row-content .content-change.content-ul-list ul li {
+    grid-template-columns: minmax(120px, max-content) minmax(0, 1fr);
+    gap: 16px;
+  }
 }
 .slider-row-content .content-change.content-ul-list ul li:last-child {
   margin-bottom: 0;
@@ -6214,8 +6253,18 @@ a.aloading::after {
 .slider-row-content .content-change.content-ul-list ul li .label {
   text-transform: uppercase;
 }
+.slider-row-content .content-change.content-ul-list ul li .text .line {
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
 .slider-row-content .title {
   margin-bottom: 40px;
+}
+@media (max-width: 991px) {
+  .slider-row-content .title {
+    margin-bottom: 24px;
+  }
 }
 @media (max-width: 991px) {
   .slider-row-content {
