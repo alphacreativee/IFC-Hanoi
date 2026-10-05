@@ -5935,7 +5935,8 @@ a.aloading::after {
   flex-direction: column;
 }
 .awards .awards-image {
-  width: 247px;
+  max-width: 247px;
+  width: 100%;
   aspect-ratio: 1;
 }
 
