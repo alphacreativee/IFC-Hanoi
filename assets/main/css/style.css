@@ -6316,6 +6316,9 @@ a.aloading::after {
   font-size: 14px;
   line-height: 1.2;
   color: var(--color-primary);
+  padding: 20px 0;
+  border-top: 1px solid #c2cfda;
+  border-bottom: 1px solid #c2cfda;
 }
 .slider-row-content .content-change.content-ul-list ul li {
   display: grid;
