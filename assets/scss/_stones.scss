@@ -2,6 +2,9 @@
   margin-bottom: 72px;
   &-heading {
     margin-bottom: 60px;
+    @media (max-width: 991px) {
+      margin-bottom: 48px;
+    }
     h3 {
       margin-bottom: 16px;
     }
@@ -48,9 +51,10 @@
   }
   &-year {
     color: var(--color-third);
-    font-size: 74px;
+    font-size: 48px;
     font-family: var(--font-heading);
     margin-bottom: 40px;
+    line-height: 1.1;
     padding-left: 16px;
     @media (max-width: 991px) {
       font-size: 32px;
@@ -59,16 +63,26 @@
     }
   }
   &-box {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   &-name {
     text-transform: uppercase;
     color: var(--color-primary);
     font-family: var(--font-heading);
     font-size: 36px;
+    line-height: 1.1;
     margin-bottom: 24px;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     @media (max-width: 991px) {
       font-size: 24px;
       line-height: 1.1;
+      min-height: 53px;
     }
   }
   &-desc {

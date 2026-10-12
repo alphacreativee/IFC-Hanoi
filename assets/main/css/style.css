@@ -5946,6 +5946,11 @@ a.aloading::after {
 .stones-heading {
   margin-bottom: 60px;
 }
+@media (max-width: 991px) {
+  .stones-heading {
+    margin-bottom: 48px;
+  }
+}
 .stones-heading h3 {
   margin-bottom: 16px;
 }
@@ -5993,9 +5998,10 @@ a.aloading::after {
 }
 .stones-year {
   color: var(--color-third);
-  font-size: 74px;
+  font-size: 48px;
   font-family: var(--font-heading);
   margin-bottom: 40px;
+  line-height: 1.1;
   padding-left: 16px;
 }
 @media (max-width: 991px) {
@@ -6005,17 +6011,29 @@ a.aloading::after {
     margin-bottom: 24px;
   }
 }
+.stones-box {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 .stones-name {
   text-transform: uppercase;
   color: var(--color-primary);
   font-family: var(--font-heading);
   font-size: 36px;
+  line-height: 1.1;
   margin-bottom: 24px;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 @media (max-width: 991px) {
   .stones-name {
     font-size: 24px;
     line-height: 1.1;
+    min-height: 53px;
   }
 }
 .stones-desc {
