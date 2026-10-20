@@ -385,17 +385,75 @@ export function animationRetail() {
   });
 }
 export function sliderNews() {
-  if (window.innerWidth < 991) return;
-  const sliderNews = document.querySelectorAll(".news-slider");
-  if (!sliderNews.length) return;
-  sliderNews.forEach((sliderEl) => {
-    new Swiper(sliderEl, {
+  const sliders = document.querySelectorAll(".news-slider");
+  if (!sliders.length) return;
+  sliders.forEach((sliderEl) => {
+    const wrapper = sliderEl.closest(".news-slider-wrap");
+    const slidesCount = sliderEl.querySelectorAll(".swiper-slide").length;
+    const prevEl = wrapper?.querySelector(".news-nav--prev");
+    const nextEl = wrapper?.querySelector(".news-nav--next");
+    if (sliderEl.dataset.newsInitialized === "true") return;
+    sliderEl.dataset.newsInitialized = "true";
+
+    const swiper = new Swiper(sliderEl, {
       slidesPerView: 3,
       spaceBetween: 12,
-      // navigation: {
-      //   nextEl: sliderEl.querySelector(".swiper-button-next"),
-      //   prevEl: sliderEl.querySelector(".swiper-button-prev"),
-      // },
+      loop: true,
+      speed: 700,
+      watchOverflow: true,
+      navigation: { nextEl, prevEl },
+      breakpoints: {
+        0: { slidesPerView: 1, spaceBetween: 16 },
+        768: { slidesPerView: 2, spaceBetween: 16 },
+        992: { slidesPerView: 3, spaceBetween: 12 },
+      },
     });
+
+    const updateNavigation = () => {
+      const visibleCount = swiper.params.slidesPerView;
+      const shouldShow = slidesCount > visibleCount;
+      if (prevEl) prevEl.hidden = !shouldShow;
+      if (nextEl) nextEl.hidden = !shouldShow;
+      updateNavigationPosition();
+    };
+
+    const updateNavigationPosition = () => {
+      const image = sliderEl.querySelector(".news-image");
+      if (!wrapper || !image) return;
+      const wrapperRect = wrapper.getBoundingClientRect();
+      const imageRect = image.getBoundingClientRect();
+      let layoutTop = 0;
+      let node = image;
+      while (node && node !== wrapper) {
+        layoutTop += node.offsetTop;
+        node = node.offsetParent;
+      }
+      const imageTop = node === wrapper ? layoutTop : imageRect.top - wrapperRect.top;
+      const imageHeight = image.offsetHeight || imageRect.height;
+      const centerY = imageTop + imageHeight / 2;
+      if (prevEl) prevEl.style.top = `${centerY}px`;
+      if (nextEl) nextEl.style.top = `${centerY}px`;
+    };
+    const scheduleNavigationPositionUpdate = () => {
+      requestAnimationFrame(() => requestAnimationFrame(updateNavigationPosition));
+    };
+
+    swiper.on("breakpoint", updateNavigation);
+    swiper.on("resize", scheduleNavigationPositionUpdate);
+    window.addEventListener("resize", scheduleNavigationPositionUpdate, { passive: true });
+    window.addEventListener("load", scheduleNavigationPositionUpdate, { once: true });
+    sliderEl.querySelectorAll(".news-image img").forEach((image) => {
+      if (!image.complete) {
+        image.addEventListener("load", scheduleNavigationPositionUpdate, { once: true });
+      }
+    });
+    if (window.ResizeObserver) {
+      const resizeObserver = new ResizeObserver(scheduleNavigationPositionUpdate);
+      resizeObserver.observe(wrapper);
+      const image = sliderEl.querySelector(".news-image");
+      if (image) resizeObserver.observe(image);
+    }
+    updateNavigation();
+    scheduleNavigationPositionUpdate();
   });
 }

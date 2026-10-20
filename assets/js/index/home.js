@@ -1,6 +1,9 @@
 // export các function dùng cho home
 
-import { animationRetail, sliderNews } from "../../main/js/helpers.min.js";
+import {
+  animationRetail,
+  sliderNews
+} from "../../main/js/helpers.min.js?ver=1.4";
 ("use strict");
 $ = jQuery;
 
