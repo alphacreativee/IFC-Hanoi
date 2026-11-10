@@ -104,6 +104,18 @@ if (root) {
 
     if (firstTenant) {
       showTenant(firstTenant.dataset.tenant);
+    } else {
+      // Không có tenant thì ẩn toàn bộ tenant card
+      tenantCards.forEach((card) => {
+        card.classList.remove("active");
+        card.setAttribute("aria-selected", "false");
+      });
+
+      // Ẩn toàn bộ article của các tầng trước
+      tenantDetails.forEach((detail) => {
+        detail.hidden = true;
+        detail.classList.remove("active");
+      });
     }
   }
 
