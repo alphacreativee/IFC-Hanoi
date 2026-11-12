@@ -92,7 +92,6 @@ function stackingPlanImageDrag() {
     if (!popup) return;
 
     const imageSources = getFloorPlanSources(trigger);
-
     if (!imageSources.length) return;
 
     setPopupContent(popup, trigger);
@@ -246,7 +245,10 @@ function stackingPlanImageDrag() {
 
     const setActiveKey = (key) => {
       triggers.forEach((item) => {
-        item.classList.toggle("active", Boolean(key) && item.dataset.stackKey === key);
+        item.classList.toggle(
+          "active",
+          Boolean(key) && item.dataset.stackKey === key,
+        );
       });
 
       overlayApi?.setActiveKey(key);
@@ -272,53 +274,52 @@ function stackingPlanImageDrag() {
     triggers.forEach((trigger) => {
       const stackKey = trigger.dataset.stackKey;
 
-      trigger.addEventListener("mouseenter", () => {
-        setActiveKey(stackKey);
-      });
-
-      trigger.addEventListener("mouseleave", () => {
-        setActiveKey(null);
-      });
-
-      trigger.addEventListener("focus", () => {
-        setActiveKey(stackKey);
-      });
-
-      trigger.addEventListener("blur", () => {
-        setActiveKey(null);
-      });
-
-      trigger.addEventListener("click", () => {
-        openFloorPlanPopup(trigger);
-      });
+      trigger.addEventListener("mouseenter", () => setActiveKey(stackKey));
+      trigger.addEventListener("mouseleave", () => setActiveKey(null));
+      trigger.addEventListener("focus", () => setActiveKey(stackKey));
+      trigger.addEventListener("blur", () => setActiveKey(null));
+      trigger.addEventListener("click", () => openFloorPlanPopup(trigger));
     });
 
+    // ===== Kéo ngang để cuộn =====
     let isDown = false;
+    let isDragging = false;
     let startX = 0;
     let scrollLeft = 0;
     let hasDragged = false;
 
     wrap.addEventListener("pointerdown", (event) => {
       if (wrap.scrollWidth <= wrap.clientWidth) return;
+      // Bấm vào nút/link/trigger thì không bắt đầu kéo
+      if (event.target.closest("a, button, [data-stack-trigger]")) return;
 
       isDown = true;
+      isDragging = false;
+      hasDragged = false;
       startX = event.clientX;
       scrollLeft = wrap.scrollLeft;
-      hasDragged = false;
-      wrap.classList.add("is-dragging");
-      wrap.setPointerCapture(event.pointerId);
     });
 
     wrap.addEventListener("pointermove", (event) => {
       if (!isDown) return;
 
-      event.preventDefault();
-      if (Math.abs(event.clientX - startX) > 4) {
+      const dx = event.clientX - startX;
+
+      // Chỉ bắt đầu kéo (và capture) khi di chuyển quá 4px
+      if (!isDragging && Math.abs(dx) > 4) {
+        isDragging = true;
         hasDragged = true;
+        wrap.classList.add("is-dragging");
+        wrap.setPointerCapture(event.pointerId);
       }
-      wrap.scrollLeft = scrollLeft - (event.clientX - startX);
+
+      if (isDragging) {
+        event.preventDefault();
+        wrap.scrollLeft = scrollLeft - dx;
+      }
     });
 
+    // Chặn đúng 1 click sinh ra sau khi kéo
     wrap.addEventListener(
       "click",
       (event) => {
@@ -335,6 +336,7 @@ function stackingPlanImageDrag() {
       if (!isDown) return;
 
       isDown = false;
+      isDragging = false;
       wrap.classList.remove("is-dragging");
 
       if (wrap.hasPointerCapture(event.pointerId)) {
@@ -344,7 +346,6 @@ function stackingPlanImageDrag() {
 
     wrap.addEventListener("pointerup", stopDrag);
     wrap.addEventListener("pointercancel", stopDrag);
-    wrap.addEventListener("pointerleave", stopDrag);
   });
 }
 
