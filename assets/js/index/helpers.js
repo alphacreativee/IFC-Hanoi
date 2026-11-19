@@ -208,14 +208,15 @@ export function animationRetail() {
     });
 
     // ----- Event delegation cho nút retail-btn (bản clone không giữ listener) -----
-    if (contentBox) {
-      contentBox.addEventListener("click", (e) => {
-        const btn = e.target.closest(".retail-btn a");
-        if (!btn) return;
+    contentBox.addEventListener("click", (e) => {
+      const btn = e.target.closest(".retail-btn a");
+      if (!btn) return;
+
+      const href = btn.getAttribute("href");
+      if (!href || href === "#" || href.startsWith("javascript")) {
         e.preventDefault();
-        // TODO: xử lý mở VR 360 tại đây
-      });
-    }
+      }
+    });
 
     // ----- Active class cho pagination -----
     function updatePagination(activeIndex) {
@@ -428,27 +429,38 @@ export function sliderNews() {
         layoutTop += node.offsetTop;
         node = node.offsetParent;
       }
-      const imageTop = node === wrapper ? layoutTop : imageRect.top - wrapperRect.top;
+      const imageTop =
+        node === wrapper ? layoutTop : imageRect.top - wrapperRect.top;
       const imageHeight = image.offsetHeight || imageRect.height;
       const centerY = imageTop + imageHeight / 2;
       if (prevEl) prevEl.style.top = `${centerY}px`;
       if (nextEl) nextEl.style.top = `${centerY}px`;
     };
     const scheduleNavigationPositionUpdate = () => {
-      requestAnimationFrame(() => requestAnimationFrame(updateNavigationPosition));
+      requestAnimationFrame(() =>
+        requestAnimationFrame(updateNavigationPosition),
+      );
     };
 
     swiper.on("breakpoint", updateNavigation);
     swiper.on("resize", scheduleNavigationPositionUpdate);
-    window.addEventListener("resize", scheduleNavigationPositionUpdate, { passive: true });
-    window.addEventListener("load", scheduleNavigationPositionUpdate, { once: true });
+    window.addEventListener("resize", scheduleNavigationPositionUpdate, {
+      passive: true,
+    });
+    window.addEventListener("load", scheduleNavigationPositionUpdate, {
+      once: true,
+    });
     sliderEl.querySelectorAll(".news-image img").forEach((image) => {
       if (!image.complete) {
-        image.addEventListener("load", scheduleNavigationPositionUpdate, { once: true });
+        image.addEventListener("load", scheduleNavigationPositionUpdate, {
+          once: true,
+        });
       }
     });
     if (window.ResizeObserver) {
-      const resizeObserver = new ResizeObserver(scheduleNavigationPositionUpdate);
+      const resizeObserver = new ResizeObserver(
+        scheduleNavigationPositionUpdate,
+      );
       resizeObserver.observe(wrapper);
       const image = sliderEl.querySelector(".news-image");
       if (image) resizeObserver.observe(image);

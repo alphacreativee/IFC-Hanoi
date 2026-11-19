@@ -2,8 +2,8 @@
 
 import {
   animationRetail,
-  sliderNews
-} from "../../main/js/helpers.min.js?ver=1.4";
+  sliderNews,
+} from "../../main/js/helpers.min.js?ver=1.0.83";
 ("use strict");
 $ = jQuery;
 
